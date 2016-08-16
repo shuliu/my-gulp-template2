@@ -1,0 +1,169 @@
+//
+// FAQ
+//
+
+// -------------------------------------
+//
+// * Value
+//
+// -------------------------------------
+$article-banner-height: 432px;
+
+
+// -------------------------------------
+//
+// * Type
+//
+// -------------------------------------
+
+// ~~~~~ Body.post ~~~~~
+// 
+// body is 'post' :: use for '神知識'
+// 
+body.post {
+  // ** spacer
+  .slider,
+  .lead, .list-group.article,
+  article, .comments {
+    @include breakpoint($larger-than-tablet) {
+      margin-right: $padding-x; // ~16
+    }
+    @include breakpoint($larger-than-desktophd) {
+      margin-right: $padding-x * 1.5; // ~24
+    }
+  }
+
+  .slider {
+    margin-bottom: $padding-y * 4; // ~32
+    height: $article-banner-height;
+    overflow: hidden;
+
+    .slider-view {
+      img {
+        @include breakpoint($larger-than-tablet) {
+          max-width: none;
+          height: $article-banner-height;
+        }
+        @include breakpoint($larger-than-desktophd) {
+          max-width: 100%;
+          height: auto;
+        }
+      }
+    }
+  }
+
+  .wrapper.fill {
+    padding-top: $padding-y * 3;  // ~24
+    padding-bottom: $padding-y * 3; // ~24
+  }
+
+
+  // list-group
+  .list-group.article {
+    .item {
+      margin-bottom: $padding-y * 3;  //~24
+    }
+  }
+
+  // lead :: use for 'article-search'
+  .lead {
+    padding-bottom: $padding-y;
+    border-bottom: 1px solid $border-default;
+  }
+  
+  // article
+  article {
+    margin-bottom: $padding-y * 2; // ~16
+    img { margin-bottom: $padding-y; }
+  }
+}
+
+
+
+// ~~~~~ Main ~~~~~
+// 
+.article-head, .article-body, .article-foot {
+  margin-bottom: $padding-y * 2; // ~16px;
+  overflow: hidden;
+  @include clearfix;
+}
+
+.article-head {
+  overflow: hidden;
+
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    margin-top: 0;
+  }
+}
+// 用於包覆 非摘要文字 的欄位，例如: 日期/分享/字級設定..等
+.article-meta {
+  padding-top: $padding-y * 2 - 4;  // ~12
+  padding-bottom: $padding-y * 2 - 4; // ~12
+  color: $gray;
+  border-top: 1px solid $border-default;
+  border-bottom: 1px solid $border-default;
+  overflow: hidden;
+
+  .date {
+    font-size: $font-size-base;
+    line-height: $line-height-computed;
+    margin-top: ($btn-sm-height - $line-height-computed) / 2 + 1; // +1為視覺誤差值
+  }
+
+  .share-buttons {
+    margin-top: ($btn-sm-height - 20) / 2; // Like button height is 20px;
+    margin-right: $padding-x;
+  }
+}
+.article-foot {
+  padding: $padding-y * 2;
+  background-color: $silver;
+
+  .btn {
+    padding-left: $padding-x;
+    padding-right: $padding-x * 1.5;
+  }
+
+  .share-buttons {
+    margin-top: ($btn-base-height - 20) / 2; // Like button height is 20px;
+  }
+}
+
+
+
+// ~~~~~ Aside ~~~~~
+// 
+// Social Plugin
+.social-widget {
+  margin-bottom: $padding-y * 3;  // ~24
+}
+
+
+
+// ~~~~~ Birthday ~~~~~
+// 
+// use for 'birthday-detail'
+.gift-caption {
+  position: relative;
+  padding-left: $padding-x * 1.5;
+  padding-right: $font-size-base * 10 * 3;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  border-left: 8px solid $dark;
+
+  .btn-group {
+    position: absolute;
+    top: 4px;
+    right: 0;
+  }
+}
+.gift-content {
+  margin-bottom: $padding-y * 3;
+}
+
+
+
+
+
+

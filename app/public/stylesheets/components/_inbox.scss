@@ -1,0 +1,39 @@
+//
+// Inbox :: 信件夾設定
+//
+
+// -------------------------------------
+//
+// * Type
+//
+// -------------------------------------
+
+.inbox {
+  margin-bottom: $padding-y * 2;
+  border: $grid-padding solid $silver;
+}
+
+.inbox-head {
+  background-color: $silver;
+  padding: $padding-y $padding-x;
+
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6, .title {
+    margin-top: 0;
+    margin-bottom: $padding-y - 2;
+  }
+  .info {
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+    color: $gray;
+
+    .icon { 
+      margin-right: $grid-padding - 2;
+      color: $gray-light; 
+    }
+  }
+}
+
+.inbox-body {
+  padding: $padding-x;
+}

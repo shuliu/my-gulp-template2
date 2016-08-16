@@ -1,0 +1,414 @@
+// ============================================
+// ．．．．．．．．．【 Catalog 】．．．．．．．．．
+// --------------------------------------------
+//
+// -- Statistic (數值統計)
+// -- Clause (條款)
+// -- Collapse-switch
+// -- Total (金額總計)
+// -- Cart-form
+// -- Info
+//
+// ============================================
+//
+// Global ** 全域設定
+//
+
+// -------------------------------------
+//
+// * Type
+//
+// -------------------------------------
+
+// ~~~~~~ 側欄選單設定 ~~~~~~
+.col-md-5 {
+  .panel, .menu-list-panel, .widget,
+  .btn-group.cube, .ad-list {
+    @include media-breakpoint-down(lg) {
+      margin-right: 16px;
+    }
+    @include media-breakpoint-up(xl) {
+      margin-right: 24px;
+    }
+  }
+}
+
+// ~~~ use for 'mb-bonus', 'mb-coupon'
+// statistic :: 使用於'數值統計'相關的欄位
+//
+.statistic {
+  text-align: center;
+
+  .value {
+    position: relative;
+    top: -2px;
+    margin-right: $padding-y / 2;
+    font-size: $font-size-xxl;
+    line-height: $line-height-xl;
+    vertical-align: middle;
+  }
+  .label {
+    & + .value {
+      top: 0;
+      margin-right: 0;
+    }
+  }
+  li {
+    padding-top: $padding-y * 2 + 4;
+    padding-bottom: $padding-y * 2 + 2;
+  }
+  p {
+    margin-bottom: 0;
+  }
+
+  // ~~~ use for 'mb-coupon' ~~~
+  // 當 button 使用時
+  .has-button {
+    // width: $font-size-base * 8;
+    padding-top: $padding-y;
+    padding-bottom: $padding-y;
+    background-color: $btn-secondary-bg;
+    color: $white;
+    vertical-align: middle;
+
+    .icon-ticket {
+      margin-top: $padding-y / 2;
+      margin-bottom: $padding-y / 2;
+      font-size: $font-size-xl;
+    }
+    a { color: $white; }
+  }
+
+  // ~~~ use for 'mb-bonus' ~~~
+  .css-table {
+    margin-bottom: 0;
+    .css-th {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    .css-td {
+      padding-bottom: 0;
+    }
+  }
+}
+
+
+// ~~~ use for 'join-step1'
+// 使用於 modal 裡的條款顯示
+.clause {
+  padding-right: $padding-x;
+  margin-bottom: 0;
+  @include box-fixed-height(400px);
+  overflow-y: auto;
+}
+
+
+// ~~~ use for 'collapse' element 開關切換
+// 使用於 '訂單查詢' 商品明細收合
+.collapse-switch {
+  position: relative;
+
+  .btn-switch {
+    // top: 0;
+    left: 0;
+    right: auto;
+    font-size: $font-size-small;
+    font-weight: bold;
+
+    .icon {
+      margin-left: 0;
+    }
+
+    &[aria-expanded="true"] {
+      .icon-plus-square-outline {
+        &:before { @extend .icon-minus-squared-alt:before; }
+      }
+      .label { display: none; }
+    }
+  }
+}
+
+
+// ~~~~~~~~ Rainbow ~~~~~~~~
+// 依商品類別項次填入不同顏色
+// use for 'category-index.html'
+.rainbow {
+  @for $i from 1 through length($navs-color) {
+    $current-color: nth($navs-color, $i);
+    // 商品索引主選單
+    .category-item:nth-child(#{$i}) {
+      .icon { color: $current-color; }
+    }
+    // 商品分類明細列表
+    .item:nth-child(#{$i}) {
+      > h4 {
+        padding-left: $padding-x * 1.5;
+        color: $current-color;
+        border-left: ($border-width * 8) solid $current-color;
+        a { color: $current-color; }
+      }
+      > .list-group a:hover { color: $current-color; }
+    }
+  }
+}
+
+
+
+// ~~~~~~~~ 金額總計 ~~~~~~~~
+// Total : use for 'order-detail', 'cart-list'
+//
+.total {
+  @include clearfix;
+
+  .total-item {
+    margin-bottom: $padding-y / 4;
+    line-height: $line-height-computed;
+    overflow: hidden;
+
+    .label {}
+    .price {
+      width: $total-price-width;
+      margin-right: $table-cell-padding;
+    }
+  }
+  .amount {
+    padding-top: $padding-y * 2;
+    padding-bottom: $padding-y * 2;
+    margin-top: $padding-y * 2;
+    border-top: 1px solid $border-default;
+    @include clearfix;
+
+    .price {
+      font-size: $total-price-size;
+    }
+  }
+
+  // add '.offest' 左邊加入空白區塊，並置右對齊
+  &.offset {
+    text-align: right;
+    @include clearfix;
+
+    .total-item {
+      margin-left: 60%;
+    }
+  }
+
+  // ~~~~~~~~ 金額總計 :: 水平樣式 A ~~~~~~~~
+  // use for 'cart-step1' & 'cart-step2'
+  &.horizontal {
+    padding-top: $padding-y * 2;
+    padding-bottom: $padding-y * 2;
+    background-color: $silver;
+    text-align: right;
+
+    .total-item {
+      display: inline-block;
+
+      & + .total-item { margin-left: $padding-y * 2; }
+      .price {
+        width: auto;
+        font-weight: normal;
+      }
+
+      &:last-child {
+        margin-right: $table-cell-padding;
+        font-weight: bold;
+
+        .price {
+          font-size: $font-size-medium;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  // ~~~~~~~~ 金額總計 :: 垂直樣式 B ~~~~~~~~
+  // use for 'cart-step1' & 'cart-step2'
+  &.billboard {
+    padding-top: $padding-y * 4 + 4;
+    padding-bottom: $padding-y * 4 + 4;
+    margin-bottom: $padding-y * 2;
+    background-color: $blue-light;
+    border: 1px solid $border-alpha;
+    text-align: center;
+
+    .divider {
+      display: inline-block;
+      width: $font-size-large;
+    }
+
+    .total-item {
+      display: inline-block;
+      margin-left: $padding-x * 1.5;
+      margin-right: $padding-x * 1.5;
+      @include media-breakpoint-down(lg) {
+        margin-left: $padding-x;
+        margin-right: $padding-x;
+      }
+      vertical-align: middle;
+
+      .label, .price { display: block; }
+      .label {
+        margin-bottom: $padding-y - 2;
+      }
+      .price {
+        width: auto;
+        margin-right: 0;
+        font-size: $font-size-medium;
+        font-weight: normal;
+      }
+      &:last-child {
+        font-weight: bold;
+        width: 160px;
+        @include media-breakpoint-down(lg) {
+          width: auto;
+        }
+
+        .price {
+          font-size: $font-size-large;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+
+// ~~~~~~~~ 購物車步驟表單 ~~~~~~~~
+// 使用'panel' → addClass 'cart-form' 做元件變形
+.cart-form {
+  padding: ($padding-y * 2) ($padding-x * 1.5);
+
+  .title, .panel-head {
+    font-size: $font-size-medium;
+    font-weight: bold;
+    color: $blue;
+  }
+  .panel-head {
+    padding: $padding-y 0 ($padding-y * 2);
+
+    & + .panel-body {
+      padding-top: $padding-y * 2;
+    }
+  }
+  .panel-body {
+    padding: $padding-y 0;
+  }
+}
+
+// ~~~~~~~~ 商品資訊/文章資訊 ~~~~~~~~
+//
+// 主要使用於 'cart-list 購物車明細'
+// 間階影響元素：
+// a) .message > .message-content > .info
+// b) article-list.html > 文章列表
+// c) .inbox > .inbox-head > .info
+.info {
+  @include clearfix;
+  overflow: hidden;
+
+  // reset
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6, .title {
+    margin-top: 0;
+    margin-bottom: $padding-y;
+
+    a {
+      color: $dark;
+      text-decoration: underline;
+
+      &:hover { color: $blue; }
+    }
+  }
+
+  // 名稱
+  .title {
+    color: $gray;
+  }
+
+  // 規格
+  .type {
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+  }
+
+  // 折扣
+  .discount {
+    overflow: hidden;
+
+    .event, .exclude {
+      p {
+        font-size: $font-size-small;
+        line-height: $line-height-small;
+      }
+      .tag {
+        margin-right: $padding-x / 4;
+        margin-bottom: $padding-y - 2;
+      }
+      .tag-event {
+        & + .text { color: $vermillion; }
+      }
+    }
+  }
+
+  // date : use for 'article-index', 'mb-mail-inbox'
+  .date, time {
+    font-size: $font-size-small;
+    color: $gray;
+  }
+}
+
+
+// ~~~~~~~~ GoogleMap StyleOptions ~~~~~~~~
+//
+$map-canvas-height: ($grid-container-desktop / 24 * 18) - ($border-width * 2);
+// googleMap嵌入高度
+.map-view {
+  width: 100% !important;
+  height: $map-canvas-height !important;
+  min-width: 100% !important;
+  min-height: $map-canvas-height !important;
+  border-left: 1px solid $border-default;
+}
+// WindowsInfo
+.popup-map-info {
+  background-color: $blue;
+  // 標題
+  .caption {}
+  // 內容
+  .content {}
+}
+
+
+// ~~~~~~~~ 門市據點資訊 ~~~~~~~~
+//
+// .store-list
+//   ∟ .item
+//      ∟ .store-info
+.store-list {
+  height: $map-canvas-height;
+  background-color: $silver;
+  border-left: 1px solid $border-default;
+  overflow: hidden;
+  overflow-y: auto;
+
+  .item {
+    margin: ($padding-y * 3) ($padding-y * 3) 0;
+    border-bottom: 1px solid #DCDDDE;
+    padding-bottom: 24px;
+    border-bottom: 1px solid $border-default;
+
+    &:last-child { border-bottom: none; }
+
+    h3 {
+      margin-top: 0;
+    }
+  }
+}
+.store-info {
+  .title {
+    margin-right: $padding-x;
+    color: $gray;
+  }
+}
+

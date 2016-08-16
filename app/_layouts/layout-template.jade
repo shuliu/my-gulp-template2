@@ -1,0 +1,20 @@
+include ./_mixins/base.jade
+doctype html
+html(lang = "zh-tw")
+  head
+    block title
+      title 預設標題
+    // PC版不加 viewport
+    include ./_elements/head.jade
+  body.home
+    #fb-root
+    include ./_elements/header.jade
+
+    .wrapper.fill
+      .container
+        block content
+
+    include ./_elements/footer.jade
+
+    include ./_elements/js-body.jade
+    include ./_elements/ga.jade

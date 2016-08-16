@@ -1,0 +1,164 @@
+//
+// Range Slider
+//
+
+// -------------------------------------
+//
+// * Value
+//
+// -------------------------------------
+$range-bar-height:    16px !default;
+$range-handle-height: $range-bar-height * 1.25 !default;
+
+
+
+// -------------------------------------
+//
+// * Type
+//
+// -------------------------------------
+.slider-range {
+  margin-top: $range-bar-height / 4;
+  margin-bottom: $range-bar-height / 2;
+}
+
+
+// ~~~~ 數值控制 ~~~~
+.slider-range-input {
+  overflow: hidden;
+
+  input, span{
+    float: left;
+  }
+  input.range {
+    width: 32%;
+    padding: ($padding-y / 2) ($padding-x / 2 - 2);
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+
+    &.min {
+      @include border-right-radius(0);
+    }
+    &.max {
+      @include border-left-radius(0);
+    }
+  }
+  span.divider {
+    height: $btn-padding-y-sm * 2 + $line-height-small + $border-width * 2;
+    padding: ($padding-y) ($padding-x / 4) 0;
+    margin: 0;
+    color: $white;
+    background-color: $input-border;
+  }
+  .btn {
+    float: right;
+    // margin-left: $padding-x / 4;
+  }
+  // input.range {
+  //   float: left;
+  //   width: 50%;
+  //   padding: 0;
+  //   color: $red;
+  //   font-weight: bold;
+  //   border: none;
+  //   @include box-shadow(none);
+
+  //   &.min {}
+  //   &.max { text-align: right; }
+    
+  //   // 清除 blueShadow
+  //   &:focus {
+  //     @include box-shadow(none);
+  //   }
+  // }
+}
+
+
+
+
+// =====================================
+// 
+// use for jQuery UI :: Slider-range
+// ** ui-slider 高度由 '.ui-slider-horizontal' 設定
+// 
+.ui-slider {
+  position: relative;
+  text-align: left;
+
+  /* support: IE8 */
+  &.ui-state-disabled {
+    .ui-slider-handle, .ui-slider-range {
+      filter: inherit;
+    }
+  }
+}
+
+// ~~~~~ progress bar ~~~~~
+// 
+// is block
+.ui-slider-range {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  font-size: $font-size-base;
+}
+// is type
+.ui-widget {}
+.ui-widget-content {
+  background-color: $gray-light;
+  .ui-widget-header {
+    background-color: lighten($blue, 25%);
+  }
+}
+
+
+// ~~~~~ horizontal ~~~~~
+// ** ui-slider 高度由 '.ui-slider-horizontal' 設定
+.ui-slider-horizontal {
+  height: $range-bar-height;
+
+  .ui-slider-range {
+    top: 0;
+    height: 100%;
+
+    &.ui-slider-range-min { left: 0; }
+    &.ui-slider-range-max { right: 0; }
+  }
+}
+
+// ~~~~~ 錨點 ~~~~~
+.ui-slider-handle {
+  position: absolute;
+  z-index: $zindex-hover;
+  top: -(($range-handle-height - $range-bar-height) / 2);
+  width: $range-handle-height;
+  height: $range-handle-height;
+  cursor: pointer;
+  -ms-touch-action: none;
+  touch-action: none;
+
+  &:last-child {
+    margin-left: -$range-handle-height;
+  }
+
+  &.ui-state-default {
+    background-color: $blue;
+  }
+  
+  // 清除 blueShadow
+  &:focus {
+    outline: 0;
+    @include box-shadow(0);
+  }
+}
+
+// ~~~~~ border Radius ~~~~~
+.ui-corner-all {
+  @include border-radius($border-radius-base);
+}
+
+
+
+
+
+

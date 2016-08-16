@@ -1,0 +1,572 @@
+//
+// Panels
+//
+
+// -------------------------------------
+//
+// * Mixins
+//
+// -------------------------------------
+@mixin panel-variant($border, $heading-text-color, $heading-bg-color, $heading-border) {
+  border-color: $border;
+
+  & > .panel-head {
+    color: $heading-text-color;
+    background-color: $heading-bg-color;
+    border-color: $heading-border;
+
+    + .panel-collapse > .panel-body {
+      border-top-color: $border;
+    }
+    .badge {
+      color: $heading-bg-color;
+      background-color: $heading-text-color;
+    }
+    a {
+      color: $heading-text-color;
+    }
+  }
+  & > .panel-footer {
+    + .panel-collapse > .panel-body {
+      border-bottom-color: $border;
+    }
+  }
+}
+
+// Vertical gradient, from top to bottom
+//
+// Creates two color stops, start and end, by specifying a color and position for each color stop.
+// Color stops are not available in IE9.
+@mixin gradient-vertical($start-color: #555, $end-color: #333, $start-percent: 0%, $end-percent: 100%) {
+  background-image: linear-gradient(to bottom, $start-color $start-percent, $end-color $end-percent);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}', GradientType=0); // IE9
+}
+
+
+// -------------------------------------
+//
+// * Type
+//
+// -------------------------------------
+// Base class
+.panel {
+  margin-bottom: $padding-x;
+  background-color: $panel-bg;
+  border: 1px solid transparent;
+  // border-radius: $panel-border-radius;
+  @include box-shadow(0 1px 1px rgba(0,0,0,.05));
+
+  &.fill {
+    background-color: $blue-light;
+
+    .panel-head {
+      padding-bottom: 0;
+    }
+  }
+}
+
+// Panel contents
+.panel-body {
+  padding: $panel-body-padding;
+  @include clearfix;
+
+  // reset Margin
+  ul, ol,
+  .css-table,
+  .tags-group {
+    margin-bottom: 0;
+  }
+}
+
+// Optional heading
+.panel-head {
+  position: relative;
+  padding: $panel-head-padding;
+  border-bottom: 1px solid transparent;
+  font-weight: bold;
+  vertical-align: middle;
+  @include clearfix;
+  // @include border-top-radius(($panel-border-radius - 1));
+
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  > .dropdown .dropdown-toggle {
+    color: inherit;
+  }
+
+  // btn-group 移除上下間距
+  .btn-group {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+// Within heading, strip any `h*` tag of its default margins for spacing.
+// .panel-title {Ｓ
+//   margin-top: 0;
+//   margin-bottom: 0;
+//   font-size: ceil(($font-size-base * 1.125));
+//   color: inherit;
+
+//   > a,
+//   > small,
+//   > .small,
+//   > small > a,
+//   > .small > a {
+//     color: inherit;
+//   }
+// }
+
+// Optional footer (stays gray in every modifier class)
+.panel-footer {
+  padding: $panel-footer-padding;
+  background-color: $panel-footer-bg;
+  border-top: 1px solid $panel-border;
+  // @include border-bottom-radius(($panel-border-radius - 1));
+}
+
+
+
+//
+// Tables in panels
+// -------------------------------------
+//
+// Place a non-bordered `.table` within a panel (not within a `.panel-body`) and
+// watch it go full width.
+
+.panel {
+  > .table,
+  > .table-responsive > .table,
+  > .panel-collapse > .table {
+    margin-bottom: 0;
+
+    caption {
+      padding-left: $panel-body-padding;
+      padding-right: $panel-body-padding;
+    }
+  }
+  // Add border top radius for first one
+  > .table:first-child,
+  > .table-responsive:first-child > .table:first-child {
+    @include border-top-radius(($panel-border-radius - 1));
+
+    > thead:first-child,
+    > tbody:first-child {
+      > tr:first-child {
+        border-top-left-radius: ($panel-border-radius - 1);
+        border-top-right-radius: ($panel-border-radius - 1);
+
+        td:first-child,
+        th:first-child {
+          border-top-left-radius: ($panel-border-radius - 1);
+        }
+        td:last-child,
+        th:last-child {
+          border-top-right-radius: ($panel-border-radius - 1);
+        }
+      }
+    }
+  }
+  // Add border bottom radius for last one
+  > .table:last-child,
+  > .table-responsive:last-child > .table:last-child {
+    @include border-bottom-radius(($panel-border-radius - 1));
+
+    > tbody:last-child,
+    > tfoot:last-child {
+      > tr:last-child {
+        border-bottom-left-radius: ($panel-border-radius - 1);
+        border-bottom-right-radius: ($panel-border-radius - 1);
+
+        td:first-child,
+        th:first-child {
+          border-bottom-left-radius: ($panel-border-radius - 1);
+        }
+        td:last-child,
+        th:last-child {
+          border-bottom-right-radius: ($panel-border-radius - 1);
+        }
+      }
+    }
+  }
+  > .panel-body + .table,
+  > .panel-body + .table-responsive,
+  > .table + .panel-body,
+  > .table-responsive + .panel-body {
+    border-top: 1px solid $table-border-color;
+  }
+  > .table > tbody:first-child > tr:first-child th,
+  > .table > tbody:first-child > tr:first-child td {
+    border-top: 0;
+  }
+  > .table-bordered,
+  > .table-responsive > .table-bordered {
+    border: 0;
+    > thead,
+    > tbody,
+    > tfoot {
+      > tr {
+        > th:first-child,
+        > td:first-child {
+          border-left: 0;
+        }
+        > th:last-child,
+        > td:last-child {
+          border-right: 0;
+        }
+      }
+    }
+    > thead,
+    > tbody {
+      > tr:first-child {
+        > td,
+        > th {
+          border-bottom: 0;
+        }
+      }
+    }
+    > tbody,
+    > tfoot {
+      > tr:last-child {
+        > td,
+        > th {
+          border-bottom: 0;
+        }
+      }
+    }
+  }
+  > .table-responsive {
+    border: 0;
+    margin-bottom: 0;
+  }
+}
+
+
+//
+// 'Shrink' in panels :: padding 縮減版
+// -------------------------------------
+//
+.panel {
+  &.shrink {
+    margin-bottom: $padding-x / 2;
+
+    // accordion 開關
+    .btn-switch {
+      top: $panel-shrink-padding;
+      right: $panel-shrink-padding;
+    }
+
+    .panel-head, .panel-body, .panel-footer,
+    .menu-list-title {
+      padding: $panel-shrink-padding;
+    }
+  }
+}
+
+
+//
+// Contextual variations
+// -------------------------------------
+//
+// White
+.panel-default {
+  @include panel-variant($panel-default-border, $panel-default-text, $panel-default-heading-bg, $panel-default-border);
+}
+// Blue
+.panel-primary {
+  @include panel-variant($panel-primary-border, $panel-primary-text, $panel-primary-heading-bg, $panel-primary-border);
+}
+// YellowGreen
+.panel-secondary {
+  @include panel-variant($panel-secondary-border, $panel-secondary-text, $panel-secondary-heading-bg, $panel-secondary-border);
+}
+// .panel-success {
+//   @include panel-variant($panel-success-border, $panel-success-text, $panel-success-heading-bg, $panel-success-border);
+// }
+// .panel-info {
+//   @include panel-variant($panel-info-border, $panel-info-text, $panel-info-heading-bg, $panel-info-border);
+// }
+// .panel-warning {
+//   @include panel-variant($panel-warning-border, $panel-warning-text, $panel-warning-heading-bg, $panel-warning-border);
+// }
+// .panel-danger {
+//   @include panel-variant($panel-danger-border, $panel-danger-text, $panel-danger-heading-bg, $panel-danger-border);
+// }
+
+// Dark
+.panel-inverted {
+  padding: ($panel-head-padding - 4) $panel-shrink-padding;
+  font-size: $font-size-medium;
+  color: $white;
+  background-color: $dark;
+  border: 1px solid $border-default;
+
+  &.stackable { border-bottom: none; }
+}
+
+
+// Outline
+// use for 'article > aside > recommand'
+.panel-outline {
+  border: none;
+  margin-bottom: $padding-y * 3; // ~24
+  @include box-shadow(none);
+
+  // reset
+  .panel-head, .panel-body { padding: 0; }
+
+  // head
+  .panel-head {
+    padding-top: $padding-y + 4;  // ~12
+    padding-bottom: $padding-y + 4;
+    font-size: $font-size-medium;
+    border-top: 3px solid $yellowgreen;
+    color: $yellowgreen;
+  }
+}
+
+// Locaiton
+// use for 'locaton'
+.panel-location {
+  border: 1px solid $border-default;
+
+  // Title
+  .panel-head {
+    border-bottom: 1px solid $border-default;
+
+    h3 { 
+      margin-top: ($line-height-computed + ($padding-y * 2) + ($border-width * 2) - $line-height-large) / 2; 
+    }
+  }
+
+  // Content
+  .panel-body {
+    padding: 0;  //~reset
+
+    // 區域篩選
+    .toolbar {
+      padding: $padding-x;
+      margin-bottom: 0;
+      border-bottom: 1px solid $border-default;
+
+      .select-group {
+        margin-bottom: $padding-y;
+        @include clearfix;
+
+        .col-md-12 {
+          width: calc(50% - 4px);
+          padding-left: $padding-x / 2;
+          padding-right: $padding-x / 2;
+
+          & + .col-md-12 {
+            margin-left: $padding-x / 2;
+          }
+        }
+      }
+      // Input
+      input.has-full {
+        margin-bottom: $padding-y * 2;
+      }
+      // Checkbox
+      label.has-block {
+        margin-top: $padding-y;
+      }
+    }
+    // 結果列表
+    .result-group {
+      height: (($grid-container-desktop / 24 * 18) - ($border-width * 2)) - 283;
+      overflow: hidden;
+      overflow-y: auto;
+
+      .title {
+        padding: $padding-y $padding-x;
+        margin-top: 0;
+        margin-bottom: 0;
+        background-color: $silver;
+      }
+      .list-group {
+        li, .item {
+          padding: $padding-y $padding-x;
+          border-top: 1px dashed $border-default;
+          h5 { 
+            margin-top: $padding-y / 2;
+            margin-bottom: $padding-y / 4; 
+            color: $dark;
+          }
+          p:last-child { margin-bottom: $padding-y / 2; }
+        }
+      }
+    }
+  }
+}
+
+
+
+//
+// Widget
+// --------------------------------------------------
+// use for '首頁側欄', '賣場第一層分類'
+//
+@mixin panel-variant($border, $heading-text-color, $heading-bg-color, $heading-border) {
+  border-color: $border;
+
+  & > .widget-title {
+    color: $heading-text-color;
+    background-color: $heading-bg-color;
+    border-color: $heading-border;
+
+    a {
+      color: $heading-text-color;
+    }
+  }
+}
+
+//
+// 使用於 ::
+// 1) 首頁：側欄元件
+// 2) category-main 賣場第一層 > 熱銷紅星
+//
+.widget {
+  margin-bottom: $padding-x;
+  background-color: $panel-bg;
+  border: 1px solid transparent;
+  @include box-shadow(0 1px 1px rgba(0,0,0,.05));
+
+  .widget-title {
+    font-weight: bold;
+    a {
+      margin-top: 1px;
+      font-size: $font-size-small;
+    }
+    .btn-group {
+      margin-top: -4px;
+      margin-bottom: -4px;
+
+    }
+    // ** media
+    @include breakpoint($larger-than-tablet) {
+      padding: ($padding-y + 4) ($padding-x - 8); // ~12/8
+
+    }
+    @include breakpoint($larger-than-desktophd) {
+      padding: ($padding-y + 4) $padding-x; // ~12/16
+
+      .btn-group {
+        margin-right: -8px;
+      }
+    }
+  }
+  .widget-content {
+    // 針對首頁「神知識」客製化 ~~~
+    h5.title {
+      margin: $padding-y ($padding-x - 4) ($padding-y - 2); //~8/12/6
+      height: $line-height-computed * 2;
+      color: darken($gray, 20%);
+      overflow: hidden;
+    }
+    p.desc {
+      margin: 0 ($padding-x - 4) $padding-y; //~0/12/8
+      height: $line-height-small * 4;
+      font-size: $font-size-small;
+      line-height: $line-height-small;
+      overflow: hidden;
+    }
+
+    ul, ol { margin-bottom: 0; }
+
+    a {
+      display: block;
+      overflow: hidden;
+      
+      // 針對首頁「優惠活動」banner客製
+      & + a {
+        border-top: 1px solid $border-default;
+      }
+    }
+
+    // use for 'list-group'
+    .list-group {
+      margin: $padding-y;
+
+      .item {
+        // 使用於：
+        // 1) article: panel > list-group
+        // 2) categroy: 館長推薦
+        .title {
+          margin-top: $padding-y / 2;
+          margin-left: 0;
+          margin-right: 0; //~reset
+          height: $line-height-small * 2;
+          line-height: $line-height-small;
+          overflow: hidden;
+        }
+      }
+
+    }
+  }
+}
+
+// banner tab框 (有頁碼) - 外框
+.widget-white {
+  // @include breakpoint($larger-than-tablet) {
+  //   margin-right: 16px;
+  // }
+  // @include breakpoint($larger-than-desktophd) {
+  //   margin-right: 24px;
+  // }
+  .pull-right.bx-pager {
+    margin: -13px 0 0 0;
+    a {
+      color: $dark;
+      padding: 10px 4px 10px;
+      border-top: 3px transparent solid;
+      @include inline-block;
+      &:hover, &.active {
+        color: $blue;
+        border-top: 3px $blue solid;
+      }
+    }
+  }
+  &.widget .widget-content {
+    .list-group {
+      @include inline-block;
+      margin: 0;
+    }
+    .item {
+      margin-bottom: 0;
+    }
+    img {
+      width: 100%;
+      border: 0;
+    }
+    a + a {
+      margin-top: 0;
+    }
+  }
+  li {
+    list-style-type: none;
+    float: left;
+  }
+
+}
+
+
+// Gray
+.widget-default {
+  @include panel-variant($panel-default-border, $panel-default-text, $silver, $panel-default-border);
+}
+// Blue
+.widget-primary {
+  @include panel-variant($panel-primary-border, $panel-primary-text, $panel-primary-heading-bg, $panel-primary-border);
+}
+// YellowGreen
+.widget-secondary {
+  @include panel-variant($panel-secondary-border, $panel-secondary-text, $panel-secondary-heading-bg, $panel-secondary-border);
+}
+
+

@@ -1,0 +1,159 @@
+//
+// Steps
+// 
+
+// -------------------------------------
+//
+// * Type: 預設值 '藍色'
+//
+// -------------------------------------
+// 
+// div.steps
+//   ∟ ul.steps-list    -----> default
+//      ∟ li.steps-item
+//         ∟ a.nav-link <----- 實際上是由這裡撐開點擊範圍(padding)
+
+.steps-list {
+  margin-bottom: 0;
+  text-align: center;
+  @include clearfix();
+
+  li, .steps-item {
+    position: relative;
+    display: inline-block;
+  }
+}
+
+// use for 'cart-step'
+$step-icon-cirlce: ($line-height-computed + ($border-width * 12) + ($padding-y / 2)) / 2;
+.steps.has-count {
+  margin-bottom: $padding-y * 2;
+  
+  .steps-list {
+    position: relative;
+    overflow: hidden;
+  }
+
+  li, .steps-item {
+    width: 20%; 
+    color: $gray;
+
+    .number, .label { display: block; }
+    
+    // 數字
+    .number {
+      position: relative;
+      z-index: $zindex-hover;
+      padding: $padding-y / 4;
+      margin: 0 auto;
+      width: $line-height-computed + ($border-width * 12) + ($padding-y / 2);
+      background-color: $white;
+      border: ($border-width * 6) solid $border-default;
+      font-weight: bold;
+      @include border-radius($step-icon-cirlce);
+    }
+    // 文字
+    .label { margin-top: $padding-y / 2; }
+    
+    // 中線
+    &:after {
+      position: absolute;
+      top: $step-icon-cirlce - 3;
+      left: -50%;
+      z-index: $zindex-base;
+      width: 100%;
+      height: 6px;
+      background-color: $border-default;
+      content: '';
+    }
+    &:first-child {
+      &:after { width: auto; }
+    }
+    
+    // 成為焦點時
+    &.active { 
+      .number {
+        color: $blue;
+        border-color: $blue;
+      }
+      .label { color: $blue; }
+
+      // 中線
+      &:after { background-color: $blue; }
+    }
+  }
+}
+
+
+// use for 'order-list'
+.steps.has-cart {
+  .steps-list {
+    position: relative;
+    overflow: hidden;
+  }
+
+  li, .steps-item { 
+    width: 24%; 
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+    color: $border-default;
+
+    .label, .date, .icon { display: block; }
+    .label { font-weight: bold; }
+    .icon { 
+      z-index: $zindex-hover; 
+      font-size: $font-size-medium;
+      &:before { background-color: $white; }
+    }
+
+    &:after {
+      position: absolute;
+      top: calc(50% - 2px);
+      left: calc(-50% - 2px);
+      z-index: $zindex-base;
+      width: 100%;
+      height: 4px;
+      background-color: $border-default;
+      content: '';
+    }
+
+    &.active { 
+      color: $blue; 
+      &:after {
+        background-color: $blue;
+      }
+    }
+  }
+}
+
+
+// use for 'join-step 1~3'
+.steps.border {
+  .steps-list {
+    border-bottom: 1px solid $border-default;
+
+    li, .steps-item {
+      width: $font-size-base * 12;
+      padding-top: $padding-y * 2;
+      padding-bottom: ($padding-y * 2) - 4;
+      // padding: ($padding-y * 2) $padding-x ($padding-y * 2) - 4;
+      color: $dark;
+      border-bottom: 4px solid $transparent;
+
+      .number {
+        width: $grid-padding * 3;
+        height: $grid-padding * 3;
+        margin-right: $padding-x / 2;
+        background-color: lighten($dark, 15%);
+        color: $white;
+        @include border-radius($grid-padding * 3 / 2);
+      }
+      &.active { 
+        font-weight: bold;
+        color: $yellowgreen;
+        border-bottom-color: $yellowgreen; 
+        .number { background-color: $yellowgreen; }
+      }
+    }
+  }
+}

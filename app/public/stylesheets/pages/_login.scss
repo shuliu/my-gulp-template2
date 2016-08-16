@@ -1,0 +1,256 @@
+//
+// Login & SignUp
+//
+
+// -------------------------------------
+//
+// * Type
+//
+// -------------------------------------
+$form-login-width:  440px !default;
+$form-login-height: 312px !default;
+// $form-login-input:  324px !default;
+$qrcode-width:      72px !default;
+
+// ~~~ 驗證碼
+.img-captcha {
+  display: inline-block;
+  margin-left: 4px;
+  margin-bottom: 0;
+  vertical-align: middle;
+}
+.btn-refresh {
+  padding: ($padding-y / 4) ($padding-x / 2);
+  font-size: $font-size-small;
+
+  .icon-refresh {
+    display: block;
+  }
+}
+
+
+// ~~~ 密碼強度判斷
+.password-verdict {
+  .progress {
+    display: inline-block;
+    width: $input-width-lg;
+    margin-right: $padding-x / 2;
+    margin-bottom: 0;
+  }
+  .status-success, .status-warning, .status-danger {
+    font-size: $font-size-small;
+    font-weight: bold;
+    line-height: 1em;
+  }
+}
+
+
+// ~~~ Common
+.form-login-title, .form-signup-title {
+  color: $blue;
+
+  &.dark { color: $dark; }
+}
+.form-signup, .form-login {
+  background-color: $white;
+  overflow: hidden;
+
+  .css-table {
+    .css-td {
+      padding-top: $padding-y - 2;
+      padding-bottom: $padding-y - 2;
+    }
+  }
+}
+
+
+// ~~~ 註冊
+// use for 'join-*', 'pwd-forgot'
+.form-signup-title {
+  margin-top: $padding-y * 4;
+  text-align: center;
+}
+.form-signup {
+  padding: ($padding-y * 3) ($padding-x * 2);
+  margin-top: $padding-y * 3;
+  margin-bottom: $padding-y * 6;
+  border: 1px solid $border-default;
+
+  .btn-group { margin-top: $padding-y * 3; }
+}
+
+
+// ~~~ 登入
+// use for 'login'
+.form-login-title {
+  margin-top: 0;
+  margin-left: $padding-x / 2;
+  margin-bottom: $padding-y * 5;
+  font-size: $font-size-large;
+}
+.form-login {
+  position: relative;
+  z-index: $zindex-ad-form;
+  width: $form-login-width;
+  padding: ($padding-y * 4) ($padding-x * 1.5) ($padding-y * 5.5);
+  margin-top: $padding-y * 8.5;
+  margin-bottom: $padding-y * 8.5;
+  border-top: 4px solid $blue;
+
+  // 登入顯示切換
+  .login-switch {
+    &:hover {
+      cursor: pointer;
+      opacity: .8;
+    }
+    .btn-switch {
+      &[aria-hidden="true"] { display: none; }
+      &[aria-hidden="false"] { display: block; }
+    }
+    .qrcode, .desktop {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+    }
+    img {
+      width: $qrcode-width;
+      float: right;
+    }
+
+    // qrcode
+    .qrcode {
+      .qrcode-title {
+        margin-top: 34px;
+        margin-right: -12px;
+        font-size: $font-size-small;
+        .icon {
+          margin-left: $padding-x / 4;
+          color: $blue;
+        }
+      }
+    }
+
+    .qrcode {
+      display: block;
+    }
+    .desktop {
+      display: none;
+    }
+    &.change {
+      .qrcode {
+        display: none;
+      }
+      .desktop {
+        display: block;
+      }
+    }
+  }
+
+  // 固定欄位高度
+  .switch-content {
+    height: $form-login-height;
+    .switch-pane {
+      &[aria-hidden="true"] { display: none; }
+      &[aria-hidden="false"] { display: block; }
+    }
+    #login-desktop {
+      display: block;
+    }
+    #login-qrcode {
+      display: none;
+    }
+    &.change {
+      #login-desktop {
+        display: none;
+      }
+      #login-qrcode {
+        display: block;
+      }
+    }
+  }
+
+  // 註冊/忘記密碼 連結
+  .pull-left {
+    &.offset {
+      margin-left: ($font-size-base * 2) + ($table-cell-padding * 2) + $table-cell-padding;
+    }
+  }
+  .pull-right {
+    &.offset {
+      margin-right: $padding-y;
+    }
+  }
+}
+
+// ~~~ 登入頁使用的QRcode大圖
+.qrcode-lg {
+  margin: ($padding-y * 7) auto ($padding-y * 3);
+  width: 144px;
+  border: 1px solid $border-default;
+}
+
+
+// ~~~ 登入頁的背景圖廣告
+.cover-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: $zindex-ad-login;
+
+  &.has-login {
+    background: transparent url($images-url + 'banner-sample.jpg') no-repeat 50% 0;
+    background-size: cover;
+  }
+}
+
+// login表單的錯誤顯示
+.form-login, .form-login-modal {
+  .error-msg {
+    position: absolute;
+    top: 72px;
+    left: ($padding-x * 1.5) + ($font-size-base * 2) + ($padding-x * 1.5);
+    z-index: $zindex-error;
+    width: ($form-login-width - ($padding-x * 3) - ($table-cell-padding * 2)) - (($table-cell-padding * 2) + ($font-size-base * 2)) - $border-width;
+    padding: ($padding-y / 2) ($padding-x / 2);
+    color: white;
+    font-size: $font-size-small;
+    font-weight: bold;
+    text-align: center;
+    background-color: $vermillion;
+    @include border-radius($border-radius-base);
+  }
+}
+
+
+// ~~~~~~~~ Modal版本 : 於結帳時未登入狀況使用
+// use for 'cart-list-login'
+.form-login-modal {
+  .modal-sm {
+    width: $form-login-width;
+    margin-left: -($form-login-width / 2);
+  }
+  .modal-body {
+    .form-login-title {
+      margin-top: $padding-y;
+      margin-bottom: $padding-y * 2;
+    }
+    .error-msg {
+      position: relative;
+      top: 0;
+      left: ($font-size-base * 2) + ($padding-x * 1.5);
+      margin-bottom: 0;
+    }
+    .css-table.pure {
+      margin-bottom: 0;
+    }
+  }
+  .modal-footer {
+    padding-top: $padding-y * 3.5;
+    padding-bottom: $padding-y * 3.5;
+    background-color: $silver;
+    @include border-bottom-radius($border-radius-base);
+  }
+}
+

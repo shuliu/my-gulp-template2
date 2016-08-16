@@ -1,0 +1,120 @@
+
+//-------------
+//-
+//- mixins
+//-
+//-------------
+
+
+//- 麵包屑
+//- @val lengthArray (array) 麵包屑不含首頁的長度
+//- @val lastIsString (false or String) 最後一段顯示文字或是select， 預設false若代入值則會進入文字樣式
+//- @val type (String) 顯示模式，全連結(String) 或是 產品下拉式(預設)
+//-      type = 'String' => [{ title : '會員中心' , href : '/mockup/Member/Control.html' },{ title : '訂單查詢' , href : '/mockup/Order/order-list.html' }]
+//-      type = 'Select' => [0, 1, 2, 3, 4, 5]
+mixin breadcrumb (lengthArray, lastIsString, type)
+  - lengthArray = typeof lengthArray != "undefined" ? lengthArray : [1,2,3,4]
+  - lastIsString = ( typeof lastIsString == "undefined")  ? false : lastIsString
+  - type = ( typeof lastIsString == "undefined")  ? 'Select' : type
+  - first = lengthArray[0]
+  - last = lengthArray[lengthArray.length - 1]
+
+  form(action = "", :method = "GET")
+    ul.breadcrumbs
+      li
+        a(href = "/") 首頁
+      if type == 'String'
+        each v, i in lengthArray
+          li
+            a(href="#{v.href}") #{v.title}
+      else
+        //- 預設 Select
+        each v, i in lengthArray
+          li.select-box
+            if last == v && lastIsString != false
+              span.last #{lastIsString}
+            else
+              span
+                select.selector(name = "", "btn-style" = "btn-mini")
+                  each j in [1,2,3,4,5]
+                    option(value = "#{j}", selected = ( ( j == 5 ) ? 'selected' : false ) ) 層級#{i+first}/選項#{j}
+
+
+//- 會員中心 nav-tabs 橫向頁籤切換
+mixin member-nav-tabs (activeString, lengthArray)
+  - lengthArray = typeof lengthArray != "undefined" ? lengthArray : [{ href: '/mockup/Member/home.html', title: '會員中心' },{ href: '/mockup/Member/profile.html', title: '會員資料' },{ href: '/mockup/Order/order-list.html', title: '訂單紀錄' },{ href: '/mockup/Member/mail-inbox.html', title: '個人訊息' },{ href: '/mockup/Bonus/home.html', title: '紅利點數' },{ href: '/mockup/Coupon/home.html', title: '優惠券' },{ href: '/mockup/Favorite/home.html', title: '商品收藏' },{ href: '/mockup/News/news-list.html', title: '活動專區' },{ href: '/mockup/RepairReservation/repair-reserve.html', title: '預約維修' }]
+  - activeString = ( typeof activeString == "undefined")  ? false : activeString
+
+
+  .nav-tabs.nav-tabs-member
+    ul.nav-tabs-list
+      each v, i in lengthArray
+        - activeReturn = ( v.title == activeString ) ? 'active' : ''
+
+        li( class="nav-tabs-item #{activeReturn}" )
+          a.nav-link(href="#{v.href}") #{v.title}
+
+//- 會員中心 單元內頁側邊欄選單
+mixin member-menu-list (activeString, lengthArray)
+  - activeString = ( typeof activeString == "undefined")  ? false : activeString
+  - lengthArray = ( typeof activeString == "undefined") ? false : lengthArray
+  if activeString != false && lengthArray != false
+    .menu-list-panel.secondary
+      each v, i in lengthArray
+        h4.menu-list-title #{v.title}
+        ul.menu-list
+          each v2, i2 in v.list
+            - activeReturn = ( v2.title == activeString ) ? 'active' : ''
+
+            li( class="menu-list-item #{activeReturn}" )
+              a.has-arrow(href="#{v2.href}") #{v2.title}
+
+//- cart-step 1 to 3
+mixin cart-step(num)
+  - num = ( typeof num == "undefined")  ? 1 : num
+  - num1 = ( num >= 1 ) ? 'active' : ''
+  - num2 = ( num >= 2 ) ? 'active' : ''
+  - num3 = ( num >= 3 ) ? 'active' : ''
+
+  ul.steps-list
+    li(class="steps-item #{num1}")
+      span.number 1
+      span.label 填寫訂購資料
+    li(class="steps-item #{num2}")
+      span.number 2
+      span.label 選擇付款方式
+    li(class="steps-item #{num3}")
+      span.number 3
+      span.label 訂單送出
+
+//- 亂數產生 (error)
+mixin range(min,max)
+  - min = ( typeof min == "undefined") ? 0 : min
+  - max = ( typeof max == "undefined") ? 10 : max
+  - max = max + 1;
+  | #{Math.floor(Math.random() * (min - max) + max)}
+
+//- article index  文章list
+mixin add-article(tag_type, article_first, article_last)
+  - tag_type = ( typeof tag_type == "undefined") ? 'XXX' : tag_type;
+  - article_first = ( typeof article_first == "undefined") ? 0 : article_first;
+  - article_last = ( typeof article_last == "undefined") ? 20 : article_last;
+  while article_first < article_last
+    - _range = Math.floor(Math.random() * (0 - 3) + 3);
+    section.card.quarter
+      .card-img
+        a(href="/mockup/Article/Detail/?id=#{articles[_range]['_seqId']}")
+          img(alt='文章圖', src="#{articles[_range]['iconImg']}")
+      .card-content
+        h4.title
+          a(href='/mockup/Article/Detail/') #{_range} #{articles[_range]['title']}
+        p.desc
+          | #{articles[_range]['title']} #{articles[_range]['title']}
+        .info
+          time.date.has-inline(datetime="#{articles[_range]['_published']}")
+            i.icon.icon-clock
+            | #{articles[_range]['_published']}
+          a.tag-text-primary(href="/mockup/Article/List/#{tag_type}")
+            i.icon.icon-tag
+            | #{tag_type}
+    - article_first++

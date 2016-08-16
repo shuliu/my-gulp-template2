@@ -1,0 +1,221 @@
+//- order-return-content
+// 頁面標題
+h4.page-header 訂單查詢 - 申請退貨
+// 步驟說明
+.alert.alert-default.align.center
+  | STEP1. 勾選退貨商品 →
+  | STEP2. 填寫退貨原因 →
+  | STEP3. 填寫取貨資訊 →
+  | STEP4. 填寫退款資訊
+// 訂單資訊
+.css-table.fill.blue
+  .css-tr
+    .css-th 訂單編號
+    .css-th 訂購日期
+    .css-th 付款方式
+    .css-th 配送方式
+  .css-tr
+    .css-td
+      a.underline(href='/mockup/Order/order-detail.html') 2016041498765
+    .css-td 2016/04/13
+    .css-td 分期付款
+    .css-td 宅配
+// 商品明細
+.css-table.middle.align.center
+  // 標題
+  .css-tr
+    .css-th.w-f1
+      .checkbox-group
+        input#prd-all.js-prd-all.checkbox(type='checkbox', name='check', data-toggle=".prd-all-toggle-1")
+        label.checkbox-label(for='prd-all')
+    .css-th.align.left 商品名稱
+    .css-th.w-f6 規格
+    .css-th.w-f4 數量
+    .css-th.w-f6.align.right 金額
+  // 內容
+  .css-tr
+    .css-td.w-f1
+      .checkbox-group
+        input#prd-checkbox-1.prd-all-toggle-1.checkbox(type='checkbox', name='check')
+        label.checkbox-label(for='prd-checkbox-1')
+    .css-td.align.left Samsung Galaxy S6 Edge 64G 5.1吋八核雙曲面智慧旗艦機（炫燦金）
+    .css-td.w-f6 金色
+    .css-td.w-f4 2
+    .css-td.w-f6.align.right $39,600
+  .css-tr
+    .css-td.w-f1
+      .checkbox-group
+        input#prd-checkbox-2.prd-all-toggle-1.checkbox(type='checkbox', name='check')
+        label.checkbox-label(for='prd-checkbox-2')
+    .css-td.align.left
+      span.tag.tag-extra-outline.tag-mini 贈品
+      | Samsung L768 立體聲耳機
+    .css-td.w-f6
+    .css-td.w-f4 1
+    .css-td.w-f6.align.right $0
+  .css-tr
+    .css-td.w-f1
+      .checkbox-group
+        input#prd-checkbox-3.prd-all-toggle-1.checkbox(type='checkbox', name='check')
+        label.checkbox-label(for='prd-checkbox-3')
+    .css-td.align.left
+      span.tag.tag-secondary-outline.tag-mini 加購價
+      | SAMSUNG 三星 原廠 8400mAh 行動電源（藍）
+    .css-td.w-f6 藍色
+    .css-td.w-f4 1
+    .css-td.w-f6.align.right $19,800
+  .css-tr
+    .css-td.w-f1
+      .checkbox-group
+        input#prd-checkbox-4.prd-all-toggle-1.checkbox(type='checkbox', name='check')
+        label.checkbox-label(for='prd-checkbox-4')
+    .css-td.align.left SONY 5000mAh CP-V5A 繽紛色系行動電源
+    .css-td.w-f6 黑色
+    .css-td.w-f4 1
+    .css-td.w-f6.align.right $1,600
+  .css-tr
+    .css-td.w-f1
+      .checkbox-group
+        input#prd-checkbox-5.prd-all-toggle-1.checkbox(type='checkbox', name='check')
+        label.checkbox-label(for='prd-checkbox-5')
+    .css-td.align.left for Samsung Galaxy S7 Edge 滿版防爆螢幕保護貼
+    .css-td.w-f6
+    .css-td.w-f4 1
+    .css-td.w-f6.align.right $500
+
+// 退貨資訊
+h4.css-table-caption 退貨資訊
+.css-table.middle
+  .css-tr
+    .css-th.align.right.w-f8 申請退貨的原因
+    .css-td
+      ul.stackable
+        li
+          span.spacing.right
+            b 商品
+          label.radio-inline
+            input.order-return-status(type='radio', name="order-return-status", value="1")
+            | 瑕疵/故障
+          label.radio-inline
+            input.order-return-status(type='radio', name="order-return-status", value="2")
+            | 寄錯商品
+          label.radio-inline
+            input.order-return-status(type='radio', name="order-return-status", value="3")
+            | 尺寸/規格不符
+          label.radio-inline
+            input.order-return-status(type='radio', name="order-return-status", value="4")
+            | 品質與原預期不同
+          label.radio-inline
+            input.order-return-status(type='radio', name="order-return-status", value="5")
+            | 缺件
+        li
+          span.spacing.right
+            b 網頁
+          label.radio-inline
+            input.order-return-status(type='radio', name="order-return-status", value="6")
+            | 商品與圖片不符
+          label.radio-inline
+            input.order-return-status(type='radio', name="order-return-status", value="7")
+            | 商品說明不完整
+          label.radio-inline
+            input.order-return-status(type='radio', name="order-return-status", value="8")
+            | 商品說明錯誤
+        li
+          span.spacing.right
+            b 其他
+          label.radio-inline
+            input.order-return-status(type='radio', name="order-return-status", value="9")
+            | 等太久了
+          label.radio-inline
+            input.order-return-status(type='radio', name="order-return-status", value="10")
+            | 購買其他款商品
+          label.radio-inline
+            input.order-return-status(type='radio', name="order-return-status", value="11")
+            | 價格太貴了
+          label.radio-inline
+            input.order-return-status(type='radio', name="order-return-status", value="12")
+            | 其他 (請補充說明)
+  .css-tr
+    .css-th.align.right.w-f8 問題或建議
+    .css-td
+      textarea.js-textarea(name='', rows='6', maxlength="200", data-toggle=".js-textarea-length")
+      p.fn-sm
+        | 可輸入 200 字，目前已輸入
+        b.notice.js-textarea-length 0
+        | 字
+
+// 取貨資訊
+h4.css-table-caption 取貨資訊
+.css-table.middle
+  .css-tr
+    .css-th.align.right.w-f8
+      b.notice *
+      | 聯絡人
+    .css-td
+      input(type='text')
+  .css-tr
+    .css-th.align.right.w-f8
+      b.notice *
+      | 手機
+    .css-td
+      input(type='text')
+      span (請保持可連絡狀態，方便快遞聯繫取件收回)
+  .css-tr
+    .css-th.align.right.w-f8 市話(建議填寫)
+    .css-td
+      input.input-mini(type='text')
+      span.divider -
+      input(type='text')
+      span.divider 分機
+      input.input-sm(type='text')
+  .css-tr
+    .css-th.align.right.w-f8
+      b.notice *
+      | 地址
+    .css-td
+      input.input-micro(type='text', placeholder='區碼')
+      select(name='')
+        option(selected='selected', value='台北市') 台北市
+      select(name='')
+        option(selected='selected', value='中正區 100') 中正區 100
+      input.input-lg(type='text', placeholder='請填寫完整地址')
+
+// 退款資訊
+h4.css-table-caption 退款資訊
+.css-table.middle
+  .css-tr
+    .css-th.align.right.w-f8
+      b.notice *
+      | 金融機構(分行)
+    .css-td
+      select(name='')
+        option(selected='selected', value='請選擇金融機構') 請選擇金融機構
+      select(name='')
+        option(selected='selected', value='請選擇分行') 請選擇分行
+  .css-tr
+    .css-th.align.right.w-f8
+      b.notice *
+      | 帳號
+    .css-td
+      input.input-lg(type='text')
+  .css-tr
+    .css-th.align.right.w-f8
+      b.notice *
+      | 戶名
+    .css-td
+      input.input-lg(type='text')
+
+// button
+.btn-group
+  button.btn.btn-primary 申請退貨
+
+// 注意事項
+.alert.alert-info
+  p.h4.spacing.bottom.sm 退貨說明
+  ul.has-type-disc
+    li 購物享有7天鑑賞期(含例假日)，請注意鑑賞期非試用期，鑑賞期為收到商品7天內
+    li 退回之商品必須是全新狀態(外觀不得有刮傷、破損、受潮與完整包裝(包含附件、隨身文件、贈品等)
+    li 有標示不接受退貨的特賣商品、福袋商品，不接受更換，但若商品本身或運送過程中有造成瑕疵，則不再此限
+    li 組合商品之主商品如需退貨，則同筆訂單內之贈品、加價購商品等商品須於退貨時同時退還
+    li 確認退貨後，實際退款金額將以最後計算為主
+    li 使用ATM轉帳繳費訂單，申請退貨時請填寫退款帳號資訊

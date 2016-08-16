@@ -1,0 +1,365 @@
+//
+// Slider
+//
+
+// -------------------------------------
+//
+// * Type
+//
+// -------------------------------------
+
+.slider {
+  position: relative;
+  margin-bottom: $padding-y * 2; // ~16
+  overflow: hidden;
+
+  // hover時顯示左右箭頭
+  &:hover {
+    .slider-arrow {
+      &.left, &.bx-prev { left: 0; }
+      &.right, &.bx-next { right: 0; }
+    }
+  }
+
+  // 商品縮圖 :: 使用於「商品介紹頁」小圖預覽
+  &.view-thumbnail {
+    .slider-view {
+      .item {
+        a {
+          float: left;
+          padding: $padding-y / 2;
+          border: 1px solid $border-alpha;
+
+          &.active {
+            border-color: $blue;
+          }
+
+          img { display: block; }
+
+          & + a { margin-left: $padding-y - 2; }
+
+          @include media-breakpoint-down(lg) {
+            padding: $padding-y / 4;
+            img {
+              width: 64px + 1;
+              height: 64px + 1;
+            }
+          }
+        }
+      }
+    }
+
+    // 左右箭頭
+    .slider-arrow {
+      padding-left: $padding-x / 2;
+      padding-right: $padding-x / 2;
+    }
+  }
+}
+
+// 輪播圖片列表: use 'div' 包 'div.item'
+//
+.slider-view {
+  position: relative;
+  overflow: hidden;
+
+  // 套件輪播的不用隱藏
+  .item {
+    min-width: 90px !important;
+    // min-height: 90px !important;
+    // display: none;
+    @include inline-block;
+
+    // bx-slider 會處理掉
+    // + .item {
+    //   margin-right: 8px;
+    // }
+
+    &.active {
+      display: block;
+    }
+
+    // reset
+    a {
+      display: block; // 清除空白間距
+      opacity: 1;
+    }
+
+    // 標題
+    .caption {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      padding: ($padding-y * 2) ($padding-x * 1.5); // ~16/24
+      // background-color: rgba($black, .5);
+      // @include background-image(linear-gradient(rgba($black, 0), rgba($black, .5) 45%, rgba($black, 1)));
+      background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiLz48c3RvcCBvZmZzZXQ9IjQ1JSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+      background-size: 100%;
+      background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(45%, rgba(0, 0, 0, 0.5)), color-stop(100%, #000000));
+      background-image: -moz-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5) 45%, #000000);
+      background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5) 45%, #000000);
+      background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5) 45%, #000000);
+      overflow: hidden;
+
+      // reset Heading
+      h1, h2, h3, h4, h5, h6, p,
+      .h1, .h2, .h3, .h4, .h5, .h6 {
+        margin-top: 0;
+        margin-bottom: $padding-y;
+        color: $white;
+        @include text-shadow(rgba($black, .5) 0 1px 3px);
+      }
+
+      a {
+        color: $white;
+
+        &:hover, &:focus { opacity: .8; }
+      }
+    }
+  }
+}
+// 左右箭頭
+.slider-arrow.slider-arrow {
+  width: auto !important;
+  height: auto !important;
+  position:  absolute;
+  top: 50% !important;
+  bottom: 50% !important;
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+  display: table;
+  z-index: $zindex-slider-arrow;
+  margin-top: -44px; // (40 + 24 * 2) / 2
+  background-color: rgba($black, .75);
+  padding: ($padding-y * 3) ($padding-x - 2);
+  opacity: .45;
+  transition: all 0.5s;
+  // @include transition-duration(.5s);
+
+  &.left, &.bx-prev { left: -52px; }
+  &.right, &.bx-next { right: -52px; }
+
+  .icon {
+    font-size: 40px;
+    color: $white;
+  }
+
+}
+
+// 輪播控制，通常為banner文字說明
+//
+.slider-control {
+  position: absolute;
+  bottom: 10px;
+  z-index: $zindex-slider-control;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0;
+  overflow: hidden;
+
+  li, a {
+    display: inline-block;
+    width: $slider-control;
+    height: $slider-control;
+    margin: 1px;
+    cursor: pointer;
+    background-color: $slider-control-bg;
+    border-radius: $slider-control-radius;
+    @include transition(all .2s ease-in-out);
+
+    &.active {
+      width: $slider-control-active;
+      height: $slider-control-active;
+      margin: 0 1px;
+      background-color: $slider-control-active-bg;
+    }
+  }
+
+  // bx-slider 樣式
+  &.bx-pager {
+    padding-right: 8px;
+    li.clear {
+      background-color: transparent;
+    }
+    a.active {
+      background-color: $blue;
+    }
+  }
+
+  // 上底線
+  &.bordered {
+    // reset
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: auto;
+    margin-left: 0;
+    text-align: left;
+
+    // add border
+    border-bottom: 1px solid $border-default;
+
+    // 如果 list 是 a link (http://bxslider.com/examples/thumbnail-pager-1)
+    li, a {
+      width: 16%;
+      height: auto;
+      padding-top: 8px;
+      padding-bottom: 8px - 4; // 減border
+      margin: 0;  // reset
+      font-size: $font-size-small;
+      line-height: 1;
+      text-align: center;
+      border-bottom: 4px solid transparent;
+      background-color: $transparent;
+      @include border-radius(0);  // reset
+      @include transition(all .2s ease-in-out);
+
+      &:hover {
+        background-color: rgba($white, .8);
+      }
+
+      &.active {
+        width: 16%;  // reset
+        height: auto;  // reset
+        font-weight: bold;
+        color: $orange;
+        background-color: $white;
+        border-bottom-color: $orange;
+      }
+    }
+  }
+}
+
+// 輪播前綴標題 :: 目前使用於「瀏覽記錄」列表樣式
+//
+.slider-lead {
+  position: relative;
+  padding: ($padding-y - 2) 0;
+  border-bottom: 1px solid $blue;
+  overflow: hidden;
+
+  .title {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .slider-control {
+    top: ($font-size-medium - $slider-control-active) / 2 + ($padding-y - 2);
+    text-align: right;
+  }
+}
+
+
+
+// 目前使用於「會員中心首頁」活動專區輪播，「商品輪播」
+//
+// .slider-control-group {
+//   overflow: hidden;
+
+//   li {
+//     float: left;
+//   }
+// }
+// .gallery {
+//   .thumbnail {
+//     margin-right: 6px;
+//     border: 1px solid $border-default;
+
+//     &:hover {
+//       border-color: $blue;
+//     }
+//   }
+// }
+
+
+.gallery-slider {
+  overflow: hidden;
+}
+.gallery-slider-view {
+  height: 384px;
+}
+.gallery-slider-btns {
+  height: 32px;
+}
+
+
+//
+// ** use for '.cart-list'
+// 針對「購物車明細」之 瀏覽記錄 & 商品收藏 輪播客製化
+.js-history-slider {
+  &.cell-5 {
+    .product {
+      width: 20%;
+      float: left;
+      @include clearfix;
+    }
+  }
+}
+
+
+// 連動
+// 產品detail的圖片輪撥組合 (view)
+.slider-product-view-box {
+  width: 480px;
+  height: 480px;
+  margin: 0 auto 16px;
+  // @include breakpoint($larger-than-desktophd) {
+  //   width: 480px;
+  //   height: 480px;
+  // }
+  .gallery-slider-view {
+    width: 480px;
+    height: 480px;
+    // @include breakpoint($larger-than-desktophd) {
+    //   width: 480px;
+    //   height: 480px;
+    // }
+  }
+  li {
+    list-style-type: none;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+}
+
+// 產品detail的圖片輪撥組合 (pager btns)
+.slider-product-pager-box {
+  width: 480px;
+  margin: 0 auto;
+  .gallery-slider-view {
+    width: 80px;
+    height: 80px;
+  }
+  li {
+    list-style-type: none;
+  }
+  .bx-controls-direction {
+    a:hover {
+      background-position: center center;
+    }
+    .bx-prev, .bx-next {
+      width: 24px;
+      height: 72px;
+      top: 20px;
+      background: transparent;
+      color: $gray;
+      text-indent: 0;
+      i {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+    }
+    .bx-prev {
+      left: -28px;
+    }
+    .bx-next {
+      right: -28px;
+    }
+  }
+}
+

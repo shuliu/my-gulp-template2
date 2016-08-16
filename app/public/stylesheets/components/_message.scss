@@ -1,0 +1,102 @@
+//
+// Message
+//
+
+
+// -------------------------------------
+// 
+// * Value
+// 
+// -------------------------------------
+$avatar-width:    96px !default;
+$avatar-width-sm: 64px !default;
+
+
+// -------------------------------------
+// 
+// * Mixin
+// 
+// -------------------------------------
+@mixin message-variant($background, $border, $body-color) {}
+
+
+// -------------------------------------
+// 
+// * Type
+// 
+// -------------------------------------
+// 
+// ．．．．．．． Tree flow ．．．．．．．
+// 
+// .message
+//   ∟ .message-avatar
+//   ∟ .message-content 
+//      ∟ .info     ---> 留言者基本資訊
+//         ∟ .name
+//         ∟ .date
+//      ∟ .text     ---> 正文
+// 
+// ．．．．．．．．．．．．．．．．．．．．
+
+.message {
+  margin-bottom: $padding-y * 2;
+}
+
+// ~~~ Avatar
+.message-avatar {
+  display: inline-block;
+  float: left;
+  width: $avatar-width-sm;
+}
+
+// ~~~ Content
+.message-content {
+  position: relative;
+  padding: ($padding-y * 1.5) $padding-x;
+  margin-left: $avatar-width-sm + $padding-x;
+  line-height: $line-height-computed;
+  border: 1px solid $border-default;
+  @include border-radius($border-radius-base);
+  @include box-shadow(0 1px 6px rgba(0,0,0,.1));
+  
+  // ~~ Arrow
+  .message-arrow {
+    top: $avatar-width-sm / 2;
+    left: -$popover-arrow-outer-width;
+    margin-top: -$popover-arrow-outer-width;
+    border-right-color: $popover-arrow-outer-color;
+    border-left-width: 0;
+    &::after {
+      bottom: -$popover-arrow-width;
+      left: 1px;
+      content: "";
+      border-right-color: $popover-arrow-color;
+      border-left-width: 0;
+    }
+  }
+  
+  // ~~ Info
+  .info {
+    margin-bottom: $padding-y;
+
+    .name {
+      margin-right: $padding-x;
+      font-weight: bold;
+      color: $black;
+    }
+  }
+  
+  // ~~ Text
+  .text {}
+}
+
+
+// ~~~ Arrows
+.message-arrow {
+  @extend .popover-arrow;
+}
+.message-arrow::after,
+.message-arrow::before {
+  content: "";
+  border-width: $popover-arrow-width;
+}

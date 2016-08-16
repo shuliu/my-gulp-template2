@@ -1,0 +1,88 @@
+//
+// FAQ
+//
+
+// -------------------------------------
+//
+// * Type
+//
+// -------------------------------------
+// dl.manual
+//   ∟ dt
+//   ∟ dd
+
+.manual {
+  dt {
+    margin-bottom: $padding-y;
+    font-size: $font-size-medium;
+    line-height: $line-height-medium;
+    color: $title-orange;
+  }
+
+  dd {
+    margin-bottom: $padding-y * 3;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+  }
+}
+
+// use for 'join-step1'
+.manual-canvas {
+  width: 720px;
+  margin: ($padding-y * 5) auto ($padding-y * 2);  
+
+  .title {
+    padding-left: $padding-x;
+    padding-bottom: $padding-y / 2;
+    margin-top: $padding-y * 2.5;
+    margin-bottom: 0;
+    border-bottom: 1px solid $border-default;
+    border-left: 8px solid $border-default;
+  }
+
+  .content {
+    height: 128px;
+    padding: ($padding-y + 4) $padding-x;
+    border: 1px solid $border-default;
+    overflow: hidden;
+    overflow-y: auto;
+
+    p, dt, dd {
+      font-size: $font-size-small;
+    }
+  }
+}
+
+// use for 'faq' & 'cht'
+.accordion {
+  .accordion-title, dt {
+    position: relative;
+    padding: ($padding-y * 2 - 4) 0;
+    font-size: $font-size-medium;
+    line-height: $line-height-medium;
+    border-top: 1px solid $border-default;
+
+    &:first-child { border-top: none; }
+
+    .icon {
+      position: absolute;
+      right: 0;
+      @include center(y);
+      font-size: $font-size-large;
+    }
+
+    a { 
+      color: $dark; 
+      &[aria-expanded="true"] {
+        .icon-plus {
+          &:before { @extend .icon-minus:before; }
+        }
+      }
+    }
+  }
+  .accordion-content, dd {
+    p:last-child { margin-bottom: $padding-y * 2; }
+  }
+}
+
+

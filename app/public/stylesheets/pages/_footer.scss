@@ -1,0 +1,151 @@
+//
+// Footer
+//
+
+// -------------------------------------
+//
+// * Type
+//
+// -------------------------------------
+footer {
+  margin-top: 24px;
+}
+
+.footer-nav {
+  padding-top: 24px;
+  padding-bottom: 24px;
+  border-top: 1px solid $border-default;
+  @include clearfix;
+
+  .footer-nav-item {
+    float: left;
+    $footer-feature-list-height: ($line-height-computed * 2 + ($padding-y + 4) * 2) * 2 - 3;
+    height: $footer-feature-list-height;
+    text-align: center;
+    overflow: hidden;
+
+    > .title {
+      margin-top: 0;
+      margin-bottom: 8px - 2;
+    }
+
+    .nav {
+      font-size: $font-size-small;
+      line-height: $line-height-small;
+
+      a:hover { color: $blue; }
+    }
+
+    & + .footer-nav-item {
+      border-left: 1px solid $border-default;
+    }
+  }
+
+  & + .footer-info {
+    margin-top: 0;
+  }
+}
+.footer-feature-list {
+  margin-bottom: 0;
+  overflow: hidden;
+
+  > li {
+    float: left;
+    width: 50%;
+    text-align: left;
+    padding: ($padding-y + 4) 0;  // ~12/0
+    vertical-align: middle;
+
+    @include breakpoint($larger-than-tablet) {
+      padding-left: $padding-x * 2;
+    }
+    @include breakpoint($larger-than-desktophd) {
+      padding-left: $padding-x * 4;
+    }
+
+    &:nth-child(1) {
+      border-right: 1px solid $border-default;
+      border-bottom: 1px solid $border-default;
+    }
+    &:nth-child(2) {
+      border-bottom: 1px solid $border-default;
+    }
+    &:nth-child(3) {
+      border-right: 1px solid $border-default;
+    }
+
+    .icon {
+      top: -6px;
+      margin-right: $padding-x;
+      font-size: 32px;
+    }
+    
+    .title {
+      margin-top: 0;
+      margin-bottom: 0;
+      color: $dark;
+      font-weight: bold;
+    }
+    .content {
+      margin-bottom: 0;
+      font-size: $font-size-small;
+    }
+
+    a:hover {
+      color: $blue;
+
+      .title, .content { color: $blue; }
+    }
+  }
+}
+
+// ::: footer-info : 關於商城 ::::
+//
+.footer-info {
+  padding-top: 16px;
+  padding-bottom: 8px;
+  margin-top: 40px;
+  border-top: 2px solid $blue;
+
+  .nav {
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+
+    .nav-item {
+      padding-left: 16px;
+      border-left: 1px solid $border-default;
+      a {
+        color: $dark;
+
+        &:hover {
+          color: $blue;
+        }
+      }
+      &:first-child {
+        padding-left: 0;
+        border-left: 0;
+      }
+    }
+
+  }
+}
+.copyright {
+  padding-top: 16px;
+  padding-bottom: 8px;
+  font-size: $font-size-small;
+}
+
+.app-downloads {
+  text-align: right;
+
+  a + a {
+    margin-left: $padding-x / 2;
+  }
+}
+
+
+//
+// ~~~~~ simplify ~~~~~
+// 精簡版，用於 'login', 'register'
+//
+footer.simplify { margin-top: 0; }

@@ -1,0 +1,29 @@
+//- order detail 內容
+
+// 頁面標題
+h4.page-header 訂單明細
+include order-detail-content-title.jade
+
+// 商品明細 & 商品總計
+include order-detail-content-product.jade
+
+// 訂購資訊
+include order-detail-content-info.jade
+
+// 付款方式
+include order-detail-content-payment-method.jade
+
+// 發票資訊
+include order-detail-content-invoice.jade
+
+// 已退貨商品
+// 有退貨才顯示
+include order-detail-content-product-refund.jade
+
+// buttons-group
+.btn-group
+  a.btn.btn-default(href='/mockup/Order/order-list.html') 回訂單查詢
+
+// 注意事項
+include order-detail-content-precautions.jade
+

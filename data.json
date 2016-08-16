@@ -1,0 +1,6 @@
+{
+"menu_category_list": [{ "name": "通訊 手機 平版", "icon": "icon-pad" }, { "name": "筆記型電腦", "icon": "icon-notebook" }, { "name": "數位相機", "icon": "icon-camera" }, { "name": "周邊配件", "icon": "icon-accessory" }, { "name": "智能商品", "icon": "icon-smart" }, { "name": "遊戲軟體", "icon": "icon-game" }, { "name": "家電美妝", "icon": "icon-home-application" }],
+"slider_item": ["熱銷排行榜", "XXXX新品搶購", "指定機送記憶卡", "3C絕對衝擊價", "折多少自己領", "高速4G機"],
+"product_tab_box": [{ "name": "手機/平版" , "color": "#0090D4" }, { "name": "美裝家電" , "color": "#D24894" }, { "name": "周邊配件" , "color": "#13A6A9" }, { "name": "數位相機" , "color": "#B640EE" }],
+"product_tab_box_titles": ["明星新品","R100s 玫飛色舞","F99 顏值美美機","HTC Butterfly 100"]
+}

@@ -1,0 +1,256 @@
+// .modal-open      - body class for killing the scroll
+// .modal           - container to scroll within
+// .modal-dialog    - positioning shell for the actual modal
+// .modal-content   - actual modal w/ bg and corners and shit
+
+
+
+// -------------------------------------
+//
+// * Value
+//
+// -------------------------------------
+// Modals
+
+// Padding applied to the modal body
+$modal-inner-padding:         24px !default;
+$modal-dialog-margin:         64px !default;
+
+// modal-header
+// $modal-title-padding:         $modal-inner-padding !default;
+// $modal-title-line-height:     $line-height-base !default;
+
+// modal-ontent
+$modal-content-bg:            $white !default;
+$modal-content-xs-box-shadow: 0 20px 24px rgba($dark, .4) !default;
+
+// backdrop
+$modal-backdrop-bg:           $black !default;
+$modal-backdrop-opacity:      .6 !default;
+
+// Border Width
+$modal-content-border-width:  $border-width !default;
+$modal-header-border-width:   $modal-content-border-width !default;
+$modal-footer-border-width:   $modal-header-border-width !default;
+// Border Color
+$modal-header-border-color:   $border-default !default;
+$modal-footer-border-color:   $modal-header-border-color !default;
+
+// Size
+$modal-lg:                    880px !default;
+$modal-md:                    640px !default;
+$modal-sm:                    480px !default;
+
+// Z-index
+$zindex-modal-bg:             1040 !default;
+$zindex-modal:                1050 !default;
+
+
+// -------------------------------------
+//
+// * Type
+//
+// -------------------------------------
+// Kill the scroll on the body
+.modal-open {
+  overflow: hidden;
+}
+
+// Container that the modal scrolls within
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: $zindex-modal;
+  display: none;
+  overflow: hidden;
+  // Prevent Chrome on Windows from adding a focus outline. For details, see
+  // https://github.com/twbs/bootstrap/pull/10951.
+  outline: 0;
+  -webkit-overflow-scrolling: touch;
+
+  // When fading in the modal, animate it to slide down
+  &.fade .modal-dialog {
+    transition: transform .3s ease-out;
+    transform: translate(0, -25%);
+  }
+  &.in .modal-dialog { transform: translate(0, 0); }
+}
+.modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+// Shell div to position the modal with bottom padding
+.modal-dialog {
+  // modal 預設設定 (樣式備份用，以方式IE破版時救回)
+  // position: relative;
+  // margin: $modal-dialog-margin auto;
+  // ---------
+  // 使用 @include center(x); 方式設算
+  position: absolute;
+  @include center(x);
+  margin-top: $modal-dialog-margin;
+  margin-bottom: $modal-dialog-margin;
+  margin-left: -($modal-md / 2);
+  &.modal-sm { margin-left: -($modal-sm / 2); }
+  &.modal-md { margin-left: -($modal-md / 2); }
+  &.modal-lg { margin-left: -($modal-lg / 2); }
+  // ---------
+  // 通用設定
+  width: $modal-md;
+}
+
+// Actual modal
+.modal-content {
+  position: relative;
+  background-color: $modal-content-bg;
+  background-clip: padding-box;
+  // border: $modal-content-border-width solid $modal-content-border-color;
+  @include border-radius($border-radius-base);
+  @include box-shadow($modal-content-xs-box-shadow);
+  // Remove focus outline from opened modal
+  outline: 0;
+}
+
+// Modal background
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: $zindex-modal-bg;
+  background-color: $modal-backdrop-bg;
+
+  // Fade for backdrop
+  &.fade { opacity: 0; }
+  &.in { opacity: $modal-backdrop-opacity; }
+}
+
+// Modal header
+// Top section of the modal w/ title and dismiss
+.modal-header {
+  position: relative;
+  // padding: ($modal-inner-padding + 8) $modal-inner-padding 0;
+  padding: 12px 12px 0;
+  // border-bottom: $modal-header-border-width solid $modal-header-border-color;
+  text-align: center;
+  @include clearfix;
+
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  & + .modal-body {
+    // padding-top: $modal-inner-padding - 8;
+    padding-top: 8px;
+  }
+
+  .btn-close {
+    position: absolute;
+    top: $modal-inner-padding + 4;
+    right: $modal-inner-padding;
+    padding: 0;
+    @include box-shadow(none);
+
+    .icon-close {
+      font-size: $font-size-xxl;
+    }
+  }
+}
+// // Close icon
+// .modal-header .close {
+//   margin-top: -2px;
+// }
+
+// Title text within header
+// .modal-title {
+//   margin: 0;
+//   line-height: $modal-title-line-height;
+// }
+
+// Modal body
+// Where all modal content resides (sibling of .modal-header and .modal-footer)
+.modal-body {
+  position: relative;
+  padding: $modal-inner-padding;
+
+  .divider {
+    &.horizontal {}
+  }
+
+  & + .modal-footer { padding-top: 0; }
+}
+
+// Footer (for actions)
+.modal-footer {
+  padding: $modal-inner-padding $modal-inner-padding ($modal-inner-padding * 1.5);
+  text-align: center; // right align buttons
+  // border-top: $modal-footer-border-width solid $modal-footer-border-color;
+  @include clearfix(); // clear it in case folks use .pull-* classes on buttons
+}
+
+// Measure scrollbar width for padding body during modal show/hide
+.modal-scrollbar-measure {
+  position: absolute;
+  top: -9999px;
+  width: 50px;
+  height: 50px;
+  overflow: scroll;
+}
+
+// Modal Size
+.modal-sm { width: $modal-sm; }
+.modal-md { width: $modal-md; }
+.modal-lg { width: $modal-lg; }
+
+// Scale up the modal
+// @include media-breakpoint-up(sm) {
+//   // Automatically set modal's width for larger viewports
+//   .modal-dialog {
+//     max-width: $modal-md;
+//     margin: $modal-dialog-sm-up-margin-y auto;
+//   }
+
+//   .modal-content {
+//     @include box-shadow($modal-content-sm-up-box-shadow);
+//   }
+
+//   .modal-sm { max-width: $modal-sm; }
+// }
+
+// @include media-breakpoint-up(lg) {
+//   .modal-lg { max-width: $modal-lg; }
+// }
+
+
+// ~~~~~~~~ 於結帳時 顯示門市地圖使用
+// use for 'cart-step1-store'
+.location-modal {
+  .modal-header {
+    padding: ($padding-y * 2) ($padding-y * 2) $padding-y;
+
+   .btn-close {
+      top: $padding-y * 2 - 4;
+      right: $padding-y * 2 - 4;
+    }
+  }
+  .modal-body {
+    padding: $padding-y / 4;  //~2
+
+    .map-view {
+      height: $modal-sm - 80; //~400
+    }
+  }
+}
+
+
+
+
+
+

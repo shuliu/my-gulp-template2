@@ -1,0 +1,527 @@
+//
+// Cart
+//
+
+// -------------------------------------
+//
+// * Type
+//
+// -------------------------------------
+
+.table-wrap {
+  &.gray {
+    background-color: $silver;
+    border: 8px solid $silver;
+  }
+  .table-wrap-title {
+    padding-top: $padding-y;
+    padding-bottom: $padding-y * 2;
+    font-size: $font-size-medium;
+
+    .sub {
+      margin-left: $padding-x;
+      font-size: $font-size-base;
+      color: $gray;
+
+      b {
+        font-size: $font-size-medium;
+        margin-left: $padding-x / 4;
+        margin-right: $padding-x / 4;
+      }
+    }
+  }
+}
+
+// use for 'cart-list'
+.cart-box {
+  margin-top: $padding-y;
+}
+// .cart-total {
+//   line-height: $line-height-computed;
+//   .ct-item {}
+// }
+
+// page
+.cart-page {
+  width: 100%;
+  background: $silver;
+  @include inline-block;
+
+  .vbody {
+    background: $silver;
+    margin: 2px 8px 2px;
+  }
+}
+
+// 商品資訊
+.info {
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6, .title {
+    margin-top: 0;
+    margin-bottom: $padding-y;
+
+    a {
+      color: $dark;
+      text-decoration: underline;
+
+      &:hover { color: $blue; }
+    }
+  }
+  // 規格
+  .type {
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+  }
+
+  // 折扣
+  .discount {
+    overflow: hidden;
+
+    .event, .exclude {
+      p {
+        font-size: $font-size-small;
+        line-height: $line-height-small;
+      }
+      .tag {
+        margin-right: $padding-x / 4;
+        margin-bottom: $padding-y - 2;
+      }
+      .tag-event {
+        & + .text { color: $vermillion; }
+      }
+      // .tag-secondary {
+      //   & + .text { color: $pumpkin; }
+      // }
+      // .tag-extra {
+      //   & + .text { color: $yellowgreen; }
+      // }
+    }
+  }
+}
+
+.cart-list {
+
+  .row {
+    // margin: 2px 8px 2px;
+    border-bottom: 2px $silver solid;
+    padding: 16px;
+    background: $white;
+    font-size: 13px;
+    line-height: 1.7;
+    @include clearfix;
+
+    &.title {
+      min-height: 0;
+    }
+  }
+  .item {
+    min-height: 110px;
+    label {
+      padding: 4px;
+    }
+  }
+  .vhead {
+    background: $silver;
+    font-size: $font-size-medium;
+    line-height: $line-height-mini;
+    color: $gray;
+    position: relative;
+    &.row {
+      padding: 4px 16px;
+    }
+    i {
+      color: $dark;
+    }
+    .title {
+      color: $dark;
+      font-weight: bold;
+      margin-left: 16px;
+    }
+    .sub {
+      margin-left: 8px;
+    }
+    .number {
+      font-size: $font-size-large;
+      color: $red;
+      line-height: $line-height-base;
+      font-weight: bold;
+      padding: 0 4px;
+    }
+    .banner {
+      width: 200px;
+      height: 340px;
+    }
+    .product {
+      width: 220px;
+      height: 320px;
+      padding: 10px 20px;
+      box-shadow: inset 0px 1px 0px 0px $gray-light, inset 0px -1px 0px 0px $gray-light, inset -1px 0px 0px 0px $gray-light;
+    }
+    .product:nth-child(3) {
+      display: none;
+    }
+    .tag {
+      border-radius: 0;
+      // padding: .1em .45em .1em;
+      padding: 2px 5px;
+      line-height: 18px;
+    }
+  }
+
+  .vbody {
+
+    .row > div > div {
+      margin-bottom: 8px;
+      line-height: 18px;
+    }
+
+    .tag {
+      min-width: 64px;
+      padding: 1px 5px;
+      line-height: 18px;
+      margin-right: 8px;
+    }
+
+    .last-child {
+      > div {
+        width: 80%;
+        margin: 0 auto;
+        padding: 10px 0 13px 0;
+        text-align: right;
+        @include clearfix;
+      }
+      .btn {
+        max-width: 160px;
+        max-height: 40px;
+        min-width: 160px;
+        min-height: 40px;
+        text-align: center;
+        margin-right: 24px;
+        float: right;
+        @include clearfix;
+        i {
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .btn-mini {
+    max-width: 80px;
+    max-height: 28px;
+    min-width: 80px;
+    min-height: 28px;
+    padding: 4px;
+    margin-bottom: 8px;
+    text-align: center;
+    background: $gray-light;
+    color: $gray;
+    font-size: 12px;
+    line-height: 1.5;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .text-right {
+    width: 70%;
+    float: right;
+    margin-right: 25px;
+    text-align: right !important;
+  }
+
+  .row:last-child {
+    min-height: 0;
+  }
+
+  .totle-dollar {
+    width: 100%;
+    font-size: $font-size-large !important;
+    line-height: 20px !important;
+  }
+
+}
+
+// cart-step pages
+
+.cart-step-box {
+  width: 470px;
+  margin: 0 auto 24px;
+  @include inline-block;
+  @include clearfix;
+}
+.cart-step-box li {
+  height: 72px;
+  list-style-type: none;
+  float: left;
+  &.cart-step-left {
+    width: 130px;
+    margin-right: -3px;
+    background: transparent url( $images-url + 'base/cart-step-1.png') right top no-repeat;
+    &.active {
+      background: transparent url( $images-url + 'base/cart-step-1-active.png') right top no-repeat;
+    }
+    span {
+      margin: 50px 0 0 -28px;
+    }
+  }
+  &.cart-step-center {
+    width: 215px;
+    background: transparent url( $images-url + 'base/cart-step-2.png') center top no-repeat;
+    &.active {
+      background: transparent url( $images-url + 'base/cart-step-2-active.png') center top no-repeat;
+    }
+    span {
+      margin: 50px auto 0;
+    }
+  }
+  &.cart-step-right {
+    width: 130px;
+    margin-left: -3px;
+    background: transparent url( $images-url + 'base/cart-step-3.png') left top no-repeat;
+    &.active {
+      background: transparent url( $images-url + 'base/cart-step-3-active.png') left top no-repeat;
+    }
+    span {
+      margin: 50px 0 0 58px;
+    }
+  }
+  span {
+    width: 100px;
+    height: 18px;
+    font-size: 15px;
+    line-height: 1.2;
+    color: #A0A0A0;
+    display: block;
+  }
+  &.active span {
+    color: #0390D5;
+  }
+}
+
+
+// step
+
+.cart-step-page {
+
+  > div {
+    margin-bottom: 16px;
+  }
+
+  .vhead {
+    margin-bottom: 0;
+    border-bottom: 1px $gray-light solid;
+  }
+  .item {
+    margin-top: 0;
+    margin-bottom: 0;
+    border-bottom: 1px $gray-light solid;
+    border-left: 1px $gray-light solid;
+    border-right: 1px $gray-light solid;
+
+    a {
+      text-decoration: underline;
+      color: $dark;
+      font-size: $font-size-small;
+      line-height: $line-height-small;
+    }
+  }
+
+  // list頁面也要改成這種
+  .vbody {
+    .content {
+      .tag {
+        float: left;
+      }
+      .price {
+        width: 75%;
+        // max-width: 78%;
+        float: left;
+        word-wrap: break-word;
+        line-height: 1.7;
+        // @include clearfix;
+      }
+    }
+  }
+
+}
+
+// 產品清單展開開關功能
+
+.js-accordion-box {
+
+  // 按鈕
+  .js-accordion-btn {
+    display: block;
+    background: $gray-light !important;
+    padding: 10px 14px;
+    line-height: 1.5;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 0;
+    text-align: center;
+    cursor: pointer;
+    @include clearfix;
+
+    a, a:link, a:hover, a:active, a:visited {
+      text-decoration: none;
+    }
+  }
+
+  .btn-add-view, .btn-less-view {
+    color: $dark;
+    font-size: $font-size-small;
+  }
+  .btn-add-view {
+    display: block;
+  }
+  .btn-less-view {
+    display: none;
+  }
+  i.icon-plus, i.icon-minus {
+    width: 20px;
+    height: 19px;
+    padding: 3px 0 0;
+    margin: 0 0 0 8px;
+    background: $white;
+    color: $gray
+  }
+  i.icon-plus {
+    display: inline-block;
+  }
+  i.icon-minus {
+    display: none;
+  }
+
+  // 清單
+  .js-accordion-view {
+    display: none;
+  }
+
+  // 作用時
+  &.active {
+    .js-accordion-btn i:first-child {
+      display: none;
+    }
+    .js-accordion-btn i:last-child {
+      display: inline-block;
+    }
+    i.icon-plus {
+      display: none;
+    }
+    i.icon-minus {
+      display: inline-block;
+    }
+    .btn-add-view {
+      display: none;
+    }
+    .btn-less-view {
+      display: block;
+    }
+    .js-accordion-view {
+      display: block;
+    }
+  }
+}
+
+// 側欄
+.cart-subtotal {
+  .vhead {
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    font-weight: bold;
+    color: $blue;
+    padding: 11px 16px;
+    background: $silver;
+  }
+  .vbody {
+    padding: 14px 16px;
+
+    &.text-left {
+      font-size: $font-size-small;
+      img {
+        margin: 0 auto 8px;
+      }
+    }
+  }
+
+  .one {
+    line-height: $line-height-base;
+    @include clearfix;
+
+    &.total {
+      .pull-left {
+        padding: 6px 0;
+      }
+      .price {
+        font-size: $font-size-large;
+      }
+    }
+  }
+
+  .btn {
+    width: 100%;
+  }
+  .btn-secondary {
+    margin-bottom: 16px;
+    position: relative;
+
+    i {
+      font-size: $font-size-large;
+      position: absolute;
+      right: 16px;
+      top: 7px;
+    }
+  }
+
+}
+
+// 表單框
+
+.cart-form {
+  padding: 16px;
+
+  .title {
+    color: $blue;
+  }
+  a {
+    margin: 0 4px;
+    color: $dark;
+    text-decoration: underline;
+  }
+  label {
+    // margin: 0 4px;
+    color: $black;
+    input {
+      margin: 0 4px;
+    }
+  }
+  .vhead {
+    padding: 0 8px 16px;
+  }
+  .vbody {
+    padding: 16px 0 0;
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+    [class*=-offset-] {
+      margin-top: 1em;
+      label {
+        color: $dark;
+      }
+    }
+    .gray {
+      color: $gray;
+    }
+  }
+  .form-control-label {
+    color: $dark;
+  }
+
+}
+

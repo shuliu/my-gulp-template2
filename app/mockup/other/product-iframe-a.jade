@@ -1,0 +1,45 @@
+doctype html
+html(lang = "zh-tw")
+  head
+    meta(charset = "UTF-8")/
+    block title
+      title 神腦線上購物
+    // PC版不加 viewport
+    meta(content = "width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0", name = "viewport")/
+    meta(content = "IE=edge", "http-equiv" = "X-UA-Compatible")/
+    link(href = "/public/stylesheets/plugins.css", rel = "stylesheet")/
+    link(href = "/public/stylesheets/main.css", rel = "stylesheet")/
+  body
+
+    .wrapper
+      .container
+        h2 假頁面
+        p.align.center
+          | Galaxy S7 edge 曲面側螢幕的新顯示設計，曲面側螢幕面板可容納高達 9 個側拉標籤，
+          br
+          | 你可以放入常用的應用程式或聯絡人，一手掌握便利生活。
+          br
+          | * 尺寸重量因製程公差或有微幅差異。
+        br
+        img(alt='商品圖片', src='/public/images/banner-sample3.png')
+        br
+        h2.align.center 極致相機 樂在精彩
+        h4.align.center Dual Pixel 快速自動對焦
+        p.align.center 首支搭載單眼相機對焦成像技術的手機，迅捷靈敏的自動相位對焦，拍照或錄影都能迅速對焦，加上快門速度提升，關鍵時刻一手掌握。
+        p.align.center
+          | Galaxy S7 edge 曲面側螢幕的新顯示設計，曲面側螢幕面板可容納高達 9 個側拉標籤，
+          br
+          | 你可以放入常用的應用程式或聯絡人，一手掌握便利生活。
+          br
+          | * 尺寸重量因製程公差或有微幅差異。
+        br
+        img(alt='商品圖片', src='/public/images/banner-sample2.jpg')
+        br
+
+
+    script(src = "/public/javascripts/vendor/jquery-custom.min.js")
+    script(src = "/public/javascripts/vendor/jquery.bxslider.min.js")
+
+    script(src = "/public/javascripts/main.js")
+
+    include ../../_layouts/_elements/ga.jade

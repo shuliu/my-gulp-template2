@@ -1,0 +1,548 @@
+//- order list 內容
+
+// 頁面標題
+h4.page-header 訂單查詢
+// 查詢篩選
+.toolbar
+  form(action="", method="get")
+    span.middle.fn-sm 訂單日期：
+    select.select-sm(name='')
+      option(selected='selected', value='最近一個月') 最近一個月
+      option(value='最近三個月') 最近三個月
+      option(value='最近六個月') 最近六個月
+      option(value='一年內') 一年內
+    span.divider.fn-sm 或
+    .input-group.input-group-sm
+      input.input-sm(placeholder='請輸入訂單編號查詢', type='text')
+      button.btn.btn-query.btn-sm 查詢
+// ***** 表單: ATM-待付款-宅配
+.order-form.table-group
+  // 訂單編號
+  .css-table.blue.middle.align.center.fn-sm
+    .css-tr
+      .css-th.align.left 訂單編號
+      .css-th 訂購日期
+      .css-th 訂單狀態
+      .css-th.w-f8 付款方式
+      .css-th 配送方式
+      .css-th 實付金額
+      .css-th 訂單處理
+    .css-tr
+      .css-td.align.left
+        a.underline(href='/mockup/Order/order-detail.html') 2016041498765
+      .css-td 2016/04/13
+      .css-td
+        | 訂購成功
+      .css-td
+        span
+          | ATM轉帳
+          br
+          | (待付款)
+      .css-td 宅配
+      .css-td
+        b $39,150
+      .css-td
+        // 訂購成功但未付款使用此, data-target的內容最後使用單號區分並在畫面底部建立同id的內容
+        a.underline(href='#cancel-order-Modal-2016041498765', data-toggle='modal', data-target='#cancel-order-Modal-2016041498765') 取消訂單
+        // 訂購成功已付款使用此
+        // <a href="/mockup/Order/order-atm-cancel.html" class="underline">取消訂單</a>
+        // 訂單已出貨用此
+        // <a href="/mockup/Order/order-return.html" class="underline">申請退貨</a>
+  // ~~~~button: 開關
+  .collapse-switch
+    a.btn-switch(data-toggle='collapse', href='#order-form-1', aria-expanded='false')
+      i.icon.icon-plus-square-outline
+      span.label 商品明細
+  // ~~~~list: 商品明細
+  #order-form-1.collapse(aria-expanded='false')
+    // 表單
+    .table-group
+      // 物流單 A
+      table.table-bordered.middle.align.center.fn-sm.stackable
+        // 進度表
+        tr
+          td(rowspan='2')
+            .steps.has-cart
+              ul.steps-list
+                li.steps-item.active
+                  span.label 訂購成功
+                  i.icon.icon-plus-circle
+                  span.date 04/10 10:34
+                li.steps-item
+                  span.label 付款成功
+                  i.icon.icon-plus-circle
+                  span.date --
+                li.steps-item
+                  span.label 出貨中
+                  i.icon.icon-plus-circle
+                  span.date --
+                li.steps-item
+                  span.label 已送達
+                  i.icon.icon-plus-circle
+                  span.date --
+          th.w-f10 配送單號
+          th.w-f8 發票
+        // 物流編號 & 發票
+        tr
+          td
+          td
+      // 商品明細 A
+      .css-table.middle.align.center.fn-sm.stackable
+        .css-tr
+          .css-td.align.left
+            | Samsung Galaxy S6 Edge 64G 5.1吋八核雙曲面智慧旗艦機（炫燦金）
+            a.icon.icon-camera(href="#inline-bs-modal-img", data-toggle="modal", data-target="#inline-bs-modal-img", src="/public/images/product-detail-0.jpeg")
+          .css-td.w-f4 1件
+          .css-td.align.right.w-f6
+            b $1,299,800
+          .css-td.w-f4 訂購成功
+          .css-td.w-f4
+            a.underline(href='/mockup/Order/order-receipt.html', target='_blank') 購買證明
+          .css-td.w-f4
+            a.has-block.underline(href='/mockup/Order/order-request.html', target='_blank') 問題詢問
+            a.has-block.underline(href='/mockup/Member/msg-detail.html', target='_blank') 問答紀錄
+        .css-tr
+          .css-td.align.left
+            span.tag.tag-extra-outline.tag-mini 贈品
+            | Samsung L768 立體聲耳機
+          .css-td.w-f4 1件
+          .css-td.align.right
+            b $0
+          .css-td.w-f4 訂購成功
+          .css-td.w-f4
+          .css-td.w-f4
+            a.has-block.underline(href='/mockup/Order/order-request.html', target='_blank') 問題詢問
+            a.has-block.underline(href='/mockup/Order/order-receipt.html', target='_blank') 問答紀錄
+        .css-tr
+          .css-td.align.left
+            span.tag.tag-secondary-outline.tag-mini 加購價
+            | SAMSUNG 三星 原廠 8400mAh 行動電源（藍）
+            a.icon.icon-camera(href="#inline-bs-modal-img", data-toggle="modal", data-target="#inline-bs-modal-img", src="/public/images/product-detail-0.jpeg")
+          .css-td.w-f4 1件
+          .css-td.align.right
+            b $19,800
+          .css-td.w-f4 訂購成功
+          .css-td.w-f4
+            a.underline(href='/mockup/Order/order-receipt.html', target='_blank') 購買證明
+          .css-td.w-f4
+            a.has-block.underline(href='/mockup/Order/order-request.html', target='_blank') 問題詢問
+            a.has-block.underline(href='/mockup/Order/order-receipt.html', target='_blank') 問答紀錄
+
+// ***** 表單: ATM-已付款-宅配
+.order-form.table-group
+  // 訂單編號
+  .css-table.blue.middle.align.center.fn-sm
+    .css-tr
+      .css-th.align.left 訂單編號
+      .css-th 訂購日期
+      .css-th 訂單狀態
+      .css-th.w-f8 付款方式
+      .css-th 配送方式
+      .css-th 實付金額
+      .css-th 訂單處理
+    .css-tr
+      .css-td.align.left
+        a.underline(href='/mockup/Order/order-detail.html') 2016041498766
+      .css-td 2016/04/13
+      .css-td
+        | 訂購成功
+      .css-td
+        span
+          | ATM轉帳
+          br
+          | (已付款)
+      .css-td 宅配
+      .css-td
+        b $39,150
+      .css-td
+        a.underline(href='/mockup/Order/order-atm-cancel.html') 取消訂單
+  // ~~~~button: 開關
+  .collapse-switch
+    a.btn-switch(data-toggle='collapse', href='#order-form-2', aria-expanded='false')
+      i.icon.icon-plus-square-outline
+      span.label 商品明細
+  // ~~~~list: 商品明細
+  #order-form-2.collapse(aria-expanded='false')
+    // 表單
+    .table-group
+      // 物流單 A
+      table.table-bordered.middle.align.center.fn-sm.stackable
+        // 進度表
+        tr
+          td(rowspan='2')
+            .steps.has-cart
+              ul.steps-list
+                li.steps-item.active
+                  span.label 訂購成功
+                  i.icon.icon-plus-circle
+                  span.date 04/10 10:34
+                li.steps-item.active
+                  span.label 付款成功
+                  i.icon.icon-plus-circle
+                  span.date 04/10 15:21
+                li.steps-item
+                  span.label 出貨中
+                  i.icon.icon-plus-circle
+                  span.date --
+                li.steps-item
+                  span.label 已送達
+                  i.icon.icon-plus-circle
+                  span.date --
+          th.w-f10 配送單號
+          th.w-f8 發票
+        // 物流編號 & 發票
+        tr
+          td
+          td
+      // 商品明細 A
+      .css-table.middle.align.center.fn-sm.stackable
+        .css-tr
+          .css-td.align.left
+            | Samsung Galaxy S6 Edge 64G 5.1吋八核雙曲面智慧旗艦機（炫燦金）
+            a.icon.icon-camera(href="#inline-bs-modal-img", data-toggle="modal", data-target="#inline-bs-modal-img", src="/public/images/product-detail-0.jpeg")
+          .css-td.w-f4 1件
+          .css-td.align.right.w-f6
+            b $1,299,800
+          .css-td.w-f4 付款成功
+          .css-td.w-f4
+            a.underline(href='/mockup/Order/order-receipt.html', target='_blank') 購買證明
+          .css-td.w-f4
+            a.has-block.underline(href='/mockup/Order/order-request.html', target='_blank') 問題詢問
+            a.has-block.underline(href='/mockup/Member/msg-detail.html', target='_blank') 問答紀錄
+        .css-tr
+          .css-td.align.left
+            span.tag.tag-extra-outline.tag-mini 贈品
+            | Samsung L768 立體聲耳機
+          .css-td.w-f4 1件
+          .css-td.align.right
+            b $0
+          .css-td.w-f4 付款成功
+          .css-td.w-f4
+          .css-td.w-f4
+            a.has-block.underline(href='/mockup/Order/order-request.html', target='_blank') 問題詢問
+            a.has-block.underline(href='/mockup/Order/order-receipt.html', target='_blank') 問答紀錄
+        .css-tr
+          .css-td.align.left
+            span.tag.tag-secondary-outline.tag-mini 加購價
+            | SAMSUNG 三星 原廠 8400mAh 行動電源（藍）
+            a.icon.icon-camera(href="#inline-bs-modal-img", data-toggle="modal", data-target="#inline-bs-modal-img", src="/public/images/product-detail-0.jpeg")
+          .css-td.w-f4 1件
+          .css-td.align.right
+            b $19,800
+          .css-td.w-f4 付款成功
+          .css-td.w-f4
+            a.underline(href='/mockup/Order/order-receipt.html', target='_blank') 購買證明
+          .css-td.w-f4
+            a.has-block.underline(href='/mockup/Order/order-request.html', target='_blank') 問題詢問
+            a.has-block.underline(href='/mockup/Order/order-receipt.html', target='_blank') 問答紀錄
+
+// ***** 表單: ATM-已付款-宅配-已送達-申請退貨
+.order-form.table-group
+  // 訂單編號
+  .css-table.blue.middle.align.center.fn-sm
+    .css-tr
+      .css-th.align.left 訂單編號
+      .css-th 訂購日期
+      .css-th 訂單狀態
+      .css-th.w-f8 付款方式
+      .css-th 配送方式
+      .css-th 實付金額
+      .css-th 訂單處理
+    .css-tr
+      .css-td.align.left
+        a.underline(href='/mockup/Order/order-detail.html') 2016041498767
+      .css-td 2016/04/13
+      .css-td
+        | 已出貨
+      .css-td
+        span
+          | ATM轉帳
+          br
+          | (已付款)
+      .css-td 宅配
+      .css-td
+        b $39,150
+      .css-td
+        a.underline(href='/mockup/Order/order-return.html') 申請退貨
+  // ~~~~button: 開關
+  .collapse-switch
+    a.btn-switch(data-toggle='collapse', href='#order-form-3', aria-expanded='false')
+      i.icon.icon-plus-square-outline
+      span.label 商品明細
+  // ~~~~list: 商品明細
+  #order-form-3.collapse(aria-expanded='false')
+    // 表單
+    .table-group
+      // 物流單 A
+      table.table-bordered.middle.align.center.fn-sm.stackable
+        // 進度表
+        tr
+          td(rowspan='2')
+            .steps.has-cart
+              ul.steps-list
+                li.steps-item.active
+                  span.label 訂購成功
+                  i.icon.icon-plus-circle
+                  span.date 04/10 10:34
+                li.steps-item.active
+                  span.label 付款成功
+                  i.icon.icon-plus-circle
+                  span.date 04/10 19:34
+                li.steps-item.active
+                  span.label 出貨中
+                  i.icon.icon-plus-circle
+                  span.date 04/11 11:12
+                li.steps-item
+                  span.label 已送達
+                  i.icon.icon-plus-circle
+                  span.date --
+          th.w-f10 配送單號
+          th.w-f8 發票
+        // 物流編號 & 發票
+        tr
+          td
+            a.value(href='#0') 新竹 09472719314523
+          td
+            b.value 已捐贈
+      // 商品明細 A
+      .css-table.middle.align.center.fn-sm.stackable
+        .css-tr
+          .css-td.align.left
+            | Samsung Galaxy S6 Edge 64G 5.1吋八核雙曲面智慧旗艦機（炫燦金）
+            a.icon.icon-camera(href="#inline-bs-modal-img", data-toggle="modal", data-target="#inline-bs-modal-img", src="/public/images/product-detail-0.jpeg")
+          .css-td.w-f4 1件
+          .css-td.align.right.w-f6
+            b $1,299,800
+          .css-td.w-f4 出貨中
+          .css-td.w-f4
+            a.underline(href='/mockup/Order/order-receipt.html', target='_blank') 購買證明
+          .css-td.w-f4
+            a.has-block.underline(href='/mockup/Order/order-request.html', target='_blank') 問題詢問
+            a.has-block.underline(href='/mockup/Member/msg-detail.html', target='_blank') 問答紀錄
+        .css-tr
+          .css-td.align.left
+            span.tag.tag-extra-outline.tag-mini 贈品
+            | Samsung L768 立體聲耳機
+          .css-td.w-f4 1件
+          .css-td.align.right
+            b $0
+          .css-td.w-f4 出貨中
+          .css-td.w-f4
+          .css-td.w-f4
+            a.has-block.underline(href='/mockup/Order/order-request.html', target='_blank') 問題詢問
+            a.has-block.underline(href='/mockup/Order/order-receipt.html', target='_blank') 問答紀錄
+        .css-tr
+          .css-td.align.left
+            span.tag.tag-secondary-outline.tag-mini 加購價
+            | SAMSUNG 三星 原廠 8400mAh 行動電源（藍）
+            a.icon.icon-camera(href="#inline-bs-modal-img", data-toggle="modal", data-target="#inline-bs-modal-img", src="/public/images/product-detail-0.jpeg")
+          .css-td.w-f4 1件
+          .css-td.align.right
+            b $19,800
+          .css-td.w-f4 出貨中
+          .css-td.w-f4
+            a.underline(href='/mockup/Order/order-receipt.html', target='_blank') 購買證明
+          .css-td.w-f4
+            a.has-block.underline(href='/mockup/Order/order-request.html', target='_blank') 問題詢問
+            a.has-block.underline(href='/mockup/Order/order-receipt.html', target='_blank') 問答紀錄
+      // 物流單 B
+      table.table-bordered.middle.align.center.fn-sm.stackable
+        // 進度表
+        tr
+          td(rowspan='2')
+            .steps.has-cart
+              ul.steps-list
+                li.steps-item.active
+                  span.label 訂購成功
+                  i.icon.icon-plus-circle
+                  span.date 04/10 10:34
+                li.steps-item.active
+                  span.label 付款成功
+                  i.icon.icon-plus-circle
+                  span.date 04/10 19:34
+                li.steps-item.active
+                  span.label 出貨中
+                  i.icon.icon-plus-circle
+                  span.date 04/11 11:12
+                li.steps-item.active
+                  span.label 已送達
+                  i.icon.icon-plus-circle
+                  span.date 04/11 11:12
+          th.w-f10 配送單號
+          th.w-f8 發票
+        // 物流編號 & 發票
+        tr
+          td
+            a.value(href='#0') 黑貓 09472719314523
+          td
+            b.value 已捐贈
+      // 商品明細 B
+      .css-table.middle.align.center.fn-sm.stackable
+        .css-tr
+          .css-td.align.left
+            | Samsung Galaxy S6 Edge 64G 5.1吋八核雙曲面智慧旗艦機（炫燦金）
+            a.icon.icon-camera(href="#inline-bs-modal-img", data-toggle="modal", data-target="#inline-bs-modal-img", src="/public/images/product-detail-0.jpeg")
+          .css-td.w-f4 1件
+          .css-td.align.right.w-f6
+            b $1,299,800
+          .css-td.w-f4 已送達
+          .css-td.w-f4
+            a.underline(href='/mockup/Order/order-receipt.html', target='_blank') 購買證明
+          .css-td.w-f4
+            a.has-block.underline(href='/mockup/Order/order-request.html', target='_blank') 問題詢問
+            a.has-block.underline(href='/mockup/Member/msg-detail.html', target='_blank') 問答紀錄
+        .css-tr
+          .css-td.align.left
+            span.tag.tag-extra-outline.tag-mini 贈品
+            | Samsung L768 立體聲耳機
+          .css-td.w-f4 1件
+          .css-td.align.right
+            b $0
+          .css-td.w-f4 已送達
+          .css-td.w-f4
+          .css-td.w-f4
+            a.has-block.underline(href='/mockup/Order/order-request.html', target='_blank') 問題詢問
+            a.has-block.underline(href='/mockup/Order/order-receipt.html', target='_blank') 問答紀錄
+        .css-tr
+          .css-td.align.left
+            span.tag.tag-secondary-outline.tag-mini 加購價
+            | SAMSUNG 三星 原廠 8400mAh 行動電源（藍）
+            a.icon.icon-camera(href="#inline-bs-modal-img", data-toggle="modal", data-target="#inline-bs-modal-img", src="/public/images/product-detail-0.jpeg")
+          .css-td.w-f4 1件
+          .css-td.align.right
+            b $19,800
+          .css-td.w-f4 已送達
+          .css-td.w-f4
+            a.underline(href='/mockup/Order/order-receipt.html', target='_blank') 購買證明
+          .css-td.w-f4
+            a.has-block.underline(href='/mockup/Order/order-request.html', target='_blank') 問題詢問
+            a.has-block.underline(href='/mockup/Order/order-receipt.html', target='_blank') 問答紀錄
+// ***** 表單: 信用卡-已付款-門市-已換貨
+.order-form.table-group
+  // 訂單編號
+  .css-table.blue.middle.align.center.fn-sm
+    .css-tr
+      .css-th.align.left 訂單編號
+      .css-th 訂購日期
+      .css-th 訂單狀態
+      .css-th.w-f8 付款方式
+      .css-th 配送方式
+      .css-th 實付金額
+      .css-th 訂單處理
+    .css-tr
+      .css-td.align.left
+        a.underline(href='/mockup/Order/order-detail.html') 2016041498768
+      .css-td 2016/04/13
+      .css-td
+        | 已送達
+      .css-td 信用卡一次付款
+      .css-td 神腦門市
+      .css-td
+        b $39,150
+      .css-td
+  // ~~~~button: 開關
+  .collapse-switch
+    a.btn-switch(data-toggle='collapse', href='#order-form-4', aria-expanded='false')
+      i.icon.icon-plus-square-outline
+      span.label 商品明細
+  // ~~~~list: 商品明細
+  #order-form-4.collapse(aria-expanded='false')
+    // 表單
+    .table-group
+      // 物流單 A
+      table.table-bordered.middle.align.center.fn-sm.stackable
+        // 進度表
+        tr
+          td(rowspan='2')
+            .steps.has-cart
+              ul.steps-list
+                li.steps-item.active
+                  span.label 訂購成功
+                  i.icon.icon-plus-circle
+                  span.date 04/10 10:34
+                li.steps-item.active
+                  span.label 付款成功
+                  i.icon.icon-plus-circle
+                  span.date 04/10 19:34
+                li.steps-item.active
+                  span.label 出貨中
+                  i.icon.icon-plus-circle
+                  span.date 04/11 11:12
+                li.steps-item.active
+                  span.label 已送達
+                  i.icon.icon-plus-circle
+                  span.date 04/12 09:24
+          th.w-f10 配送單號
+          th.w-f8 發票
+        // 物流編號 & 發票
+        tr
+          td
+            a.value(href='#0') 新竹 09472719314523
+          td
+            b.value QA87659843
+      // 商品明細 A
+      .css-table.middle.align.center.fn-sm.stackable
+        .css-tr
+          .css-td.align.left
+            | Samsung Galaxy S6 Edge 64G 5.1吋八核雙曲面智慧旗艦機（炫燦金）
+            a.icon.icon-camera(href="#inline-bs-modal-img", data-toggle="modal", data-target="#inline-bs-modal-img", src="/public/images/product-detail-0.jpeg")
+          .css-td.w-f4 1件
+          .css-td.align.right.w-f6
+            b $1,299,800
+          .css-td.w-f4 已換貨
+          .css-td.w-f4
+            a.underline(href='/mockup/Order/order-receipt.html', target='_blank') 購買證明
+          .css-td.w-f4
+            a.has-block.underline(href='/mockup/Order/order-request.html', target='_blank') 問題詢問
+            a.has-block.underline(href='/mockup/Member/msg-detail.html', target='_blank') 問答紀錄
+        .css-tr
+          .css-td.align.left
+            span.tag.tag-extra-outline.tag-mini 贈品
+            | Samsung L768 立體聲耳機
+          .css-td.w-f4 1件
+          .css-td.align.right
+            b $0
+          .css-td.w-f4 已送達
+          .css-td.w-f4
+          .css-td.w-f4
+            a.has-block.underline(href='/mockup/Order/order-request.html', target='_blank') 問題詢問
+            a.has-block.underline(href='/mockup/Member/msg-detail.html', target='_blank') 問答紀錄
+        .css-tr
+          .css-td.align.left
+            span.tag.tag-secondary-outline.tag-mini 加購價
+            | SAMSUNG 三星 原廠 8400mAh 行動電源（藍）
+            a.icon.icon-camera(href="#inline-bs-modal-img", data-toggle="modal", data-target="#inline-bs-modal-img", src="/public/images/product-detail-0.jpeg")
+          .css-td.w-f4 1件
+          .css-td.align.right
+            b $19,800
+          .css-td.w-f4 已送達
+          .css-td.w-f4
+            a.underline(href='/mockup/Order/order-receipt.html', target='_blank') 購買證明
+          .css-td.w-f4
+            a.has-block.underline(href='/mockup/Order/order-request.html', target='_blank') 問題詢問
+            a.has-block.underline(href='/mockup/Member/msg-detail.html', target='_blank') 問答紀錄
+// 頁籤
+include ./../_elements/nav/pagination-nav.jade
+
+
+// 取消訂單: Modal
+#cancel-order-Modal-2016041498765.modal
+  // dialog = 尺寸設定
+  .modal-dialog.modal-sm
+    // Content = 防止內容溢出的框框
+    .modal-content
+      // 標題
+      .modal-header
+        h3 【 取消訂單 】
+      // 內容
+      .modal-body
+        p.align.center.stackable
+          | 是否確認取消訂單？
+          br
+          | 訂單取消後，如需購買請重新訂購！
+      // Footer
+      .modal-footer
+        form(action="", method="post")
+          input(type="hidden", name="order-id", value="2016041498765")
+          button.btn.btn-default(data-dismiss='modal') 取消
+          button.btn.btn-primary(name="cancel-order-id", value="Y") 確認

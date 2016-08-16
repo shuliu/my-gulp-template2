@@ -1,0 +1,201 @@
+//
+// Images
+//
+
+// -------------------------------------
+//
+// * Mixins
+//
+// -------------------------------------
+// - Responsive image
+// - Retina image
+
+// Responsive image
+//
+// Keep images from scaling beyond the width of their parents.
+
+@mixin img-fluid($display: block) {
+  display: $display;
+  max-width: 100%; // Part 1: Set a maximum relative to the parent
+  height: auto; // Part 2: Scale the height according to the width, otherwise you get stretching
+}
+
+// Retina image
+//
+// Short retina mixin for setting background-image and -size.
+
+@mixin img-retina($file-1x, $file-2x, $width-1x, $height-1x) {
+  background-image: url($file-1x);
+
+  // Autoprefixer takes care of adding -webkit-min-device-pixel-ratio and -o-min-device-pixel-ratio,
+  // but doesn't convert dppx=>dpi.
+  // There's no such thing as unprefixed min-device-pixel-ratio since it's nonstandard.
+  // Compatibility info: http://caniuse.com/#feat=css-media-resolution
+  @media
+  only screen and (min-resolution: 192dpi), // IE9-11 don't support dppx
+  only screen and (min-resolution: 2dppx) { // Standardized
+    background-image: url($file-2x);
+    background-size: $width-1x $height-1x;
+  }
+}
+
+
+// ~~~~~~ 固定「圖片」高度 ~~~~~~
+// 固定區塊內的圖片高度，寬度自動縮放
+// 目前使用於 'AD', 'Slider'
+@mixin img-fixed-height($height) {
+  height: $height;
+  overflow: hidden;
+
+  img {
+    height: $height;
+    max-width: none;
+  }
+}
+.h-fix-336 {
+  @include img-fixed-height(336px);
+}
+
+
+// -------------------------------------
+//
+// * Type
+//
+// -------------------------------------
+
+// Image thumbnails
+.thumbnail {
+  transition: all .2s ease-in-out;
+
+  // Keep them at most 100% wide
+  @include img-fluid(inline-block);
+
+  &.small {
+    width: $thumbnail-small;
+    height: $thumbnail-small;
+  }
+
+  &.medium {
+    width: $thumbnail-medium;
+    height: $thumbnail-medium;
+  }
+}
+
+// 使用於 <a> 包覆 <img> 時使用
+// <a class="img-rind"><img class="img-core"></a>
+.img-rind {
+  // 當'img-rind' 加上 'pull-left' 時，才會觸發 margin 效果
+  &.pull-left { margin-right: $padding-x / 2; }
+}
+
+// 使用於「神腦購買證明章」
+// use for 'order-receipt'
+.img-seal {
+  display: inline-block;
+  width: 188px;
+}
+
+
+// ~~~~~ AD ~~~~~
+.ad {
+  position: relative;
+  overflow: hidden;
+  @include clearfix;
+
+  a {
+    display: block; // 消除 1px 白邊
+    opacity: 1;
+  }
+
+  img {
+    margin-bottom: 0;
+  }
+
+}
+
+// use for 'home', 右上固定廣告
+.ad-rail {
+  &.fixed {
+    // @include center(y);
+    top: 164px;  //~為了demo先寫死高度
+    right: $padding-x / 2;
+    z-index: $zindex-ad-fixed;
+    width: 112px;
+    height: auto;
+  }
+  figure {
+    display: block;
+    margin: 0;
+    padding: $padding-y;
+    background-color: $white;
+    border: 1px solid $border-alpha;
+    text-align: center;
+    overflow: hidden;
+
+    .figure-caption { margin-bottom: $padding-y / 2; }
+  }
+  .btn-close {
+    float: right;
+    color: $gray-light;
+    background-color: $white;
+    border: 1px solid $border-alpha;
+    border-bottom: 0;
+
+    &:hover { color: $blue; }
+  }
+}
+
+
+// AD Size
+.ad-xs {
+  margin-bottom: $padding-y * 2;
+  @include img-fixed-height($ad-xs);
+}
+.ad-vertical {
+  height: $ad-vertical;
+  overflow: hidden;
+}
+
+
+
+// Bootstrap v4
+//
+// Responsive images (ensure images don't scale beyond their parents)
+//
+// This is purposefully opt-in via an explicit class rather than being the default for all `<img>`s.
+// We previously tried the "images are responsive by default" approach in Bootstrap v2,
+// and abandoned it in Bootstrap v3 because it breaks lots of third-party widgets (including Google Maps)
+// which weren't expecting the images within themselves to be involuntarily resized.
+// See also https://github.com/twbs/bootstrap/issues/18178
+.img-fluid {
+  @include img-fluid();
+}
+
+// Rounded corners
+.img-rounded {
+  @include border-radius($border-radius-large);
+}
+
+// Perfect circle
+.img-circle {
+  border-radius: 50%;
+}
+
+//
+// Figures
+//
+
+.figure {
+  // Ensures the caption's text aligns with the image.
+  display: inline-block;
+}
+
+.figure-img {
+  margin-bottom: ($spacer-y / 2);
+  line-height: 1;
+}
+
+.figure-title {
+  font-size: $font-size-base;
+  color: lighten($gray, 10%);
+}

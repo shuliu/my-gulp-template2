@@ -1,0 +1,66 @@
+//
+// Member
+//
+
+// -------------------------------------
+//
+// * Type
+//
+// -------------------------------------
+
+// use for '會員中心首頁 > 使用者頭像'
+.avatar {
+  display: inline-block;
+  width: 96px;
+  margin-top: $padding-y * 2;
+}
+
+// use for '會員中心首頁 > email'
+p.mail {
+  font-size: $font-size-small;
+}
+
+// use for '會員中心首頁 > 六宮格選單'
+.member-track {
+  .css-td.col-3 {
+    padding: ($table-member-track-cell-padding - 4) $table-member-track-cell-padding;
+    height: ($line-height-computed * 6) + ($table-member-track-cell-padding * 2) + ($border-width * 2) + 14;  // +14 是為了對齊左側高度
+    @include media-breakpoint-down(lg) {
+      height: auto;
+    }
+  }
+  .nav a {
+    line-height: $line-height-medium;
+  }
+  .value { font-weight: bold; }
+}
+
+
+// ~~~ use for 'order'
+.order-form {
+  padding-bottom: $padding-y * 4;
+
+  .table-group {
+    margin-left: 24px - 4;
+    .css-table {
+      .css-tr {
+        border-left: 1px solid $border-default;
+        border-right: 1px solid $border-default;
+      }
+    }
+  }
+  .css-table.blue {
+    margin-bottom: $padding-y;
+  }
+  .table-bordered {
+    th {
+      padding-top: $padding-y / 2;
+      padding-bottom: $padding-y / 2;
+      height: $line-height-computed + $padding-y;
+    }
+  }
+
+  .icon-camera {
+    margin-left: $padding-x / 2;
+  }
+}

@@ -1,0 +1,855 @@
+// ============================================
+// ．．．．．．．．．【 Catalog 】．．．．．．．．．
+// --------------------------------------------
+//
+// -- <Body> / <a> / <span> / <img>
+//
+// -- Reset-text
+// -- Clearfix
+// -- Flex
+//
+// -- Floats
+// -- Position
+// -- Spacing (通常用於文字空白間距)
+// -- Divider (分隔線/隔板)
+//
+// -- Pills (水平無間隙 串接)
+// -- Stackable, Sticky (垂直無間隙 堆疊)
+//
+// -- Wrapper
+// -- Block / display / hide & show / text-hide
+// -- Bar / Toolbar / Border
+// -- Column
+//
+// -- Screenreaders
+// -- Reset filters for IE
+//
+// ============================================
+
+//
+// base
+//
+
+body {
+  background-color: $body-bg;
+  color: $body-color;
+  // body 字級設定在 _type.SCSS 裡
+}
+
+a {
+  display: inline-block;
+  cursor: pointer;
+}
+span, time { display: inline-block; }
+img {
+  display: block; // 預防圖片有空白間隙
+  max-width: 100%;
+}
+hr {
+  border: none;
+  border-bottom: 1px solid $gray-light;
+}
+
+
+
+// --------------------------------------------
+//
+// Reset-text
+//
+@mixin reset-text {
+  font-family: $font-family-base;
+  // We deliberately do NOT reset font-size.
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-break: auto;
+  line-height: $line-height-base;
+  text-align: left; // Fallback for where `start` is not supported
+  text-align: start;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: none;
+  white-space: normal;
+  word-break: normal;
+  word-spacing: normal;
+  word-wrap: normal;
+}
+
+
+//
+// Clearfix
+//
+@mixin clearfix() {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+.clearfix {
+  @include clearfix();
+}
+
+// Center-align a block level element
+@mixin center-block() {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.center-block {
+  @include center-block();
+}
+
+
+//
+// flex
+//
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+
+// --------------------------------------------
+//
+// Float
+//
+@mixin pull-left {
+  float: left !important;
+}
+@mixin pull-right {
+  float: right !important;
+}
+
+.pull-left {
+  @include pull-left;
+}
+.pull-right {
+  @include pull-right;
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    .pull-#{$breakpoint}-left {
+      @include pull-left();
+    }
+    .pull-#{$breakpoint}-right {
+      @include pull-right();
+    }
+    .pull-#{$breakpoint}-none {
+      float: none !important;
+    }
+  }
+}
+
+// use for 'join-step1', 設定固定寬度置中
+.pull-center {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+
+
+// Center :: use for 'absolute'
+//
+@mixin center($xy:xy) {
+  @if $xy == xy {
+    left: 50%;
+    top: 50%;
+    bottom: auto;
+    right: auto;
+    @include transform(translateX(-50%) translateY(-50%));
+  }
+  @else if $xy == x {
+    left: 50%;
+    right: auto;
+    @include transform(translateX(-50%));
+  }
+  @else if $xy == y {
+    top: 50%;
+    bottom: auto;
+    @include transform(translateY(-50%));
+  }
+}
+
+
+//
+// Position
+//
+.relative {
+  position: relative !important;
+}
+
+.absolute {
+  position: absolute !important;
+
+  &.top { top: 0; }
+  &.bottom { bottom: 0; }
+  &.lt {
+    top: 0;
+    left: 0;
+  }
+  &.rt {
+    top: 0;
+    right: 0;
+  }
+  &.lb {
+    top: 0;
+    left: 0;
+  }
+  &.rb {
+    top: 0;
+    right: 0;
+  }
+  &.center {
+    @include center(y);
+  }
+  &.lc {
+    left: 0;
+    @include center(y);
+  }
+  &.rc {
+    right: 0;
+    @include center(y);
+  }
+}
+
+.fixed { position: fixed !important; }
+
+
+//
+// 上下左右空白間距 :: 用於「文字」間距 (區塊間距請用: divider)
+//
+.spacing {
+  margin-left: 8px;
+  margin-right: 8px;
+
+  &.left {
+    margin-left: 16px;
+    margin-right: 0;
+  }
+  &.right {
+    margin-left: 0;
+    margin-right: 16px;
+  }
+  &.top {
+    margin-top: 16px;
+    margin-left: 0;
+    margin-right: 0;
+
+    &.xl { margin-top: 48px; }
+    &.lg { margin-top: 32px; }
+    &.md { margin-top: 24px; }
+    &.sm { margin-top: 8px; }
+    &.mini { margin-top: 4px; }
+  }
+  &.bottom {
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 16px;
+
+    &.lg { margin-bottom: 32px; }
+    &.md { margin-bottom: 24px; }
+    &.sm { margin-bottom: 8px; }
+    &.mini { margin-bottom: 4px; }
+  }
+  &.lt {
+    margin-top: 16px;
+    margin-left: 16px;
+  }
+  &.rt {
+    margin-top: 16px;
+    margin-right: 16px;
+  }
+  &.lb {
+    margin-bottom: 16px;
+    margin-left: 16px;
+  }
+  &.rb {
+    margin-bottom: 16px;
+    margin-right: 16px;
+  }
+}
+
+//
+// 分頻器 :: 區塊上下左右間距
+//
+// 預設左右
+.divider {
+  margin-left: 8px;
+  margin-right: 8px;
+  vertical-align: middle;
+
+  // 上下間距
+  &.horizontal {
+    margin: 16px 0;
+
+    &.lg {
+      margin-top: 24px;
+      margin-bottom: 24px;
+    }
+  }
+}
+
+
+
+// --------------------------------------------
+//
+// Pills
+//
+.pills {
+  display: table;
+  border-collapse: collapse;
+
+  // use for 'li'
+  li {
+    display: table-cell;
+    padding: $padding-y $padding-x;
+    border: 1px solid $border-default;
+    vertical-align: middle;
+
+    &:first-child {
+      @include border-left-radius($border-radius-base);
+    }
+    &:last-child {
+      @include border-right-radius($border-radius-base);
+    }
+
+    .value {
+      padding: 0 ($padding-x / 4);
+    }
+  }
+
+  // 縮減版
+  &.sm {
+    li {
+      padding: ($padding-y / 2) $padding-x;
+      font-size: $font-size-small;
+      line-height: $line-height-small;
+    }
+  }
+
+  // ~~~ (´･ω･`) Demo暫存用 ~~~
+  // 針對商品介紹頁「分期表」客製化
+  .popover-hover {
+    &:hover { background-color: $silver; }
+  }
+  .popover.bottom {
+    margin-top: $line-height-small + $padding-y + $popover-arrow-width - 2;
+    margin-left: -($popover-sm / 2) + ((($font-size-base * 3) + ($padding-x * 2)) / 2);
+    @include media-breakpoint-down(lg) {
+      .popover-arrow {
+        left: ($popover-sm / 2) + ($font-size-small * 1.5 + $padding-x);
+      }
+      margin-left: -(($popover-sm / 2) + $padding-y + ($border-width * 2));
+    }
+  }
+}
+
+
+//
+// stackable ** 區塊可堆疊
+//
+.stackable, .sticky {
+  margin-bottom: 0 !important;
+
+  & + .stackable {
+    border-top: 0;
+  }
+
+  &.panel{
+    @include border-radius(0);
+  }
+}
+
+
+// --------------------------------------------
+//
+// Wrapper
+//
+.wrapper {
+  position: relative;
+  @include clearfix;
+  overflow: hidden;
+
+  &.fill { background-color: $silver; }
+}
+
+// --------------------------------------------
+//
+// Block
+//
+.has-inline { display: inline-block !important; }
+.has-block { display: block !important; }
+.has-full { width: 100% !important; }
+
+
+//
+// Display: None @ specific viewport.
+//
+@include media-breakpoint-down(sm) {
+  .hide-pp { display: none; }  // 'pp' is Phone Portrait 544
+}
+@include media-breakpoint-down(md) {
+  .hide-tp { display: none; }  // 'tp' is Tablet Portrait 768
+}
+@include media-breakpoint-down(lg) {
+  .hide-dt { display: none; }  // 'dt' is Desktop 1024
+}
+
+
+.invisible {
+  visibility: hidden !important;
+}
+.show, .is-show { display: block !important; }
+.hide, .is-hide { display: none !important; }
+.hide.active { display: block !important; }
+.hidden {
+  visibility: hidden !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+
+// 單行 ...
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+// 多行 ... 效果
+.ellipsis-row {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  position: relative;
+  &:after {
+    content: "...";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0 5px;
+    background-color: transparent;
+  }
+}
+
+//
+// CSS image replacement
+@mixin text-hide() {
+  font: "0/0" a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+.text-hide {
+  @include text-hide();
+}
+
+
+// --------------------------------------------
+//
+// Bar / Toolbar / Border
+//
+.bar {
+  padding: ($padding-y * 2) ($padding-x * 4);
+  @include border-radius($border-radius-base);
+
+  &.gray {
+    background-color: $silver;
+  }
+  &.blue {
+    background-color: $blue;
+  }
+
+  // use for 'cart-step2' 分期表
+  &.shrink {
+    padding-left: $padding-x;
+    padding-right: $padding-x;
+  }
+
+  // use for 'pwd-forgot'
+  // 下方注意事項，為了對齊上方表格而新增的class
+  .offset-md {
+    width: $font-size-base * 22;
+    margin-left: auto;
+    margin-right: auto;
+    // reset 'h5', 'ul'
+    margin-bottom: $padding-y;
+  }
+  // use for 'pwd-forgot'
+  // 上方說明文字，為了對齊下方表格而客製化padding
+  &.w-fix-md {
+    padding-left: $padding-x * 2.5; //~40
+    padding-right: $padding-x * 2.5;
+    margin-bottom: 0;
+  }
+}
+
+.toolbar {
+  margin-bottom: $padding-x;
+  @include clearfix;
+
+  .btn-group {
+    margin-bottom: 0;
+  }
+  .btn-sm {
+    .icon-delete { font-size: $font-size-base; }
+  }
+  .btn, select, span { vertical-align: middle; }
+
+  .badge-info {
+    // padding-top: $padding-y;
+    // padding-bottom: $padding-y;
+    border: 1px solid $transparent;
+    line-height: $line-height-small;
+  }
+}
+
+// border
+//
+.border {
+  &.bottom {
+    border-bottom: 1px solid $gray;
+
+    &.dotted {
+      border-bottom-style: dotted;
+    }
+    &.dashed {
+      border-bottom-style: dashed;
+    }
+  }
+}
+
+// --------------------------------------------
+//
+// UL style
+//
+ul {
+  // 阿拉伯數字
+  &.has-type-decimal {
+    padding-left: $padding-x * 2;
+    list-style: decimal outside;
+
+    li ul {
+      padding-left: $padding-x * 2;
+      margin-top: $padding-y / 2;
+      margin-bottom: $padding-y;
+    }
+
+    > li ul {
+      list-style: lower-alpha outside;
+
+      > li ul {
+        list-style: square outside;
+      }
+    }
+  }
+  // 點
+  &.has-type-disc {
+    margin-top: $padding-y / 2;
+    margin-left: $padding-x * 2;
+    margin-bottom: $padding-y;
+    list-style: square outside;
+
+    li ul {
+      margin-top: $padding-y / 2;
+      margin-bottom: $padding-y;
+      margin-left: $padding-x / 2;
+    }
+
+    // use for 'faq'系列頁面 側欄選單
+    .active {
+      color: $blue;
+      font-weight: bold;
+      a { color: $blue; }
+    }
+  }
+}
+
+
+// --------------------------------------------
+//
+// Column :: 區塊分欄(二/三/四)
+//
+.half, .third, .quarter {
+  float: left;
+  margin-left: $padding-x;
+
+  // Sticky :: NO Margin-left
+  &.sticky {
+    margin-left: 0;
+  }
+}
+
+// 一列二欄 :: half
+.half {
+  &:first-child {
+    margin-left: 0;
+  }
+  @include media-breakpoint-down(lg) {
+    width: (($grid-container-desktop / 24 * 19) - ($padding-x * 2)) / 2;
+  }
+  @include media-breakpoint-up(xl) {
+    width: (($grid-container-desktophd / 24 * 19) - ($padding-x * 2)) / 2;
+  }
+}
+
+// 一列三欄 :: third
+// 使用於「商品分類第三層 置頂商品」
+.third {
+  &:nth-child(3n + 1) {
+    margin-left: 0;
+  }
+  @include media-breakpoint-down(lg) {
+    width: (($grid-container-desktop / 24 * 19) - ($padding-x * 2)) / 3;
+  }
+  @include media-breakpoint-up(xl) {
+    width: (($grid-container-desktophd / 24 * 19) - ($padding-x * 2)) / 3;
+  }
+}
+
+// 一列四欄 :: quarter
+// 使用於「神知識文章列表」
+.quarter {
+  @include media-breakpoint-down(lg) {
+    width: ($grid-container-desktop - ($padding-x * 2)) / 3;
+    &:nth-child(3n + 1) {
+      margin-left: 0;
+    }
+  }
+  @include media-breakpoint-up(xl) {
+    width: ($grid-container-desktophd - ($padding-x * 3)) / 4;
+    &:nth-child(4n + 1) {
+      margin-left: 0;
+    }
+  }
+}
+
+// 測試失敗改用js控制
+// .quarter.show {
+//   .card-img {
+//     text-align: center;
+//     a {
+//       display: block;
+//     }
+//   }
+//   img {
+//     width: 100%;
+//     margin: 0 auto;
+//   }
+//   @include media-breakpoint-down(lg) {
+//     width: ($grid-container-desktop - ($padding-x * 2)) / 3;
+//     // &:nth-child(3n + 1) {
+//     //   margin-left: 0;
+//     // }
+//   }
+//   @include media-breakpoint-up(xl) {
+//     width: ($grid-container-desktophd - ($padding-x * 3)) / 4;
+//     // &:nth-child(4n + 1) {
+//     //   margin-left: 0;
+//     // }
+//   }
+//   &.js-nth-child {
+//     margin-left: 0;
+//   }
+// }
+
+
+// ~~~~~~ 使用「字數」計算寬度 ~~~~~~
+//
+// use for 'th', 'td' 固定顯示寬度
+// ** 'w' is 'width', 'f' is 'font'
+@mixin td-width-column($column) {
+  width: ($font-size-base * $column) + ($table-cell-padding * 2);
+}
+// 1~10
+@for $i from 1 through 16 {
+  .w-f#{$i} {
+    @include td-width-column($i);
+  }
+}
+
+// use for 'join-verify-code'
+.w-f42 {
+  @include td-width-column(42);
+}
+
+// ~~~~~~ 固定「區塊」寬度 ~~~~~~
+// use for 'join-step1', 'join-step2'
+.w-fix-md {
+  width: 640px !important;
+}
+.w-fix-lg {
+  width: 880px !important;
+}
+// use for 'prdocut-default' > 加入購物車button
+.w-fix-cart {
+  width: $btn-product-cart-width;
+}
+// use for 'birthday > btn'
+.w-fix-gift {
+  width: $font-size-base * 9;
+  padding-left: 0 !important;   //~reset
+  padding-right: 0 !important;  //~reset
+}
+
+
+// ~~~~~~ 固定「區塊」高度 ~~~~~~
+@mixin box-fixed-height($height) {
+  height: $height;
+  overflow: hidden;
+}
+.h-fix-296 {
+  @include box-fixed-height(296px);
+}
+.h-fix-80 {
+  @include box-fixed-height(80px);
+}
+
+
+
+// // --------------------------------------------
+// //
+// // Screenreaders
+// //
+
+// // Only display content to screen readers
+// //
+// // See: http://a11yproject.com/posts/how-to-hide-content/
+
+// @mixin sr-only {
+//   position: absolute;
+//   width: 1px;
+//   height: 1px;
+//   padding: 0;
+//   margin: -1px;
+//   overflow: hidden;
+//   clip: rect(0,0,0,0);
+//   border: 0;
+// }
+
+// // Use in conjunction with .sr-only to only display content when it's focused.
+// //
+// // Useful for "Skip to main content" links; see http://www.w3.org/TR/2013/NOTE-WCAG20-TECHS-20130905/G1
+// //
+// // Credit: HTML5 Boilerplate
+
+// @mixin sr-only-focusable {
+//   &:active,
+//   &:focus {
+//     position: static;
+//     width: auto;
+//     height: auto;
+//     margin: 0;
+//     overflow: visible;
+//     clip: auto;
+//   }
+// }
+
+// .sr-only {
+//   @include sr-only();
+// }
+
+// .sr-only-focusable {
+//   @include sr-only-focusable();
+// }
+
+
+//
+// Reset filters for IE
+//
+// When you need to remove a gradient background, do not forget to use this to reset
+// the IE filter for IE9 and below.
+@mixin reset-filter() {
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+
+
+.large {
+  font-size: $font-size-base * 1.2;
+  p {
+    font-size: $font-size-base * 1.2;
+  }
+  div {
+    font-size: $font-size-base * 1.2;
+  }
+  h1, .h1 {
+    font-size: $font-size-h1 * 1.2;
+    line-height: $line-height-xxl * 1.2;
+  }
+  h2, .h2 {
+    font-size: $font-size-h2 * 1.2;
+    line-height: $line-height-xl * 1.2;
+
+    & + h3 {
+      margin-top: -8px;
+    }
+  }
+  h3, .h3 {
+    font-size: $font-size-h3 * 1.2;
+    line-height: $line-height-large * 1.2;
+
+    &.page-header { margin-top: 0; }
+  }
+  h4, .h4 {
+    font-size: $font-size-h4 * 1.2;
+    line-height: $line-height-medium * 1.2;
+  }
+  h5, .h5 {
+    font-size: $font-size-h5 * 1.2;
+    line-height: $line-height-base * 1.2;
+  }
+  h6, .h6 {
+    font-size: $font-size-h6 * 1.2;
+    line-height: $line-height-small * 1.2;
+  }
+}
+
+.small {
+  font-size: $font-size-base * 0.8;
+  p {
+    font-size: $font-size-base * 0.8;
+  }
+  div {
+    font-size: $font-size-base * 0.8;
+  }
+  h1, .h1 {
+    font-size: $font-size-h1 * 0.8;
+    line-height: $line-height-xxl * 0.8;
+  }
+  h2, .h2 {
+    font-size: $font-size-h2 * 0.8;
+    line-height: $line-height-xl * 0.8;
+
+    & + h3 {
+      margin-top: -8px;
+    }
+  }
+  h3, .h3 {
+    font-size: $font-size-h3 * 0.8;
+    line-height: $line-height-large * 0.8;
+
+    &.page-header { margin-top: 0; }
+  }
+  h4, .h4 {
+    font-size: $font-size-h4 * 0.8;
+    line-height: $line-height-medium * 0.8;
+  }
+  h5, .h5 {
+    font-size: $font-size-h5 * 0.8;
+    line-height: $line-height-base * 0.8;
+  }
+  h6, .h6 {
+    font-size: $font-size-h6 * 0.8;
+    line-height: $line-height-small * 0.8;
+  }
+}

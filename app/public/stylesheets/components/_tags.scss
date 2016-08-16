@@ -1,0 +1,192 @@
+//
+// Tags
+//
+
+// -------------------------------------
+//
+// * value
+//
+// -------------------------------------
+
+
+
+// -------------------------------------
+//
+// * Mixins
+//
+// -------------------------------------
+// Button sizes
+@mixin tags-size($padding-y, $padding-x, $font-size, $line-height) {
+  padding: $padding-y $padding-x;
+  font-size: $font-size;
+  line-height: $line-height;
+}
+
+@mixin tags-variant-outline($bg, $border-color, $color) {
+  background-color: $bg;
+  border-color: $border-color;
+  color: $color;
+  font-weight: bold;
+}
+
+
+// -------------------------------------
+//
+// * Type: 預設值 '灰色'
+//
+// -------------------------------------
+.tag {
+  display: inline-block;
+  min-width: 60px;
+  padding: ($tags-padding-y / 2) ($tags-padding-x / 2); // 4/8
+  background-color: $gray;
+  color: $white;
+  font-size: $font-size-small;
+  font-weight: bold;
+  line-height: $line-height-small;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border: 1px solid transparent;
+  cursor: default;
+  @include border-radius($tags-border-radius);
+
+  & + .tag {
+    margin-left: $tags-padding-x / 2; // ~8
+  }
+
+  &.radius {
+    border-radius: $border-radius-base;
+  }
+}
+
+// if 'tag' is <a>
+a.tag { cursor: pointer; }
+
+
+// default is Gray
+.tag-default {
+  background-color: $tags-default;
+  color: $gray;
+}
+
+// primary is Blue
+.tag-primary {
+  background-color: $tags-primary;
+  color: $white;
+}
+
+// secondary is Orange
+.tag-secondary {
+  background-color: $tags-secondary;
+  color: $white;
+} 
+// extra is YellowGreen
+.tag-extra {
+  background-color: $tags-extra;
+  color: $white;
+} 
+// extra is Vermillion
+.tag-danger, .tag-event {
+  background-color: $tags-danger;
+  color: $white;
+} 
+
+
+// 外框線
+//
+// is Gray
+.tag-default-outline, .tag-outline {
+  @include tags-variant-outline($white, darken($tags-default, 15%), darken($tags-default, 15%));
+  &:hover {
+    color: $blue;
+    border-color: $blue;
+  }
+}
+// is Dark
+.tag-inverted-outline {
+  @include tags-variant-outline($white, $tags-inverted, $tags-inverted);
+}
+// is Blue
+.tag-primary-outline {
+  @include tags-variant-outline($white, $tags-primary, $tags-primary);
+}
+// is Orange
+.tag-secondary-outline {
+  @include tags-variant-outline($white, $tags-secondary, $tags-secondary);
+}
+// is YellowGreen
+.tag-extra-outline {
+  @include tags-variant-outline($white, $tags-extra, $tags-extra);
+}
+// is Vermillion
+.tag-danger-outline, .tag-event-outline {
+  @include tags-variant-outline($white, $tags-danger, $tags-danger);
+}
+
+
+// 純文字
+//
+.tag-text-default,
+.tag-text-primary,
+.tag-text-secondary,
+.tag-text-extra { font-weight: bold; }
+// is gray
+.tag-text-default { color: $gray; }
+// is blue
+.tag-text-primary { color: $blue; }
+// is orange
+.tag-text-secondary { color: $orange; }
+// is extra
+.tag-text-extra { color: $yellowgreen; }
+
+
+
+// Tags Size
+.tag-lg {
+  // line-height: ensure even-numbered height of button next to large input
+  @include tags-size($tags-padding-y-lg, $tags-padding-x-lg, $font-size-large, $line-height-large);
+}
+.tag-md {
+  // line-height: ensure proper height of button next to small input
+  @include tags-size(($tags-padding-y / 2), $tags-padding-x, $font-size-base, $line-height-base);
+}
+.tag-sm {
+  // line-height: ensure proper height of button next to small input
+  @include tags-size($tags-padding-y-sm, $tags-padding-x-sm, $font-size-small, $line-height-small);
+}
+.tag-mini {
+  // line-height: ensure proper height of button next to small input
+  @include tags-size($tags-padding-y-mini, $tags-padding-x-mini, $font-size-mini, $line-height-mini);
+  & + .tag-mini {
+    margin-left: $tags-padding-x / 4; // ~4
+  }
+}
+
+
+//
+// Tags Group : tags群組裡的 tag 自動帶入右下空白間隔
+//
+.tags-group {
+  margin-bottom: $padding-y;  // ~8
+  @include clearfix;
+  overflow: hidden;
+
+  // 標題
+  .tag-group-title {
+    float: left;
+    padding-top: $tags-padding-y / 2;
+    padding-right: $tags-padding-x / 2;
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+  }
+
+  // type
+  .tag {
+    float: left;
+    margin-bottom: $tags-padding-x / 2;
+  }
+  .tag-mini {
+    margin-bottom: $tags-padding-x / 4;
+  }
+}

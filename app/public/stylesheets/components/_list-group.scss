@@ -1,0 +1,360 @@
+//
+// List group
+//
+
+// -------------------------------------
+//
+// * Mixins
+//
+// -------------------------------------
+
+
+// -------------------------------------
+//
+// * Type
+//
+// -------------------------------------
+// ．．．．．．． Tree flow ．．．．．．．
+//
+// .list-group  ~~> usable <ul>, <ol>, or <div>
+//   ∟ .item    ~~> usable <li>, or <div>
+//      ∟ .image
+//      ∟ .content
+//         ∟ .tag   (use for 'product')
+//         ∟ .title (use for 'product', 'news', 'article')
+//         ∟ .date  (use for 'news')
+//         ∟ .desc  (use for 'news')
+//         ∟ .price (use for 'product')
+//
+// ．．．．．．．．．．．．．．．．．．．．
+//
+// extend to ::
+// 1) use for 'home > aside > product'
+// 2) use for 'article > aside'
+// 3) use for 'news > news-list.html'
+//
+
+//
+// 使用於：
+// 1) article: panel > list-group
+// 2) categroy: 館長推薦
+// 3) faq: 側欄選單
+// 4) news: 活動列表
+// 5) location: 店家列表
+.list-group {
+  margin-bottom: 0; // reset 'ul'
+  overflow: hidden;
+
+  .item {
+    margin-bottom: $padding-y;
+    overflow: hidden;
+
+    .image {
+      float: left;
+      margin-right: $padding-x / 2; // ~8
+    }
+
+    .content { overflow: hidden; }
+
+    // is 'default'
+    .title {
+      margin-top: 0;
+      margin-bottom: $padding-y / 2; // ~4
+    }
+
+    // is 'product'
+    .tag {
+      margin-bottom: $padding-y / 2; // ~4
+    }
+    .price {}
+
+    // is 'news'
+    .date {
+      display: block;
+      margin-bottom: $padding-y;
+      color: $gray;
+    }
+    .desc {}
+
+    // ***
+    // if 'last-child'
+    &:last-child {
+      margin-bottom: 0;
+
+      // use for 'location' 門市據點
+      .store-info {
+        border-bottom: 0;
+      }
+    }
+    // ***
+    // 使用於 'category-main' > 熱銷紅星
+    // 當viewport小於1200時，指定特定item，為最後一個品項
+    @include media-breakpoint-down(lg) {
+      &.dt-last {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // ****
+  // addClass 'featured'
+  // use for 'category-main'
+  &.featured {
+    // margin-right: $padding-x;
+    margin-bottom: $padding-y * 2;
+    border-bottom: 1px solid $border-default;
+
+    .item {
+      float: left;
+      margin-right: $padding-x;
+      @include media-breakpoint-down(lg) {
+        width: (((($grid-container-desktop / 24 * 19) / 24 * 18) - $padding-x) - ($padding-x * 3)) / 4 ;
+      }
+      @include media-breakpoint-up(xl) {
+        // width: (((($grid-container-desktophd / 24 * 19) / 24 * 18) - $padding-x) - ($padding-x * 3)) / 4 ;
+        width: 160px;
+      }
+
+      &:nth-child(4n) {
+        margin-right: 0;
+      }
+
+      // 清除空白間距
+      a { display: block; }
+
+      // 標題
+      .title {
+        margin-top: $padding-y + 2;       //~10
+        margin-bottom: $padding-y - 2;    //~6
+        @include media-breakpoint-down(lg) {
+          margin-top: $padding-y - 2;     //~6
+          margin-bottom: $padding-y - 6;  //~2
+        }
+        height: $line-height-small;
+        line-height: $line-height-small;
+        font-size: $font-size-small;
+        font-weight: bold;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      // hover Color
+      &:hover {
+        p { color: $blue; }
+      }
+    }
+  }
+
+  // ****
+  // addClass 'brands'
+  // use for 'category-main'
+  &.brands {
+    margin-bottom: $padding-y * 2;
+    .item {
+      float: left;
+      width: 25%;
+      padding: $padding-y * 2;
+      margin-bottom: 0;
+      border-left: 1px solid $border-default;
+      border-bottom: 1px solid $border-default;
+
+      &:nth-child(4n + 1) {
+        border-left: 0;
+      }
+
+      a {
+        display: block; // 清除空白間距
+        img {
+          margin: 0 auto;
+          height: 40px;
+        }
+      }
+    }
+  }
+
+  // ****
+  // ::: 加購商品 / 活動相關產品 :::
+  // addClass 'product-plus'
+  // use for 'prodcut-detail', 'news-detail', 'cart-list'
+  &.product-plus {
+    margin-bottom: $padding-y * 2;
+
+    .item {
+      float: left;
+      margin-top: $padding-y * 2;
+      margin-left: $padding-x;
+      margin-bottom: 0;
+      &:nth-child(3n + 1) {
+        margin-left: 0;
+      }
+      @include media-breakpoint-down(lg) {
+        width: (($grid-container-desktop / 24 * 19) - ($padding-x * 2)) / 3;
+      }
+      @include media-breakpoint-up(xl) {
+        width: (($grid-container-desktophd / 24 * 19) - ($padding-x * 2)) / 3;
+      }
+      padding: 16px;
+      background-color: $silver;
+      border: 1px solid $border-default;
+    }
+    .title {
+      font-size: $font-size-small;
+      line-height: $line-height-mini;
+    }
+    .checkbox-group {
+      margin-top: ($thumbnail-small - $input-checkbox-width) / 2;
+    }
+
+    // addClass 'four', use for 'news-detail' & 'cart-list'
+    &.four {
+      .item {
+        &:nth-child(3n + 1) {
+          margin-left: $padding-x;
+        } //~reset
+        &:nth-child(4n + 1) {
+          margin-left: 0;
+        }
+        @include media-breakpoint-down(lg) {
+          width: ($grid-container-desktop - ($padding-x * 3)) / 4;
+        }
+        @include media-breakpoint-up(xl) {
+          width: ($grid-container-desktophd - ($padding-x * 3)) / 4;
+        }
+      }
+    }
+  }
+
+
+  // ****
+  // addClass 'divided' 隔線
+  // use for 'article-index, article-list, article-detail'
+  &.divided {
+    .item {
+      padding-top: $padding-y + 1; // +1 是為了與banner對齊
+      border-top: 1px solid $border-default;
+    }
+  }
+
+  // ****
+  // addClass 'event'
+  // use for 'news-list.html' :: 針對 '活動專區' 客製化
+  &.event {
+    padding: 0;
+    overflow: hidden;
+
+    .item {
+      margin-bottom: $padding-y * 4; // 32 - 8 (desc margin)
+
+      & + .item {
+        padding-top: $padding-y * 4;
+        border-top: 3px solid $gray-light;
+      }
+
+      &:first-child {
+        margin-top: $padding-y * 2;
+      }
+
+      .image {
+        width: 360px;
+        padding-right: $padding-x;
+
+        // reset
+        img {
+          margin-bottom: 0;
+        }
+      }
+
+      .title {
+        margin-bottom: $padding-y;
+      }
+      .desc {
+        min-height: 48px;
+        padding-right: 180px;
+
+        p { margin-bottom: 0; }
+      }
+    }
+  }
+
+  // ****
+  // addClass 'article'
+  // use for 'article-list.html' :: 針對 '神知識 文章列表' 客製化
+  &.article {
+    margin-bottom: $padding-y * 2;
+    overflow: hidden;
+
+    .item {
+      .image {
+        width: 220px;
+        margin-right: $padding-x * 1.5; // ~24
+      }
+
+      .title {
+        margin-bottom: $padding-y;
+
+        a {
+          color: $dark;
+
+          &:hover, &:focus {
+            color: $blue;
+          }
+        }
+      }
+      .desc {
+        margin-bottom: $padding-y;  // ~16
+      }
+      .info {
+        font-size: $font-size-small;
+        line-height: $line-height-small;
+        color: $gray;
+      }
+    }
+  }
+
+  // ****
+  // addClass 'rainbow'
+  // use for 'category-index.html' :: 針對 商品分類 加上不同顏色區分
+  &.rainbow {
+    // 第一層分類
+    > .item {
+      padding-top: $padding-y * 4;    
+      margin-bottom: $padding-y * 4;
+
+      &:first-child {
+        padding-top: $padding-y * 2;
+      }
+
+      h4 {
+        margin-top: 0;
+        margin-bottom: $padding-y * 2;
+      }
+
+      & + .item {
+        border-top: 1px solid $border-default;
+      }
+    }
+    // 第二層分類
+    .list-group {
+      .h5 {
+        float: left;
+        width: $font-size-base * 7;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      .item {
+        margin-left: ($padding-x * 1.5) + ($border-width * 8);
+      }
+    }
+  }
+}
+
+// ****
+// use for 'category-main > brands'
+.list-group-title {
+  padding-bottom: $padding-y - 2;
+  margin-bottom: 0;
+  border-bottom: 1px solid $blue;
+}
+
+
+

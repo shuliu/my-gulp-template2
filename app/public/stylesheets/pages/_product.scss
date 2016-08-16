@@ -1,0 +1,277 @@
+//
+// Product
+//
+// -------------------------------------
+//
+// * Value
+//
+// -------------------------------------
+$product-padding-x: 16px !default;
+$product-padding-y: 24px !default;
+
+$product-title:     $dark !default;
+$product-content:   $gray !default;
+
+// 使用於 '商品列表' 的Tag位置計算
+$tag-mini-height: $tags-padding-y-mini * 2 + $line-height-mini + $border-width * 2; // ~24
+
+
+// -------------------------------------
+//
+// * Type
+//
+// -------------------------------------
+
+// ::: 商品項目 :::
+// .product-group.row
+//   .product.product-view
+//     img
+//     .title
+//     .price
+//     .tags-group
+//       .tag
+
+// 商品列表
+.product-group {
+  & + .product-group {
+    border-top: 1px solid $border-default;
+  }
+}
+.product {
+  position: relative;
+  z-index: $zindex-base;
+  padding: ($padding-y * 3) $padding-x;
+  border: 1px solid $transparent;
+  // @include transition(all .2s ease-in-out);
+  transition: all 0.2s ease-in-out;
+
+  &.hasline {
+    width: 30%;
+    padding: $product-padding-y $product-padding-x;
+    margin: 8px auto;
+    border: 1px solid $gray-light;
+    float: none;
+    &:first-child {
+      float: left;
+      margin: 0 0;
+    }
+    &:nth-child(2) {
+      float: right;
+      margin: 0 0;
+    }
+    &.last-child {
+      //
+    }
+  }
+
+  &:hover {
+    z-index: $zindex-hover;
+    border-color: rgba($blue, 0.8);
+    // @include box-shadow(rgba($gray, 0.2) 0 0 12px inset);
+  }
+
+  // Thumbnail
+  img {
+    margin-bottom: $padding-y;
+  }
+
+  // Product desc
+  .content {
+    position: relative;
+
+    .title {
+      margin-bottom: $padding-y;
+      max-height: $line-height-small * 2;
+      line-height: $line-height-small;
+      font-weight: bold;
+      overflow: hidden;
+
+      a {
+        // 字數不夠時高度不變
+        height: 44px;
+        color: $product-title;
+      }
+    }
+
+    .tags-group {
+      position: absolute;
+      top: -($tag-mini-height + $padding-y);
+      z-index: $zindex-tag;
+
+      .tag + .tag { margin-left: 2px; }
+    }
+  }
+}
+.product-view {
+  // 一列三欄 :: use for 'category-sub-child'
+  &.third {
+    margin-bottom: $padding-y * 2;
+    border-color: $border-default;
+
+
+    &:hover {
+      border-color: rgba($blue, 0.8);
+    }
+  }
+}
+
+
+//
+// ::: 商品介紹頁 :::
+// .detail-images  ~~ 圖庫
+//   .slider
+// .detail-intro   ~~ 商品基本資訊
+//   .product-title
+//   .product-desc
+//   .product-price
+//   .product-type
+
+// ~~~ Left ~~~
+// 商品圖廊
+.detail-images {
+  .share-buttons {
+    margin-top: 1px; // Like button height is 20px;
+  }
+  .btn-favorite-outline {
+    padding-top: 1px;
+    padding-bottom: 1px;
+  }
+}
+
+// ~~~ Right ~~~
+// 商品簡介
+.detail-intro {
+  padding-left: $padding-x * 1.5;
+
+  // 純文字標籤
+  .tag-text-secondary {
+    margin-bottom: $padding-y - 2;
+    font-size: $font-size-small;
+    line-height: $line-height-mini;
+  }
+
+  // 價格
+  .price {
+    margin-bottom: $padding-y * 2;
+    del { margin-right: $padding-x / 2; }
+  }
+
+  // button
+  .btn-group {
+    margin-bottom: 0;
+
+    @include media-breakpoint-down(lg) {
+      .btn { 
+        width: $btn-product-cart-width - 4; //~168
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+    @include media-breakpoint-up(xl) {
+      .btn { width: $btn-product-cart-width; } //~176
+    }
+  }
+  // divider 
+  // .divider {
+  //   margin-top: $padding-y * 3;
+  //   margin-bottom: $padding-y * 3;
+  // }
+}
+// 商品標題
+.product-title {
+  margin-top: 0;
+  margin-bottom: $padding-y;
+  // font-size: $font-size-h3;
+  // line-height: $line-height-large;
+}
+// 商品簡述
+.product-desc {
+  margin-bottom: $padding-y * 2;
+  line-height: $line-height-computed;
+}
+// 商品價格
+.product-price {
+  padding-bottom: $padding-y * 3;
+  border-bottom: 1px solid $border-default;
+}
+// 商品規格
+.product-type {
+  margin-bottom: $padding-y * 2;
+
+  select {
+    width: ($input-width-mini - $padding-x) + ($input-height-sm * 2);
+  }
+}
+// 商品數量
+.product-qty {
+  margin-bottom: $padding-y * 2;
+}
+// 優惠活動
+.product-event {
+  position: relative;
+  font-size: $font-size-small;
+  line-height: $line-height-small;
+
+  li {
+    padding-left: ($font-size-small * 4) + $padding-x + ($border-width * 2) + $padding-y;
+    margin-bottom: $padding-y;
+    overflow: hidden;
+  }
+  .tag-mini {
+    position: absolute;
+    left: 0;
+    width: ($font-size-small * 4) + $padding-x + ($border-width * 2);
+    margin-right: $padding-x / 4;
+  }
+}
+// 額外說明
+.product-extra {
+  font-size: $font-size-small;
+  line-height: $line-height-small;
+}
+
+
+
+// ~~~~ Filter ~~~~
+//
+// 商品排序工具
+.filter {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border-top: 1px solid $border-default;
+  border-bottom: 1px solid $border-default;
+  @include clearfix;
+
+  .btn-group {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+
+// ~~~~ SearchPage ~~~~
+//
+// 搜尋無結果 頁面元件
+.warning-empty {
+  width: 560px;
+  margin: 40px auto;
+
+  .has-type-disc {
+    .title {
+      font-weight: bold;
+      list-style: none;
+      margin-left: 0;
+    }
+  }
+
+  .lead {
+    .icon-exclamation-triangle {
+      top: 3px;
+      font-size: $font-size-large;
+    }
+  }
+}
+
+
+
+

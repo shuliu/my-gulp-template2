@@ -1,0 +1,613 @@
+//
+// --------- border ---------
+// * table: 預設，有底線
+// * table.pure: 移除所有底線/底色
+// * table.striped: tbody裡 th/td 奇數帶底線
+// * table.bordered: 全部含有框線
+// 
+// --------- background ---------
+// * table.fill: 填滿背景色，預設灰色
+// * table.blue: 填滿藍色
+// * table.inverted: 填滿黑色
+
+
+// -------------------------------------
+//
+// * Mixins
+//
+// -------------------------------------
+
+// use '<div.css-table>'
+@mixin css-table-row-variant($state, $th-bg, $td-bg, $border) {
+  .css-table.#{$state} {
+    .css-tr {
+      .css-th {
+        background-color: $th-bg;
+        border-color: $border;
+      }
+      .css-td {
+        background-color: $td-bg;
+        border-color: $border;
+      }
+    }
+  }
+}
+
+// use '<table>'
+@mixin table-row-variant($state, $background) {
+  // Exact selectors below required to override `.table-striped` and prevent
+  // inheritance to nested tables.
+  .table > thead > tr,
+  .table > tbody > tr,
+  .table > tfoot > tr {
+    > td.#{$state},
+    > th.#{$state},
+    &.#{$state} > td,
+    &.#{$state} > th {
+      background-color: $background;
+    }
+  }
+
+  // Hover states for `.table-hover`
+  // Note: this is not available for cells or rows within `thead` or `tfoot`.
+  .table-hover > tbody > tr {
+    > td.#{$state}:hover,
+    > th.#{$state}:hover,
+    &.#{$state}:hover > td,
+    &:hover > .#{$state},
+    &.#{$state}:hover > th {
+      background-color: darken($background, 5%);
+    }
+  }
+}
+
+
+// -------------------------------------
+//
+// * Type
+//
+// -------------------------------------
+
+// 
+// ** CSS Tables: use 'div'
+// 
+// ** reset
+.css-table, .css-tr, .css-th, .css-td {
+  padding: 0;
+  margin: 0;
+}
+
+// * default
+.css-table {
+  // 初始化為Table Style
+  display: table;
+  border-collapse: collapse;
+  
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: $padding-y * 2;
+  background-color: $white;
+  line-height: $line-height-computed;
+
+  // bordered :: 全部加上線條
+  &.bordered {
+    border: 1px solid $table-border-color;
+    .css-th, .css-td {
+      border: 1px solid $table-border-color;
+    }
+  }
+
+  // Pure :: 移除所有線條
+  &.pure {
+    .css-tr {
+      &.css-tr:first-child { border: none; }
+    }
+  }
+  
+  // fill :: 填滿顏色後的文字色彩設定
+  &.white {
+    .css-tr:first-child { border-top: none; }
+    .css-th { background-color: $white; }
+  }
+  &.blue {
+    .css-tr:first-child { border-top: none; }
+    .css-th { color: $white; }
+  }
+  &.green {
+    .css-th { color: $white; }
+  }
+
+  // ~~~ text vertical
+  &.middle {
+    .css-th, .css-td { vertical-align: middle; }
+  }
+
+  // ~~~ icons
+  .icon-delete, .icon-cart { 
+    font-size: $font-icons-medium; 
+  }
+  // if use 'fn-sm'
+  &.fn-sm {
+    line-height: $line-height-mini;
+    // .css-th, .css-td, th, td {
+    //   padding-top: $padding-y - 2;
+    //   padding-bottom: $padding-y - 2;
+    // }
+    
+    // icons
+    .icon-delete, .icon-cart { 
+      font-size: $font-icons-base; 
+    }
+  }
+}
+
+.css-tr {
+  display: table-row;
+  width: 100%;
+
+  &:first-child { border-top: 1px solid $table-border-color; }
+  
+  // ~~~ 金額總計 :: use for 'mb-bonus'
+  // &.total {
+  //   .css-td { 
+  //     background-color: $silver;
+  //     color: $dark; 
+  //     font-weight: bold;
+  //   }
+  // }
+}
+
+.css-th, .css-td {
+  display: table-cell;
+  vertical-align: top;
+  padding: $table-cell-padding;
+  border-bottom: 1px solid $table-border-color;
+
+  p {
+    margin-bottom: 0;
+
+    &.error {
+      margin-top: 4px;
+      margin-bottom: 4px;
+      font-size: $font-size-small;
+      font-weight: bold;
+      color: $vermillion;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+
+  // 寬度設定
+  &.col-3 {
+    width: 33.33%;
+  }
+}
+
+.css-th, th {
+  font-weight: bold;
+  background-color: $table-bg-head;
+  color: $dark;
+
+  label { color: $dark; }
+}
+.css-td, td {
+  color: $dark;
+  
+  // 地址
+  .addr {
+    margin-top: $padding-y - 2;
+    color: $dark;
+  }
+}
+
+// -- Caption use for '.css-table'
+// -- 預設 綠色 # Demo: /mb-notes-account.html
+.css-table-caption {
+  padding-top: $table-cell-padding / 4;
+  padding-bottom: $table-cell-padding;
+  margin-bottom: 0; //~reset
+  color: $dark;
+  border-bottom: 2px solid $yellowgreen;
+}
+
+//
+// Striped
+// 
+.css-table.table-striped .css-tr:nth-child(even) {
+  background: $table-border-color;
+}
+.css-table.table-dashed .css-tr {
+  border-bottom: 1px dashed $table-border-color;
+}
+
+// Alternate Colors
+@include css-table-row-variant('pure', $white, $white, $transparent);
+@include css-table-row-variant('fill', $gray-light, $gray-light, $gray-light);
+@include css-table-row-variant('blue', $table-primary-head-bg, $table-primary-body-bg, $gray-light);
+@include css-table-row-variant('green', $table-seconday-head-bg, $table-seconday-body-bg, $gray-light);
+
+
+//
+// Tables
+// --------------------------------------------------
+
+caption {
+  padding-top: $table-cell-padding;
+  padding-bottom: $table-cell-padding;
+  color: $font-title-color;
+  // text-align: left;
+}
+
+table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: $line-height-computed;
+  line-height: $line-height-computed;
+  background-color: $table-bg;
+
+  // th {
+  //   text-align: left;
+  // }
+  // Cells
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > th,
+      > td {
+        padding: $table-cell-padding;
+        line-height: $line-height-base;
+        vertical-align: top;
+        border-top: 1px solid $table-border-color;
+      }
+    }
+  }
+  // Bottom align for column headings
+  > thead > tr > th {
+    vertical-align: bottom;
+    border-bottom: 2px solid $table-border-color;
+  }
+  // Remove top border from thead by default
+  > caption + thead,
+  > colgroup + thead,
+  > thead:first-child {
+    > tr:first-child {
+      > th,
+      > td {
+        border-top: 0;
+      }
+    }
+  }
+  // Account for multiple tbody instances
+  > tbody + tbody {
+    border-top: 2px solid $table-border-color;
+  }
+
+  // Nesting
+  .table {
+    background-color: $body-bg;
+  }
+
+  // Middle
+  &.middle {    
+    > thead,
+    > tbody,
+    > tfoot {
+      > tr {
+        > th,
+        > td {
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+}
+
+
+// Add .table-condensed to make tables more compact by cutting cell padding in half.
+
+.table-condensed {
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > th,
+      > td {
+        padding: $table-condensed-cell-padding;
+      }
+    }
+  }
+}
+
+
+// Bordered version
+//
+// Add borders all around the table and between all the columns.
+
+.table-bordered {
+  border: 1px solid $table-border-color;
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > th,
+      > td {
+        border: 1px solid $table-border-color;
+      }
+    }
+  }
+  > thead > tr {
+    > th,
+    > td {
+      border-bottom-width: 2px;
+    }
+  }
+}
+
+
+// Zebra-striping
+//
+// Default zebra-stripe styles (alternating gray and transparent backgrounds)
+
+.table-striped {
+  > tbody > tr:nth-of-type(odd) {
+    background-color: $table-bg-accent;
+  }
+}
+
+
+// Hover effect
+//
+// Placed here since it has to come after the potential zebra striping
+
+.table-hover {
+  > tbody > tr:hover {
+    background-color: $table-bg-hover;
+  }
+}
+
+
+// Table cell sizing
+//
+// Reset default table behavior
+
+table col[class*="col-"] {
+  position: static; // Prevent border hiding in Firefox and IE9-11 (see https://github.com/twbs/bootstrap/issues/11623)
+  float: none;
+  display: table-column;
+}
+table {
+  td,
+  th {
+    &[class*="col-"] {
+      position: static; // Prevent border hiding in Firefox and IE9-11 (see https://github.com/twbs/bootstrap/issues/11623)
+      float: none;
+      display: table-cell;
+    }
+  }
+}
+
+
+// Table backgrounds
+//
+// Exact selectors below required to override `.table-striped` and prevent
+// inheritance to nested tables.
+
+// Generate the contextual variants
+// @include table-row-variant('active', $table-bg-active);
+// @include table-row-variant('success', $state-success-bg);
+// @include table-row-variant('info', $state-info-bg);
+// @include table-row-variant('warning', $state-warning-bg);
+// @include table-row-variant('danger', $state-danger-bg);
+
+
+// Responsive tables
+//
+// Wrap your tables in `.table-responsive` and we'll make them mobile friendly
+// by enabling horizontal scrolling. Only applies <768px. Everything above that
+// will display normally.
+
+.table-responsive {
+  overflow-x: auto;
+  min-height: 0.01%; // Workaround for IE9 bug (see https://github.com/twbs/bootstrap/issues/14837)
+  $screen-xs-max: ($grid-container-tablet - 1) !default;
+  @media screen and (max-width: $screen-xs-max) {
+    width: 100%;
+    margin-bottom: ($line-height-computed * 0.75);
+    overflow-y: hidden;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border: 1px solid $table-border-color;
+
+    // Tighten up spacing
+    > .table {
+      margin-bottom: 0;
+
+      // Ensure the content doesn't wrap
+      > thead,
+      > tbody,
+      > tfoot {
+        > tr {
+          > th,
+          > td {
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+
+    // Special overrides for the bordered tables
+    > .table-bordered {
+      border: 0;
+
+      // Nuke the appropriate borders so that the parent can handle them
+      > thead,
+      > tbody,
+      > tfoot {
+        > tr {
+          > th:first-child,
+          > td:first-child {
+            border-left: 0;
+          }
+          > th:last-child,
+          > td:last-child {
+            border-right: 0;
+          }
+        }
+      }
+
+      // Only nuke the last row's bottom-border in `tbody` and `tfoot` since
+      // chances are there will be only one `tr` in a `thead` and that would
+      // remove the border altogether.
+      > tbody,
+      > tfoot {
+        > tr:last-child {
+          > th,
+          > td {
+            border-bottom: 0;
+          }
+        }
+      }
+
+    }
+  }
+}
+
+
+// 
+// ** Extra ** Table Pack 
+// use for 'cart-list', 當 css-table 外面要在多一層糖衣的時候
+// 
+.table-pack {
+  &.gray { 
+    background-color: $silver;
+    border: 8px solid $silver; 
+
+    .table-pack-head {
+      padding: ($padding-y * 1.5) ($padding-x / 2);
+      border: none; 
+    }
+  }
+  // 標題
+  .table-pack-head {
+    position: relative;
+    padding: ($padding-y * 2) $padding-x;
+    font-size: $font-size-medium;
+    font-weight: bold;
+    background-color: $silver;
+    border: 1px solid $border-default; 
+
+    .sub {
+      margin-left: $padding-x;
+      font-size: $font-size-base;
+
+      b {
+        font-size: $font-size-medium;
+        margin-left: $padding-x / 4;
+        margin-right: $padding-x / 4;
+      }
+    }
+    // 列表收合開關
+    .btn-switch {
+      right: -1px; //~抵消border偏移
+      padding: ($padding-y * 2) $padding-x;
+      font-size: $font-size-base;
+      background-color: $border-default;
+
+      &:before { content: "收合明細"; }
+      &[aria-expanded="false"] {
+        &:before { content: "展開明細"; }
+        .icon-minus {
+          &:before { @extend .icon-plus:before; }
+        }
+      }
+      .icon {
+        padding: ($padding-y / 2) ($padding-x / 2);
+        margin-left: $padding-x - 4;
+        margin-right: 0;
+        background-color: $white;
+      }
+    }
+  }
+  // 內容
+  .table-pack-body {
+    border: 1px solid $border-default;
+  }
+  // 頁尾 (buttons)
+  .table-pack-footer {
+    padding-top: $padding-y * 2;
+    padding-bottom: $padding-y * 2;
+    text-align: right;
+    @include clearfix;
+    
+    .btn-secondary { 
+      margin-right: $table-cell-padding;
+      width: $total-price-width + $font-size-medium * 5 - 8; 
+    }
+  }
+  // 商品金額 
+  .price { margin-right: $padding-y; }
+  
+  // 使用於 'table-total' & 'table-pack-footer > .btn'
+  // ** add '.offset-left-* & .offset-right-*' 左右偏移固定空白區塊
+  .offset-left-2, .offset-left-2 {
+    padding-left: $thumbnail-small + $padding-y;
+  }
+  .offset-right-2, .offset-right-2 {
+    padding-right: ($font-size-base * 6) + ($table-cell-padding * 3);
+  }
+  
+  // ** Shrink 縮減版
+  // 使用於 'cart-step1', 'cart-step2'
+  &.shrink {
+    
+  }
+}
+
+// 購物車清單
+.table-cart {
+  .info {
+    .title {
+      color: $dark;
+    }
+  }
+}
+
+// 購物車金額總計
+.table-total {
+  padding-top: $padding-y * 3;
+  padding-bottom: $padding-y * 2;
+  background-color: $white;
+  @include clearfix;
+
+  & + .table-total { 
+    padding-top: 0;
+    border-top: 1px solid $border-default; 
+  }
+  
+  // 針對'優惠券選項'優化
+  select.select-sm:not([multiple]) {
+    background-position: 98% 50%;
+  }
+  // 活動折扣 TAG
+  .tag { margin-top: $padding-y - 2; }
+
+  // 總金額
+  .amount {
+    padding-top: $padding-y * 2;
+    padding-bottom: $padding-y;
+    
+    text-align: right;
+    @include clearfix;
+
+    .label { font-weight: bold; }
+    .price { 
+      width: $total-price-width;
+      margin-right: $table-cell-padding;
+      font-size: $font-size-large;
+    }
+  }
+}
+

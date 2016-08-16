@@ -1,0 +1,134 @@
+// 
+// badges
+// 
+
+// -------------------------------------
+// 
+// Value
+// 
+// -------------------------------------
+$badge-color:                 $white !default;
+$badge-link-hover-color:      $badge-color !default;
+
+
+// -------------------------------------
+// 
+// Mixins
+// 
+// -------------------------------------
+@mixin badge-variant($color) {
+  background-color: $color;
+
+  &[href] {
+    @include hover-focus {
+      background-color: darken($color, 10%);
+    }
+  }
+}
+
+
+// Base class
+//
+// Requires one of the contextual, color modifier classes for `color` and
+// `background-color`.
+
+.badge {
+  display: inline-block;
+  padding: $badge-padding-y $badge-padding-x;
+  font-size: $badge-font-size;
+  font-weight: $badge-font-weight;
+  line-height: 1;
+  color: $badge-color;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  @include border-radius($border-radius-base);
+
+  // Empty badges collapse automatically
+  &:empty {
+    display: none;
+  }
+
+  // Circle
+  &.circle {
+    @include border-radius($badge-radius-circle);
+  }
+}
+
+// Quick fix for badges in buttons
+.btn .badge {
+  position: relative;
+  top: -1px;
+}
+
+// Add hover effects, but only for links
+a.badge {
+  @include hover-focus {
+    color: $badge-link-hover-color;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+
+// Pill badges
+//
+// Make them extra rounded with a modifier to replace v3's badges.
+
+.badge-pill {
+  padding-right: .6em;
+  padding-left: .6em;
+  // Use a higher than normal value to ensure completely rounded edges when
+  // customizing padding or font-size on badges.
+  @include border-radius(10rem);
+}
+
+// Colors
+//
+// Contextual variations (linked badges get darker on :hover).
+
+.badge-default {
+  @include badge-variant($badge-default-bg);
+  color: $gray;
+}
+.badge-primary {
+  @include badge-variant($badge-primary-bg);
+}
+.badge-secondary {
+  @include badge-variant($badge-secondary-bg);
+}
+
+// .badge-success {
+//   @include badge-variant($badge-success-bg);
+// }
+
+.badge-info {
+  @include badge-variant($badge-info-bg);
+  color: $alert-info-text;
+}
+
+// .badge-warning {
+//   @include badge-variant($badge-warning-bg);
+// }
+
+.badge-danger {
+  @include badge-variant($badge-danger-bg);
+}
+
+
+// Sizes
+// 
+
+.badge-mini {
+  font-size: $badge-font-size-mini;
+}
+.badge-lg {
+  font-size: $badge-font-size-lg;
+
+  &.circle {
+    @include border-radius($badge-radius-circle-lg);
+  }
+}
+
+
+
+

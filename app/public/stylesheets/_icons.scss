@@ -1,0 +1,442 @@
+//
+// Icons
+//
+
+
+// -------------------------------------
+//
+// * value
+//
+// -------------------------------------
+$icon-width-base:     16px !default;
+$icon-height-base:    16px !default;
+
+$icon-width-small:    12px !default;
+$icon-height-small:   12px !default;
+
+$icon-width-large:    32px !default;
+$icon-height-large:   32px !default;
+
+
+// -------------------------------------
+//
+// * mixins
+//
+// -------------------------------------
+@font-face {
+  font-family: 'fontello';
+  src: url('/public/fonts/fontello.eot');
+  src: url('/public/fonts/fontello.eot#iefix') format('embedded-opentype'),
+       url('/public/fonts/fontello.woff2') format('woff2'),
+       url('/public/fonts/fontello.woff') format('woff'),
+       url('/public/fonts/fontello.ttf') format('truetype'),
+       url('/public/fonts/fontello.svg#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+// -------------------------------------
+//
+// * Type
+//
+// -------------------------------------
+
+// ** Base
+// Catchall baseclass
+.icon {
+  position: relative;
+  display: inline-block;
+  // width: $icon-width-base;
+  // height: $icon-height-base;
+  text-align: center;
+  text-decoration: inherit;
+  margin-left: 2px;
+  margin-right: 2px;
+
+  font-family: 'fontello';
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background-size: contain;
+  mask-size: 100% 100%;
+  -moz-mask-size: 100% 100%;
+  -webkit-mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  -moz-mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  background-repeat: no-repeat;
+
+  // Color Setting
+  &.green { color: $yellowgreen; }
+  &.red { color: $vermillion; }
+  &.blue { color: $blue; }
+  &.yellow { color: $yellow; }
+}
+.icon-sm {}
+.icon-lg {}
+
+
+// ** icons Webfont
+.icon-mail:before { content: '\e800'; } /* '' */
+.icon-mail-outline:before { content: '\e801'; } /* '' */
+.icon-heart:before { content: '\e802'; } /* '' */
+.icon-heart-empty:before { content: '\e803'; } /* '' */
+.icon-minus-squared-alt:before { content: '\e804'; } /* '' */
+.icon-plus-squared-alt:before { content: '\e805'; } /* '' */
+.icon-download-cloud:before { content: '\e806'; } /* '' */
+.icon-print-1:before { content: '\e807'; } /* '' */
+.icon-trash:before { content: '\e808'; } /* '' */
+.icon-attention-triangle:before { content: '\e809'; } /* '' */
+.icon-location:before { content: '\e80a'; } /* '' */
+.icon-angle-left:before { content: '\e80b'; } /* '' */
+.icon-angle-right:before { content: '\e80c'; } /* '' */
+.icon-refresh-bold:before { content: '\e80d'; } /* '' */
+.icon-font:before { content: '\e80e'; } /* '' */
+.icon-qrcode:before { content: '\e80f'; } /* '' */
+.icon-truck:before { content: '\e810'; } /* '' */
+.icon-camera:before { content: '\e811'; } /* '' */
+.icon-info-circle:before { content: '\e812'; } /* '' */
+.icon-help-circle:before { content: '\e813'; } /* '' */
+.icon-bag:before { content: '\e814'; } /* '' */
+.icon-back-in-time:before { content: '\e815'; } /* '' */
+.icon-monitor:before { content: '\e816'; } /* '' */
+.icon-mobile:before { content: '\e817'; } /* '' */
+.icon-globe:before { content: '\e818'; } /* '' */
+.icon-floppy:before { content: '\e819'; } /* '' */
+.icon-chat:before { content: '\e81a'; } /* '' */
+.icon-archive:before { content: '\e81b'; } /* '' */
+.icon-folder:before { content: '\e81c'; } /* '' */
+.icon-print:before { content: '\e81d'; } /* '' */
+.icon-bell:before { content: '\e81e'; } /* '' */
+.icon-attention-circle:before { content: '\e81f'; } /* '' */
+.icon-group:before { content: '\e820'; } /* '' */
+.icon-cog:before { content: '\e821'; } /* '' */
+.icon-cancel:before { content: '\e822'; } /* '' */
+.icon-left-open:before { content: '\e823'; } /* '' */
+.icon-right-open:before { content: '\e824'; } /* '' */
+.icon-left-open-big:before { content: '\e825'; } /* '' */
+.icon-right-open-big:before { content: '\e826'; } /* '' */
+.icon-plus:before { content: '\e827'; } /* '' */
+.icon-minus:before { content: '\e828'; } /* '' */
+.icon-wallet:before { content: '\e829'; } /* '' */
+.icon-stopwatch:before { content: '\e82a'; } /* '' */
+.icon-clock:before { content: '\e82b'; } /* '' */
+.icon-search:before { content: '\e82c'; } /* '' */
+.icon-facebook:before { content: '\e82d'; } /* '' */
+.icon-calendar:before { content: '\e82e'; } /* '' */
+.icon-bell-alt:before { content: '\e82f'; } /* '' */
+.icon-bell-off:before { content: '\e830'; } /* '' */
+.icon-credit-card-1:before { content: '\e831'; } /* '' */
+.icon-megaphone:before { content: '\e832'; } /* '' */
+.icon-ticket:before { content: '\e833'; } /* '' */
+.icon-wrench:before { content: '\e834'; } /* '' */
+.icon-tags:before { content: '\e835'; } /* '' */
+.icon-flag:before { content: '\e836'; } /* '' */
+.icon-thumbs-up:before { content: '\e837'; } /* '' */
+.icon-quote-left:before { content: '\e838'; } /* '' */
+.icon-quote-right:before { content: '\e839'; } /* '' */
+.icon-pencil:before { content: '\e83a'; } /* '' */
+.icon-file-image:before { content: '\e83b'; } /* '' */
+.icon-picture:before { content: '\e83c'; } /* '' */
+.icon-up-open:before { content: '\e83d'; } /* '' */
+.icon-up-bold:before { content: '\e83e'; } /* '' */
+.icon-refrash:before { content: '\e83f'; } /* '' */
+.icon-clipboard:before { content: '\e840'; } /* '' */
+.icon-th-large:before { content: '\e841'; } /* '' */
+.icon-th:before { content: '\e842'; } /* '' */
+.icon-up:before { content: '\e843'; } /* '' */
+.icon-award:before { content: '\e844'; } /* '' */
+.icon-user:before { content: '\e845'; } /* '' */
+.icon-search-outline:before { content: '\e846'; } /* '' */
+.icon-heart-outline:before { content: '\e847'; } /* '' */
+.icon-comment-outline:before { content: '\e848'; } /* '' */
+.icon-location-outline:before { content: '\e849'; } /* '' */
+.icon-key-outline:before { content: '\e84a'; } /* '' */
+.icon-megaphone-outline:before { content: '\e84b'; } /* '' */
+.icon-ok:before { content: '\e84c'; } /* '' */
+.icon-sort:before { content: '\e84d'; } /* '' */
+.icon-down-micro:before { content: '\e84e'; } /* '' */
+.icon-down-open:before { content: '\e84f'; } /* '' */
+.icon-smile:before { content: '\e850'; } /* '' */
+.icon-cup:before { content: '\e851'; } /* '' */
+.icon-spin4:before { content: '\e852'; } /* '' */
+.icon-menu:before { content: '\e853'; } /* '' */
+.icon-menu-bold:before { content: '\e854'; } /* '' */
+.icon-eye-on:before { content: '\e855'; } /* '' */
+.icon-eye-off:before { content: '\e856'; } /* '' */
+.icon-trash-outline:before { content: '\e857'; } /* '' */
+.icon-files-plus:before { content: '\e858'; } /* '' */
+.icon-basket-outline:before { content: '\e859'; } /* '' */
+.icon-basket:before { content: '\e85a'; } /* '' */
+.icon-close:before { content: '\e85b'; } /* '' */
+.icon-right-circle:before { content: '\e85c'; } /* '' */
+.icon-plus-circle:before { content: '\e85d'; } /* '' */
+.icon-nav-beauty:before { content: '\e85e'; } /* '' */
+.icon-nav-camera:before { content: '\e85f'; } /* '' */
+.icon-nav-cart:before { content: '\e860'; } /* '' */
+.icon-nav-game:before { content: '\e861'; } /* '' */
+.icon-nav-headset:before { content: '\e862'; } /* '' */
+.icon-nav-mail:before { content: '\e863'; } /* '' */
+.icon-nav-pc:before { content: '\e864'; } /* '' */
+.icon-nav-phone:before { content: '\e865'; } /* '' */
+.icon-nav-search:before { content: '\e866'; } /* '' */
+.icon-nav-tv:before { content: '\e867'; } /* '' */
+.icon-nav-user:before { content: '\e868'; } /* '' */
+.icon-repair-a:before { content: '\e869'; } /* '' */
+.icon-repair-b:before { content: '\e86a'; } /* '' */
+.icon-repair-c:before { content: '\e86b'; } /* '' */
+.icon-repair-d:before { content: '\e86c'; } /* '' */
+.icon-money:before { content: '\e86d'; } /* '' */
+.icon-nav-forcer:before { content: '\e86e'; } /* '' */
+.icon-nav-drug:before { content: '\e86f'; } /* '' */
+.icon-nav-appliances:before { content: '\e870'; } /* '' */
+.icon-nav-car:before { content: '\e871'; } /* '' */
+
+
+// -------------------------------------
+// 獨立使用block呈現，use '<i>' elements
+// -------------------------------------
+
+// ~~~~~ 箭頭系列
+//
+// use for 'base'
+.icon-arrow-left {
+  &:before { @extend .icon-left-open-big:before; }
+}
+.icon-arrow-right {
+  &:before { @extend .icon-right-open-big:before; }
+}
+.icon-arrow-down {
+  &:before { @extend .icon-down-open:before; }
+}
+
+
+// ~~ footer特色四大項
+//
+.icon-footer-cart, .icon-cart {
+  &:before { @extend .icon-basket:before; }
+}
+.icon-footer-truck, .icon-truck {
+  &:before { @extend .icon-truck:before; }
+}
+.icon-footer-repair {
+  &:before { @extend .icon-wrench:before; }
+}
+.icon-footer-ticket {
+  &:before { @extend .icon-ticket:before; }
+}
+
+// ~~~~~ Header Main Icons
+//
+.icon-menu {
+  &:before { @extend .icon-menu:before; }
+}
+.icon-cart-outline {
+  &:before { @extend .icon-nav-cart:before; }
+}
+.icon-user-outline {
+  &:before { @extend .icon-nav-user:before; }
+}
+.icon-share-fb {
+  &:before { @extend .icon-facebook:before }
+}
+.icon-mail {
+  &:before { @extend .icon-mail:before }
+}
+// use for '.header-category'
+.icon-caret-down {
+  &:before { @extend .icon-down-micro:before; }
+}
+
+// ~~~~~ Home 維修服務 4 icons
+.icon-repair-a {
+  &:before { @extend .icon-repair-a:before; }
+}
+.icon-repair-b {
+  &:before { @extend .icon-repair-b:before; }
+}
+.icon-repair-c {
+  &:before { @extend .icon-repair-c:before; }
+}
+.icon-repair-d {
+  &:before { @extend .icon-repair-d:before; }
+}
+
+// ~~~~~ Home 主選單 7 icons ~ 最多 10 icons
+// 
+.icon-cate-a {
+  &:before { @extend .icon-nav-phone:before; }
+}
+.icon-cate-b {
+  &:before { @extend .icon-nav-pc:before; }
+}
+.icon-cate-c {
+  &:before { @extend .icon-nav-camera:before; }
+}
+.icon-cate-d {
+  &:before { @extend .icon-nav-car:before; }
+}
+.icon-cate-e {
+  &:before { @extend .icon-nav-headset:before; }
+}
+.icon-cate-f {
+  &:before { @extend .icon-nav-tv:before; }
+}
+.icon-cate-g {
+  &:before { @extend .icon-nav-appliances:before; }
+}
+.icon-cate-h {
+  &:before { @extend .icon-nav-drug:before; }
+}
+.icon-cate-i {
+  &:before { @extend .icon-nav-forcer:before; }
+}
+
+// ~~~~~ Login & Register
+// 三角型驚嘆號
+.icon-exclamation-triangle {
+  &:before { @extend .icon-attention-triangle:before; }
+}
+// 圓型驚嘆號
+.icon-attention-circle {
+  &:before { @extend .icon-attention-circle:before; }
+}
+// 圓型問號
+.icon-info-circle {
+  &:before { @extend .icon-info-circle:before; }
+}
+// 刷新
+.icon-refresh {
+  &:before { @extend .icon-refresh-bold:before; }
+}
+// 圓型箭頭
+.icon-arrow-circle {
+  &:before { @extend .icon-right-circle:before; }
+}
+
+// ~~~~~ Order & Product
+// use for 'order-list' 物流表
+.icon-plus-circle {
+  &:before { @extend .icon-plus-circle:before; }
+}
+// use for 'order-list' 商品明細收合
+.icon-plus-square-outline {
+  &:before { @extend .icon-plus-squared-alt:before; }
+}
+.icon-minus-square-outline {
+  &:before { @extend .icon-minus-squared-alt:before; }
+}
+// use for 'order-list' 商品快照
+.icon-camera {
+  &:before { @extend .icon-camera:before; }
+}
+// Cart
+.icon-cart {
+  top: 1px;
+  &:before { @extend .icon-basket-outline:before; }
+}
+
+// ~~~~~ Member
+// 新增資訊
+.icon-folder-plus {
+  &:before { @extend .icon-files-plus:before; }
+}
+// 維修查詢
+.icon-help {
+  &:before { @extend .icon-help-circle:before; }
+}
+
+// ~~~~~ Wishlist
+// 商品收藏
+.icon-heart {
+  &:before { @extend .icon-heart-empty:before; }
+}
+
+// ~~~~~ News & Article
+// 文章分類
+.icon-tag {
+  &:before { @extend .icon-tags:before; }
+}
+.icon-calendar {
+  &:before { @extend .icon-calendar:before; }
+}
+
+// ~~~~~ Bitrhday
+// 生日禮領取點數
+.icon-coin {
+  &:before { @extend .icon-money:before; }
+}
+.icon-share-fb {
+  &:before { @extend .icon-facebook:before; }
+}
+.icon-mail {}
+
+// ~~~~~ Password
+.icon-eye-show {
+  &:before { @extend .icon-eye-on:before; }
+}
+.icon-eye-hide {
+  &:before { @extend .icon-eye-off:before; }
+}
+
+// ~~~~~ Form 
+// 打勾
+.icon-check {
+  &:before { @extend .icon-ok:before; }
+}
+.icon-check-circle-outline {}
+// 刪除
+.icon-delete {
+  &:before { @extend .icon-trash-outline:before; }
+}
+// +, -
+// use for 'cart-list > qty', 'faq > collapse'
+.icon-plus {
+  &:before { @extend .icon-plus:before; }
+}
+.icon-minus {
+  &:before { @extend .icon-minus:before; }
+}
+
+// ~~~~~ GoogleMap
+.icon-google-map {
+  width: 20px;
+  height: 20px;
+  top: 4px;
+  background: $transparent url($images-url + 'icons/icon-google-map.png') no-repeat 0 0;
+  background-size: cover;
+}
+.icon-phone {
+  &:before { @extend .icon-mobile:before; }
+}
+.icon-location {
+  &:before { @extend .icon-location:before; }
+}
+.icon-time {
+  &:before { @extend .icon-clock:before; }
+}
+
+// ~~~~~ Modal
+// 關閉
+.icon-close {
+  &:before { @extend .icon-cancel:before; }
+}
+
+// ~~~~~ eDM
+.icon-download {
+  &:before { @extend .icon-download-cloud:before; }
+}
+
+// ~~~~~ CHT
+.icon-archive {
+  @extend .icon-archive:before;
+}
+
+

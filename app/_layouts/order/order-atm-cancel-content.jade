@@ -1,0 +1,37 @@
+//- order-atm-cancel-content
+// 頁面標題
+h4.page-header 訂單查詢 - 訂單取消（ATM轉帳退款）
+// 訂單資訊
+.css-table.fill.blue
+  .css-tr
+    .css-th 訂單編號
+    .css-th 訂購日期
+    .css-th 付款方式
+    .css-th 配送方式
+  .css-tr
+    .css-td
+      a.underline(href='/mockup/Order/order-detail.html') 2016041498765
+    .css-td 2016/04/13
+    .css-td ATM轉帳
+    .css-td 宅配
+// 退款資訊
+h4.css-table-caption 退款資訊
+.css-table.middle
+  .css-tr
+    .css-th.align.right.w-f8 金融機構(分行)
+    .css-td
+      select(name='')
+        option(selected='selected', value='請選擇金融機構') 請選擇金融機構
+      select(name='')
+        option(selected='selected', value='請選擇分行') 請選擇分行
+  .css-tr
+    .css-th.align.right.w-f8 帳號
+    .css-td
+      input.input-lg(type='text')
+  .css-tr
+    .css-th.align.right.w-f8 戶名
+    .css-td
+      input.input-lg(type='text')
+// button
+.btn-group
+  button.btn.btn-primary 確認取消

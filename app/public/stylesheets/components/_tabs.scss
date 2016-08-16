@@ -1,0 +1,231 @@
+//
+// Tabs
+//
+// -------------------------------------
+//
+// * Type: 預設值 '藍色'
+//
+// -------------------------------------
+//
+// ．．．．．．． Tree flow ．．．．．．．
+//
+// div.nav-tabs
+//   ∟ span.nav-tabs-title
+//   ∟ ul.nav-tabs-list ------> default
+//      ∟ li.nav-tabs-item
+//         ∟ a.nav-link <----- 實際上是由這裡撐開點擊範圍(padding)
+//
+// ．．．．．．．．．．．．．．．．．．．．
+
+.nav-tabs {
+  position: relative;
+  margin-bottom: $padding-y * 2;  // ~16
+
+  ul, ol { margin-bottom: 0; }  // reset
+
+  .nav-tabs-title {
+    position: absolute;
+    top: $padding-y + 4;  // ~12
+    font-size: $font-size-medium;
+    font-weight: bold;
+  }
+}
+
+.nav-tabs-list {
+  border-bottom: 1px solid $tabs-border-color;
+  @include clearfix();
+
+
+  li, .nav-tabs-item {
+    display: inline-block;
+    // Make the list-items overlay the bottom border
+    margin-bottom: -1px;
+
+    + li, + .nav-tabs-item {
+      margin-left: 2px;
+    }
+  }
+
+  // setting for '<a>'
+  a, .nav-link {
+    display: block;
+    padding: $padding-y $padding-x; // 8/24
+    border: 1px solid transparent;
+    border-top: 3px solid transparent;
+    cursor: pointer;
+
+    &:hover {
+      color: $gray;
+    }
+
+    &.disabled {
+      @include plain-hover-focus {
+        color: $nav-disabled-link-color;
+        background-color: transparent;
+        border-color: transparent;
+      }
+    }
+  }
+
+  // if '.nav-tabs-item' add '.active'
+  li, .nav-tabs-item {
+    &.active a,
+    &.active .nav-link,
+    a.active, 
+    .nav-link.active {
+      // font-weight: bold;
+      color: $blue;
+      background-color: $white;
+      border-color: $blue;
+      border-bottom-color: $white;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  // ~~~~~ if addClass 'pills' ~~~~~
+  // use for 'location', 'news-list'  
+  &.pills {
+    margin-bottom: 0;
+
+    .nav-tabs-item {
+      display: table-cell;
+      padding: 0; //~reset
+      margin: 0;  //~reset
+
+      & + li { margin-left: 0; }
+
+      a { 
+        padding: $btn-padding-y $btn-padding-x; 
+        border: none; //~rest
+
+        &:hover { color: $gray; }
+        &.active { background-color: $gray-light; }
+      }
+    }
+    
+    // Color is 'blue'
+    &.blue {
+      a.active {
+        background-color: $blue;
+        color: $white;
+      }
+    }
+  }
+}
+
+
+//
+// Tabbable tabs
+//
+
+// Hide tabbable panes to start, show them when `.active`
+.tab-content {
+  > .tab-pane {
+    display: none;
+  }
+  > .active {
+    display: block;
+  }
+}
+
+// tab-content iframe content
+.iframe-content {
+  padding: 10px 0;
+  iframe {
+    width: 100%;
+  }
+}
+
+//
+// Alternate :: 'nav-tabs-member'
+//
+// 針對「會員中心」客製化 - 綠色版
+.nav-tabs-member {
+  .nav-tabs-list {
+    background-color: $silver;
+    border-bottom-color: $yellowgreen;
+    text-align: center;
+
+    li, .nav-tabs-item {
+      &.active a,
+      &.active .nav-link {
+        color: $yellowgreen;
+        background-color: $white;
+        border-color: $yellowgreen;
+        border-bottom-color: $white;
+      }
+
+      + li, + .nav-tabs-item {
+        margin-left: 0;
+      }
+    }
+
+    a, .nav-link {
+      padding: ($padding-y * 1.5) $padding-x; // 8/16
+
+      @include breakpoint($larger-than-tablet) {
+        padding-left: $padding-x * 1.125; //~18
+        padding-right: $padding-x * 1.125; //~18
+      }
+      @include breakpoint($larger-than-desktophd) {
+        padding-left: $padding-x * 2; //~32
+        padding-right: $padding-x * 2; //~32
+      }
+    }
+  }
+}
+
+//
+// Alternate :: 'nav-tabs-product'
+//
+// 針對「商品介紹頁」客製化 - 藍色版
+.nav-tabs-product {
+  margin-bottom: $padding-y * 3;
+
+  // '<a>' element
+  a, .nav-link {
+    padding: ($padding-y * 1.5) ($padding-x * 2.5); // 12/40
+    border-color: $border-default;
+    border-bottom-color: $transparent;
+    min-width: 144px;
+  }
+}
+
+
+//
+// Alternate :: '.nav-tabs-underline'
+// 
+// use for '神知識首頁', '賣場第一層'
+.nav-tabs-underline {
+  .nav-tabs-list {
+    li, .nav-tabs-item {
+      margin-bottom: 0;
+
+      &.active a,
+      &.active .nav-link,
+      // 使用 bootstrap > tabs.js 的設定
+      a.active,
+      .nav-link.active {
+        background-color: $transparent;
+        border-bottom-color: $blue;
+      }
+    }
+    a, .nav-link {
+      padding-bottom: $padding-y - 4; // 減border
+      // font-size: $font-size-medium;
+      // line-height: $line-height-medium;
+      border: 0;
+      border-bottom: 4px solid $transparent;
+    }
+  }
+  .badge {
+    font-size: $font-size-mini;
+    vertical-align: text-top;
+  }
+}
+
+
+

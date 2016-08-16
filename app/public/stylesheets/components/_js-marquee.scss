@@ -1,0 +1,74 @@
+//
+// Message
+//
+
+
+// -------------------------------------
+//
+// * Value
+//
+// -------------------------------------
+$marquee-inner-height: $font-size-base + ($padding-x * 4);
+
+
+
+// -------------------------------------
+//
+// * Type
+// example: http://risq.github.io/jquery-advanced-news-ticker/index.html
+//
+// -------------------------------------
+.marquee {
+  position: relative;
+  z-index: $zindex-slider-view;
+  padding: $padding-x;
+  margin-bottom: $padding-y * 2;
+  background-color: $silver;
+}
+// 內容區塊
+.marquee-inner{
+  .item {
+    // display: none;
+
+    &.active { display: block; }
+  }
+  .title {
+    margin-left: $padding-x * 1.5;
+    margin-right: $padding-x / 2;
+  }
+  .desc { color: $blue; }
+}
+
+// 左右箭頭
+.marquee-arrow.marquee-arrow.marquee-arrow {
+  position: absolute;
+  z-index: $zindex-slider-arrow;
+  color: $gray-light;
+
+  background: transparent;
+  // color: $white;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: auto;
+  height: auto;
+
+  @include center(y);
+  @include transition(all .2s ease-in-out);
+
+  &:hover { color: $blue; }
+
+  &.left, &.bx-prev {
+    left: -$padding-x/4;
+    // left: 0;
+  }
+  &.right, &.bx-next {
+    right: -$padding-x/4;
+    // right: 0;
+  }
+}
+
+.js-slider-marquee {
+  .bx-wrapper {
+    background-color: transparent;
+  }
+}

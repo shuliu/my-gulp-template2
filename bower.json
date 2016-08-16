@@ -1,0 +1,45 @@
+{
+  "name": "gulp_template",
+  "private": true,
+  "dependencies": {
+    "chai": "~3.5.0",
+    "compass-breakpoint": "~2.7.0",
+    "mocha": "~2.5.3"
+  },
+  "overrides": {
+    "bootstrap-sass": {
+      "main": [
+        "assets/stylesheets/_bootstrap.scss",
+        "assets/fonts/bootstrap/*",
+        "assets/javascripts/bootstrap.js"
+      ]
+    }
+  },
+  "devDependencies": {
+    "chai": "~3.4.2",
+    "mocha": "~2.3.4",
+    "coffee-script": "~1.10.0",
+    "susy": "~2.2.7",
+    "compass-breakpoint": "~2.6.1",
+    "compass-mixins": "^1.0.2"
+  },
+  "authors": [
+    "shuliu <shuliu.gardiana@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "resolutions": {
+    "chai": "~3.5.0",
+    "mocha": "~2.5.3",
+    "compass-breakpoint": "~2.7.0"
+  }
+}

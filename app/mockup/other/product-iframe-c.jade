@@ -1,0 +1,113 @@
+doctype html
+html(lang = "zh-tw")
+  head
+    meta(charset = "UTF-8")/
+    block title
+      title 神腦線上購物
+    // PC版不加 viewport
+    meta(content = "width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0", name = "viewport")/
+    meta(content = "IE=edge", "http-equiv" = "X-UA-Compatible")/
+    link(href = "/public/stylesheets/plugins.css", rel = "stylesheet")/
+    link(href = "/public/stylesheets/main.css", rel = "stylesheet")/
+  body
+
+    .wrapper
+      .container
+        h2 假頁面
+
+        form.toolbar.align.center(action='')
+          span.divider
+            | 合約期數
+            select(name='')
+              option(selected='selected', value='30個月') 30個月
+              option(value='24個月') 24個月
+              option(value='12個月') 12個月
+          span.divider
+            | 活動專案
+            select(name='')
+              option(selected='selected', value='4G極速優惠方案') 4G極速優惠方案
+              option(value='學生方案') 學生方案
+              option(value='網路吃到飽') 網路吃到飽
+        .css-table.align.center.middle
+          .css-tr
+            .css-th
+            .css-th 月租費
+            .css-th 專案價
+            .css-th 預繳金額
+            .css-th 上網吃到飽
+            .css-th.align.left 網內/網外吃到飽
+            .css-th.align.left 市話/簡訊數
+          .css-tr
+            .css-td
+            .css-td $359
+            .css-td $18,290
+            .css-td $2,000
+            .css-td
+              i.icon.icon-close
+            .css-td.align.left
+              p 網內通話免費
+              p 網外通話贈送30分鐘
+            .css-td.align.left
+              p 市話每秒0.1
+              p 網內簡訊數150則
+          .css-tr
+            .css-td
+            .css-td $469
+            .css-td $17,290
+            .css-td $2,000
+            .css-td
+              i.icon.icon-check
+            .css-td.align.left
+              p 網內通話免費
+              p 網外通話贈送30分鐘
+            .css-td.align.left
+              p 市話每秒0.1
+              p 網內簡訊數150則
+          .css-tr.recommend
+            .css-td
+              .tag.tag-secondary.tag-md 熱門推薦
+            .css-td $799
+            .css-td $14,290
+            .css-td $2,000
+            .css-td
+              i.icon.icon-check
+            .css-td.align.left
+              p 網內通話免費
+              p 網外通話贈送30分鐘
+            .css-td.align.left
+              p 市話每秒0.1
+              p 網內簡訊數150則
+          .css-tr
+            .css-td
+            .css-td $1,199
+            .css-td $11,790
+            .css-td $2,000
+            .css-td
+              i.icon.icon-check
+            .css-td.align.left
+              p 網內通話免費
+              p 網外通話贈送30分鐘
+            .css-td.align.left
+              p 市話每秒0.1
+              p 網內簡訊數150則
+          .css-tr
+            .css-td
+            .css-td $1,399
+            .css-td $8,990
+            .css-td $2,000
+            .css-td
+              i.icon.icon-check
+            .css-td.align.left
+              p 網內通話免費
+              p 網外通話贈送30分鐘
+            .css-td.align.left
+              p 市話每秒0.1
+              p 網內簡訊數150則
+
+
+    script(src = "/public/javascripts/vendor/jquery-custom.min.js")
+    script(src = "/public/javascripts/vendor/jquery.bxslider.min.js")
+
+    script(src = "/public/javascripts/main.js")
+
+    include ../../_layouts/_elements/ga.jade

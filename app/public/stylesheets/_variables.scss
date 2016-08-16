@@ -1,0 +1,912 @@
+// ============================================
+// ．．．．．．．．．【 Catalog 】．．．．．．．．．
+// --------------------------------------------
+//
+// -- Grid
+// -- Fonts-Size & Spacing & Line-height
+// -- Colors: include 'body', 'links', 'fonts', 'border'
+// -- Padding
+// -- BorderRedius
+//
+// -- Buttons
+// -- Input & Form
+//
+// -- Navs
+// -- Breadcrumbs
+// -- Tabs
+// -- Tags
+//
+// -- Tables
+// -- Alerts
+// -- Panels
+// -- ...
+//
+// -- *** mixins
+//
+// ============================================
+
+
+// --------------------------------------------
+// * value:: Grid
+// --------------------------------------------
+// Base Grid config, use for 'susy'
+$grid-max-width:    1200px !default;
+$grid-columns:      24 !default;
+$grid-gutter-width: 0px !default;
+$grid-padding:      8px !default;
+
+$images-url: '/public/images/';
+
+// Base Container Size
+$grid-container-mobile:     320px;  // - $grid-gutter-width;
+$grid-container-phablet:    480px;  // - $grid-gutter-width;
+$grid-container-tablet:     768px;  // - $grid-gutter-width;
+$grid-container-desktop:    960px;  // - $grid-gutter-width;
+$grid-container-desktophd:  1200px; // - $grid-gutter-width;
+
+// Grid breakpoints
+//
+$grid-breakpoints: (
+  // Extra small screen / phone
+  xs: 0,
+  // Small screen / phone
+  sm: 544px,
+  // Medium screen / tablet
+  md: 768px,
+  // Large screen / desktop
+  lg: 1024px,
+  // Extra large screen / wide desktop
+  xl: 1200px
+) !default;
+
+// media :: Screen Size from Mobile to Desktop
+$larger-than-mobile:        $grid-container-mobile;   // + $grid-gutter-width;
+$larger-than-phablet:       $grid-container-phablet;  // + $grid-gutter-width;
+$larger-than-tablet:        $grid-container-tablet;   // + $grid-gutter-width;
+$larger-than-desktop:       $grid-container-desktop;  // + $grid-gutter-width;
+$larger-than-desktophd:     $grid-container-desktophd;// + $grid-gutter-width;
+
+
+// Options
+//
+// Quickly modify global styling by enabling or disabling optional features. by Bootstrap V4
+
+$enable-flex:               false !default;
+$enable-rounded:            true !default;
+$enable-shadows:            false !default;
+$enable-gradients:          false !default;
+$enable-transitions:        false !default;
+$enable-hover-media-query:  false !default;
+$enable-grid-classes:       true !default;
+
+
+
+// --------------------------------------------
+// * value:: Fonts Size & Spacing & Line Height
+// --------------------------------------------
+$icon-font-path: '/public/fonts/';
+// font-size  line-height
+//    36px　︱　48px
+//    30px　︱　40px
+//    24px　︱　34px
+//    18px　︱　28px
+//    15px　︱　24px
+//    13px　︱　22px
+//    12px　︱　18px
+// ーーーーーーーーーーー
+
+// ***** Typography
+//
+$font-family-sans-serif:     'PingFangTC-Light', 'PingFangTC', Helvetica, 'HeitiTC', '微軟正黑體', 'Microsoft JhengHei', sans-serif !default;
+$font-family-base:           $font-family-sans-serif !default;
+
+
+// ***** Base Size
+// :: xxl > xl > large > medium > base > small > mini
+//
+$font-size-xxl:       36px;
+$font-size-xl:        30px;
+$font-size-large:     24px;
+$font-size-medium:    18px;
+$font-size-base:      15px !default;
+$font-size-small:     13px;
+$font-size-mini:      12px;
+
+// ***** h1 ~ h6
+//
+$font-size-h1:        $font-size-xxl;    // ~36px
+$font-size-h2:        $font-size-xl;     // ~30px
+$font-size-h3:        $font-size-large;  // ~24px
+$font-size-h4:        $font-size-medium; // ~18px
+$font-size-h5:        $font-size-base;   // ~15px
+$font-size-h6:        $font-size-small;  // ~13px
+
+// ***** Spacing
+//
+// variables. Mostly focused on spacing.
+$spacer:              8px !default;
+$spacer-x:            $spacer !default;
+$spacer-y:            $spacer !default;
+
+// ***** Line-height
+//
+//** Unit-less `line-height` for use in components like buttons.
+$line-height-base: 1.6 !default; // 24/15
+//** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
+// 依字體大小自動乘以1.6
+$line-height-computed: floor($font-size-base * $line-height-base) !default; // ~24px
+
+$line-height-xxl:     floor($font-size-base * 3.2) !default;          // ~48/15
+$line-height-xl:      floor($font-size-base * 2.7) !default;          // ~40/15
+$line-height-large:   floor($font-size-base * 2.3) !default;          // ~34/15
+$line-height-medium:  floor($font-size-base * 1.9) !default;          // ~28/15
+$line-height-base:    1.6 !default; // ~24/15
+$line-height-small:   floor($font-size-base * 1.5) !default;          // ~22/15
+$line-height-mini:    floor($font-size-base * 1.2) !default;          // ~18/15
+
+
+// ***** headings
+//
+$headings-font-family:       inherit !default;
+$headings-font-weight:       bold !default;
+$headings-line-height:       1.1 !default;
+$headings-color:             inherit !default;
+
+
+// --------------------------------------------
+// * value:: Colors
+// --------------------------------------------
+// Senao brand Colors
+$brand-blue:      #0090D4;
+$brand-deepblue:  #005097;
+$brand-green:     #CBD300;
+$brand-pink:      #E64894;
+$brand-yellow:    #FAC109;
+$brand-gray:      #B5B5B6;
+
+// Base Colors
+$transparent:     transparent;
+$black:           #000000;  // 黑色
+$white:           #FFFFFF;  // 白色
+$silver:          #F3F4F5;  // 銀白色: 背景預設 灰
+$gray:            #6F7274;  // 預設 灰
+$gray-light:      #DCDDDE;  // --  亮灰: use 'hover', 'bar'
+$dark:            #1B1C1D;  // 預設 暗黑
+$blue:            #0090D4;  // 預設 藍
+$blue-light:      #E8F7FD;  // --  淺藍: use 'table'
+$yellowgreen:     #C8D100;  // 預設 草綠
+$orange:          #ED9E02;  // 預設 橘
+$pumpkin:         #F17200;  // 南瓜橘
+$vermillion:      #F61A13;  // 朱紅
+$red:             #E70000;  // 紅
+$yellow:          #FCC72C;  // 黃
+$green:           #4CB648;  // 綠
+
+// Social Colors
+$facebook-color:  #3B5998;  // facebook藍
+
+
+// Navs color ::
+// 1) 全商品分類 選單顏色
+// 2) 首頁Tabs促銷區塊 (寫在_type.scss)
+$nav-blue:         #0089C0;  // 1
+$nav-pink:         #DC4690;  // 2, 7
+$nav-purple:       #BA4AE7;  // 3
+$nav-darkcyan:     #00A8A8;  // 4
+$nav-indigo:       #433783;  // 5
+$nav-yellow:       #EEA35C;  // 6
+$nav-darkblue:     #004D98;  // 8
+$nav-green:        #45B035;  // 9
+$nav-red:          #B81C22;  // 10
+
+$navs-color: $nav-blue $nav-pink $nav-darkcyan $nav-purple $nav-yellow $nav-indigo $nav-pink $nav-darkblue $nav-green $nav-red;
+
+
+// Body
+//
+// Settings for the `<body>` element.
+$body-bg:         #FFFFFF !default;
+$body-color:      $dark !default;
+
+
+// Links
+//
+// Settings for the `<a>` element.
+$link-color:            $gray !default;
+$link-decoration:       none !default;
+//** Link hover color set via `darken()` function.
+$link-hover-color:      $blue !default;
+//** Link hover decoration.
+$link-hover-decoration: underline !default;
+
+
+// Component Status
+//
+$component-active-color:      $blue !default;
+$component-active-bg:         $white !default;
+
+$component-status-default:    $gray !default;
+$component-status-success:    $green !default;
+$component-status-warning:    $yellow !default;
+$component-status-danger:     $red !default;
+$component-status-info:       $blue !default;
+$component-status-inverted:   $dark !default;
+$component-status-disabled:   $gray-light !default;
+
+// Fonts
+//
+// Settings for the `font` element.
+//
+// fonts => gray
+$font-title-color:    $dark;
+// $font-color-subtitle: ;
+$font-content-color:  $gray;
+
+$font-bold:     $dark;
+$font-normal:   $gray;
+
+// fonts => blue
+$font-color-blue: $blue !default;
+// $font-color-blue: #0390D5;  // steps
+
+// fonts => icons
+$font-icons-base:   16px !default;
+$font-icons-medium: 18px !default;
+$font-icons-larger: 24px !default;
+$font-icons-xl:     30px !default;
+
+// title => colorful
+$title-blue: $blue;
+$title-orange: $pumpkin;
+$title-green: $yellowgreen;
+// $title-green: #acb403; // type 2
+
+
+// Border
+//
+// Settings for the `border` element.
+//
+$border-default:  $gray-light;   // gray-light
+$border-alpha:    rgba(34, 36, 38, .15); // use 'buttons border'
+$border-blue:     $blue;
+$border-green:    $yellowgreen;
+
+$header-border:   $border-blue;
+$footer-border:   $border-blue;
+
+
+// --------------------------------------------
+// * value:: padding
+// *** vertical:垂直, horizontal:水平
+// --------------------------------------------
+$padding-x: $grid-padding * 2 !default; //~16
+$padding-y: $grid-padding !default;     //~8
+
+// Alternate
+$padding-base-vertical:     $padding-y;
+$padding-base-horizontal:   $padding-x;
+$padding-base-icon:         8px;
+
+$padding-xl-vertical:       24px;
+$padding-xl-horizontal:     64px;
+$padding-xl-icon:           24px;
+
+$padding-large-vertical:    16px;
+$padding-large-horizontal:  40px;
+$padding-large-icon:        16px;
+
+$padding-medium-vertical:   8px;
+$padding-medium-horizontal: 24px;
+$padding-medium-icon:       12px;
+
+$padding-small-vertical:    4px;
+$padding-small-horizontal:  12px;
+$padding-small-icon:        6px;
+
+$padding-mini-vertical:     2px;
+$padding-mini-horizontal:   8px;
+$padding-mini-icon:         4px;
+
+
+// --------------------------------------------
+// * value:: border-radius
+// --------------------------------------------
+$border-width:          1px !default;
+
+$border-radius-base:    2px;
+$border-radius-large:   6px;
+$border-radius-small:   1px;
+
+// for button radius
+$btn-border-radius-base:         $border-radius-base !default;
+$btn-border-radius-large:        $border-radius-large !default;
+$btn-border-radius-small:        $border-radius-small !default;
+
+
+
+// --------------------------------------------
+// * value:: Button Style
+// --------------------------------------------
+//
+// * define text, background and border color.
+
+$btn-font-weight:           bold !default;
+
+// buttons => white
+$btn-default-color:         $gray !default;
+// $btn-default-color:        #5F5E5E !default;  // type 2
+$btn-default-bg:            $white !default;
+$btn-default-border:        $border-alpha !default;
+
+// buttons => yellowgreen
+$btn-primary-color:         $white !default;
+$btn-primary-bg:            $yellowgreen !default;
+// $btn-primary-bg:           #B5CF00 !default;  // type 2
+$btn-primary-border:        $border-alpha !default;
+
+// buttons => orange
+$btn-secondary-color:       $white !default;
+$btn-secondary-bg:          $orange !default;
+$btn-secondary-border:      $border-alpha !default;
+
+// buttons => blue
+$btn-query-color:           $white !default;
+$btn-query-bg:              $blue !default;
+$btn-query-border:          $border-alpha !default;
+
+// buttons => gray
+$btn-disabled-color:        $gray !default;
+$btn-disabled-bg:           $gray-light !default;
+$btn-disabled-border:       $border-alpha !default;
+
+// buttons => dark
+$btn-inverted-color:        $white !default;
+$btn-inverted-bg:           $dark !default;
+$btn-inverted-border:       $dark !default;
+
+$btn-success-color:         $white !default;
+$btn-success-bg:            $green !default;
+$btn-success-border:        $green !default;
+
+$btn-info-color:            $white !default;
+$btn-info-bg:               lighten($blue, 25%) !default;
+$btn-info-border:           lighten($blue, 25%) !default;
+
+$btn-warning-color:         $white !default;
+$btn-warning-bg:            $yellow !default;
+$btn-warning-border:        $yellow !default;
+
+// buttons => vermillion
+$btn-danger-color:          $white !default;
+$btn-danger-bg:             $vermillion !default;
+$btn-danger-border:         $vermillion !default;
+
+// buttons => favorite
+$btn-favorite-color:        $white !default;
+$btn-favorite-bg:           $brand-pink !default;
+$btn-favorite-border:       $brand-pink !default;
+
+// buttons => share
+$btn-share-color:           $white !default;
+$btn-share-bg:              $facebook-color !default;
+$btn-share-border:          $facebook-color !default;
+
+
+$btn-link-disabled-color:   $gray-light !default;
+
+//
+// Padding
+//
+$btn-padding-x:             $padding-large-horizontal !default;
+$btn-padding-y:             $padding-y !default;
+
+$btn-padding-x-sm:          $padding-small-horizontal !default;
+$btn-padding-y-sm:          $padding-small-vertical !default;
+
+$btn-padding-x-mini:        $padding-mini-horizontal !default;
+$btn-padding-y-mini:        $padding-mini-vertical !default;
+
+$btn-padding-x-lg:          $padding-xl-horizontal !default;
+$btn-padding-y-lg:          $padding-large-vertical !default;
+
+//
+// Height
+//
+$btn-base-height: $line-height-computed + $padding-y * 2 + $border-width * 2;
+$btn-sm-height: $line-height-small + $btn-padding-y-sm * 2 + $border-width * 2;
+
+// btn-group Padding
+$btn-group-padding:         $padding-y * 3;
+
+//
+// radius
+//
+$btn-border-radius:              $border-radius-base !default;
+$btn-border-radius-lg:           $border-radius-large !default;
+$btn-border-radius-sm:           $border-radius-small !default;
+
+$caret-width:            .3em !default;
+$caret-width-lg:         $caret-width !default;
+
+// Fixed-width : use for 'prodcut-default'
+$btn-product-cart-width: 176px;
+
+
+// --------------------------------------------
+// * value:: input base style
+// --------------------------------------------
+$input-width-base:        240px !default;
+$input-width-full:        100% !default;
+$input-width-lg:          360px !default;
+$input-width-md:          240px !default;
+$input-width-sm:          144px !default;
+$input-width-mini:        88px !default;
+$input-width-micro:       64px !default;
+
+// ** input Height
+$input-height-base:       $line-height-computed + ($padding-y * 2);
+$input-height-sm:         $input-height-base - 8;
+
+//** `<input>` background color
+$input-bg:                $white !default;
+$input-bg-disabled:       lighten($gray-light, 5%) !default;
+//** Text color for `<input>`s
+$input-color:             $dark !default;
+$input-color-disabled:    $gray !default;
+$input-color-placeholder: $gray-light !default;
+//** `<input>` border color
+$input-border:            #A2A5A7 !default;
+$input-border-disabled:   $border-alpha !default;
+$input-border-focus:      $blue !default;
+//** `<input>` border radius
+$input-border-radius:     $border-radius-base !default;
+$input-border-radius-lg:  $border-radius-large !default;
+$input-border-radius-sm:  $border-radius-small !default;
+
+$input-btn-border-width:  $border-width !default;
+$input-box-shadow:        inset 0 1px 1px rgba(0,0,0,.075) !default;
+
+
+//** input `checkbox`, `radio`
+$input-checkbox-width:    20px !default;
+
+
+// padding
+$input-padding-x:         $padding-base-horizontal !default;
+$input-padding-y:         $padding-y !default;
+
+$input-padding-x-sm:      $padding-small-horizontal !default;
+$input-padding-y-sm:      $padding-small-vertical !default;
+
+$input-padding-x-lg:      $padding-large-horizontal !default;
+$input-padding-y-lg:      $padding-large-vertical !default;
+
+$input-group-addon-bg:            $gray-light !default;
+$input-group-addon-border-color:  $input-border !default;
+
+// ** Disabled cursor for form controls and buttons.
+$cursor-disabled:                 not-allowed !default;  // 禁止點擊
+
+// Form validation icons
+$form-icon-success: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MTIgNzkyIj48cGF0aCBmaWxsPSIjNWNiODVjIiBkPSJNMjMzLjggNjEwYy0xMy4zIDAtMjYtNi0zNC0xNi44TDkwLjUgNDQ4LjhDNzYuMyA0MzAgODAgNDAzLjMgOTguOCAzODljMTguOC0xNC4yIDQ1LjUtMTAuNCA1OS44IDguNGw3MiA5NUw0NTEuMyAyNDJjMTIuNS0yMCAzOC44LTI2LjIgNTguOC0xMy43IDIwIDEyLjQgMjYgMzguNyAxMy43IDU4LjhMMjcwIDU5MGMtNy40IDEyLTIwLjIgMTkuNC0zNC4zIDIwaC0yeiIvPjwvc3ZnPg==" !default;
+$form-icon-warning: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MTIgNzkyIj48cGF0aCBmaWxsPSIjZjBhZDRlIiBkPSJNNjAzIDY0MC4ybC0yNzguNS01MDljLTMuOC02LjYtMTAuOC0xMC42LTE4LjUtMTAuNnMtMTQuNyA0LTE4LjUgMTAuNkw5IDY0MC4yYy0zLjcgNi41LTMuNiAxNC40LjIgMjAuOCAzLjggNi41IDEwLjggMTAuNCAxOC4zIDEwLjRoNTU3YzcuNiAwIDE0LjYtNCAxOC40LTEwLjQgMy41LTYuNCAzLjYtMTQuNCAwLTIwLjh6bS0yNjYuNC0zMGgtNjEuMlY1NDloNjEuMnY2MS4yem0wLTEwN2gtNjEuMlYzMDRoNjEuMnYxOTl6Ii8+PC9zdmc+" !default;
+$form-icon-danger: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MTIgNzkyIj48cGF0aCBmaWxsPSIjZDk1MzRmIiBkPSJNNDQ3IDU0NC40Yy0xNC40IDE0LjQtMzcuNiAxNC40LTUyIDBsLTg5LTkyLjctODkgOTIuN2MtMTQuNSAxNC40LTM3LjcgMTQuNC01MiAwLTE0LjQtMTQuNC0xNC40LTM3LjYgMC01Mmw5Mi40LTk2LjMtOTIuNC05Ni4zYy0xNC40LTE0LjQtMTQuNC0zNy42IDAtNTJzMzcuNi0xNC4zIDUyIDBsODkgOTIuOCA4OS4yLTkyLjdjMTQuNC0xNC40IDM3LjYtMTQuNCA1MiAwIDE0LjMgMTQuNCAxNC4zIDM3LjYgMCA1MkwzNTQuNiAzOTZsOTIuNCA5Ni40YzE0LjQgMTQuNCAxNC40IDM3LjYgMCA1MnoiLz48L3N2Zz4=" !default;
+
+
+// --------------------------------------------
+// * value:: Navs
+// --------------------------------------------
+// ** Padding
+$nav-link-padding:                 10px 15px !default;
+
+// ** Background
+$nav-link-hover-bg:                $gray-light !default;
+
+// ** Default 'font' colors
+$nav-link-color:                   $gray !default;
+$nav-link-hover-color:             $gray !default;
+$nav-disabled-link-color:          $gray-light !default;
+$nav-disabled-link-hover-color:    $gray-light !default;
+
+$nav-pills-border-radius:           $border-radius-base !default;
+$nav-pills-active-link-hover-bg:    $component-active-bg !default;
+$nav-pills-active-link-hover-color: $component-active-color !default;
+
+
+// --------------------------------------------
+// * value:: Breadcrumbs
+// --------------------------------------------
+$breadcrumb-padding-vertical:   8px !default;
+$breadcrumb-padding-horizontal: 16px !default;
+//** Breadcrumb background color
+$breadcrumb-bg:                 transparent !default;
+//** Breadcrumb text color
+$breadcrumb-color:              $gray !default;
+//** Text color of current page in the breadcrumb
+$breadcrumb-active-color:       $blue !default;
+//** Textual separator for between breadcrumb elements
+$breadcrumb-separator:          ">" !default;
+
+
+
+// --------------------------------------------
+// * value:: Tabs
+// --------------------------------------------
+$tabs-border-blue:    $blue;
+$tabs-border-green:   $yellowgreen;
+$tabs-border-orange:  $orange;
+
+// border
+$tabs-border-color:             $blue !default;
+$tabs-link-hover-border-color:  $gray-light !default;
+
+// ** nav-tabs
+// background
+$nav-tabs-bg:            $white;
+$nav-tabs-bg-gray:       $gray-light;
+
+// hover Background
+$nav-tabs-active-link-hover-bg:             $silver !default;
+$nav-tabs-active-link-hover-color:          $gray !default;
+$nav-tabs-active-link-hover-border-color:   $tabs-border-color !default;
+
+// $nav-tabs-justified-link-border-color:            #ddd !default;
+// $nav-tabs-justified-active-link-border-color:     $body-bg !default;
+
+
+// --------------------------------------------
+// * value:: Tags
+// --------------------------------------------
+// colors
+$tags-default:    $gray-light;
+$tags-primary:    $blue;
+$tags-secondary:  $pumpkin;
+$tags-extra:      $green;
+$tags-danger:     $vermillion;
+$tags-inverted:   $dark;
+
+//
+// Padding
+//
+$tags-padding-x:             $padding-base-horizontal !default;
+$tags-padding-y:             $padding-y !default;
+
+$tags-padding-x-sm:          $padding-small-horizontal !default;
+$tags-padding-y-sm:          $padding-small-vertical !default;
+
+$tags-padding-x-mini:        $padding-mini-horizontal !default;
+$tags-padding-y-mini:        $padding-mini-vertical !default;
+
+$tags-padding-x-md:          $padding-medium-horizontal !default;
+$tags-padding-y-md:          $padding-medium-vertical !default;
+
+$tags-padding-x-lg:          $padding-large-horizontal !default;
+$tags-padding-y-lg:          $padding-large-vertical !default;
+
+//
+// radius
+//
+$tags-border-radius:              $border-radius-base !default;
+$tags-border-radius-lg:           $border-radius-large !default;
+$tags-border-radius-sm:           $border-radius-small !default;
+
+
+
+// --------------------------------------------
+// * value:: table style
+// --------------------------------------------
+//** Padding for `<th>`s and `<td>`s.
+$table-cell-padding:              8px !default;
+//** Padding for cells in `.table-condensed`.
+$table-condensed-cell-padding:    4px !default;
+//** Padding for cells in `.member-track`.
+$table-member-track-cell-padding: 16px !default;
+
+//** Default background color used for all tables.
+$table-bg:            $white !default;
+//** Background color used for `.table-striped`.
+$table-bg-accent:     $silver !default; // #F3F4F5
+//** Background color used for `.table-hover`.
+$table-bg-hover:      $silver !default;
+$table-bg-active:     $table-bg-hover !default;
+// ** Background color used for `<thead>`s and `<th>`s
+$table-bg-head:       lighten($gray-light, 5%) !default;
+
+//** Border color for table and cell borders.
+$table-border-color:  $gray-light !default;
+
+//** Text muted color
+$text-muted:          $gray-light !default;
+
+//** Alternate
+$table-primary-head-bg:  rgba($blue, .65) !default;
+$table-primary-body-bg:  $blue-light !default;
+
+$table-seconday-head-bg:  $yellowgreen !default;
+$table-seconday-body-bg:  $white !default;
+
+// ** 金額總計: use for 'order-detail', 'cart-list'
+$total-price-width: 128px;
+$total-price-size: ceil($font-size-base * 1.33); //~20
+
+
+// --------------------------------------------
+// * value:: Tags
+// --------------------------------------------
+// colors
+$tags-default:    $gray-light;
+$tags-inverted:   $dark;
+$tags-primary:    $blue;
+$tags-secondary:  $pumpkin;
+$tags-extra:      $yellowgreen;
+$tags-info:       $blue-light;
+$tags-success:    $green;
+$tags-warning:    $yellow;
+$tags-danger:     $vermillion;
+
+//
+// Padding
+//
+$tags-padding-x:             $padding-base-horizontal !default;
+$tags-padding-y:             $padding-y !default;
+
+$tags-padding-x-sm:          $padding-small-horizontal !default;
+$tags-padding-y-sm:          $padding-small-vertical !default;
+
+$tags-padding-x-mini:        $padding-mini-horizontal !default;
+$tags-padding-y-mini:        $padding-mini-vertical !default;
+
+$tags-padding-x-md:          $padding-medium-horizontal !default;
+$tags-padding-y-md:          $padding-medium-vertical !default;
+
+$tags-padding-x-lg:          $padding-large-horizontal !default;
+$tags-padding-y-lg:          $padding-large-vertical !default;
+
+
+// Radius
+$tags-border-radius:         $border-radius-base !default;
+$tags-border-radius-lg:      $border-radius-large !default;
+$tags-border-radius-sm:      $border-radius-small !default;
+
+
+// --------------------------------------------
+// * value:: Badge
+// --------------------------------------------
+// Colors
+$badge-default-bg:            lighten($tags-default, 5%) !default;
+$badge-primary-bg:            $tags-primary !default;
+$badge-secondary-bg:          $tags-secondary !default;
+$badge-success-bg:            $tags-success !default;
+$badge-info-bg:               $tags-info !default;
+$badge-warning-bg:            $tags-warning !default;
+$badge-danger-bg:             $tags-danger !default;
+
+$badge-default-outline:       $badge-default-bg !default;
+$badge-primary-outline:       $badge-primary-bg !default;
+$badge-secondary-outline:     $badge-secondary-bg !default;
+$badge-danger-outline:        $badge-danger-bg !default;
+
+// Font-Size
+$badge-font-size:             $font-size-small !default;
+$badge-font-size-lg:          $font-size-large !default;
+$badge-font-size-mini:        $font-size-mini !default;
+$badge-font-weight:           bold !default;
+
+// Padding
+$badge-padding-x: $padding-mini-horizontal !default;
+$badge-padding-y: $padding-small-vertical !default;
+
+
+// Radius
+$badge-radius-circle:     ceil(($badge-font-size + ($badge-padding-y * 2)) / 2);
+$badge-radius-circle-lg:  ceil(($badge-font-size-lg + ($badge-padding-y * 2)) / 2);
+
+
+
+// --------------------------------------------
+// * value:: Alerts (by bootstrap)
+// --------------------------------------------
+//## Define alert colors, border radius, and padding.
+
+$alert-padding:               16px !default;
+$alert-padding-sm:            10px 16px !default;
+$alert-border-radius:         $border-radius-base !default;
+$alert-link-font-weight:      bold !default;
+$alert-border-width:          $border-width !default;
+
+$alert-default-bg:            $white !default;
+$alert-default-text:          $font-content-color !default;
+$alert-default-border:        $gray-light !default;
+
+$alert-success-bg:            $component-status-success !default;
+$alert-success-text:          $white !default;
+$alert-success-border:        $border-alpha !default;
+
+$alert-info-bg:               $blue-light !default;
+$alert-info-text:             $font-content-color !default;
+$alert-info-border:           $border-alpha !default;
+
+$alert-warning-bg:            lighten($yellow, 30%) !default;
+$alert-warning-text:          $font-content-color !default;
+$alert-warning-border:        $border-alpha !default;
+
+$alert-danger-bg:             lighten($vermillion, 40%) !default;
+$alert-danger-text:           $font-content-color !default;
+$alert-danger-border:         $border-alpha !default;
+
+$alert-inverted-bg:           $dark !default;
+$alert-inverted-text:         $white !default;
+$alert-inverted-border:       $border-alpha !default;
+
+
+// --------------------------------------------
+// * value:: list-group
+// --------------------------------------------
+
+
+// --------------------------------------------
+// * value:: panels
+// --------------------------------------------
+
+$panel-bg:                      $white !default;
+$panel-body-padding:            16px !default;
+$panel-head-padding:            16px !default;
+$panel-footer-padding:          $panel-head-padding !default;
+$panel-shrink-padding:          10px !default;
+$panel-border-radius:           $border-radius-base !default;
+
+//** Border color for elements within panels
+$panel-border:                  $border-default !default;
+$panel-head-bg:                 $silver !default;
+$panel-footer-bg:               $silver !default;
+
+$panel-default-text:            $gray !default;
+$panel-default-border:          $border-default !default;
+$panel-default-heading-bg:      $white !default;
+
+$panel-primary-text:            $white !default;
+$panel-primary-border:          $border-default !default;
+$panel-primary-heading-bg:      $blue !default;
+
+$panel-secondary-text:          $white !default;
+$panel-secondary-border:        $border-default !default;
+$panel-secondary-heading-bg:    $yellowgreen !default;
+// $panel-success-text:          $state-success-text !default;
+
+$panel-white-text:              $blue !default;
+$panel-white-border:            $gray-light !default;
+$panel-white-heading-bg:        $white !default;
+
+// $panel-success-border:        $state-success-border !default;
+// $panel-success-heading-bg:    $state-success-bg !default;
+
+// $panel-info-text:             $state-info-text !default;
+// $panel-info-border:           $state-info-border !default;
+// $panel-info-heading-bg:       $state-info-bg !default;
+
+// $panel-warning-text:          $state-warning-text !default;
+// $panel-warning-border:        $state-warning-border !default;
+// $panel-warning-heading-bg:    $state-warning-bg !default;
+
+// $panel-danger-text:           $state-danger-text !default;
+// $panel-danger-border:         $state-danger-border !default;
+// $panel-danger-heading-bg:     $state-danger-bg !default;
+
+
+// --------------------------------------------
+// * value:: Cards
+// --------------------------------------------
+$card-border-width:        $border-width !default;
+$card-border-radius:       $border-radius-base !default;
+$card-border-color:        $border-alpha !default;
+$card-border-radius-inner: $card-border-radius !default;
+$card-cap-bg:              $silver !default;
+$card-bg:                  $white !default;
+
+
+// --------------------------------------------
+// * value:: Thumbnails
+// --------------------------------------------
+//** Width Size
+$thumbnail-small:             80px !default;
+$thumbnail-medium:            208px !default;
+
+//** Padding around the thumbnail image
+$thumbnail-padding:           $padding-y !default;
+//** Thumbnail background color
+$thumbnail-bg:                $body-bg !default;
+//** Thumbnail border
+$thumbnail-border-color:      $border-default !default;
+$thumbnail-border-width:      $border-width !default;
+$thumbnail-border-radius:     $border-radius-base !default;
+
+//** Custom text color for thumbnail captions
+$thumbnail-caption-color:     $font-content-color !default;
+//** Padding around the thumbnail caption
+$thumbnail-caption-padding:   $padding-base-horizontal !default;
+
+
+// --------------------------------------------
+// * value:: AD
+// --------------------------------------------
+$ad-xs: 64px;
+$ad-vertical: 336px;
+
+
+// --------------------------------------------
+// * value:: Popover
+// --------------------------------------------
+$popover-bg:                #FFFFFF !default;
+$popover-border-width:      $border-width !default;
+$popover-border-color:      $border-alpha !default;
+
+$popover-title-bg:          $silver !default;
+
+$popover-arrow-width:       8px !default;
+$popover-arrow-color:       $popover-bg !default;
+
+$popover-arrow-outer-width: ($popover-arrow-width + 1) !default;
+$popover-arrow-outer-color: fade-in($popover-border-color, 0.05) !default;
+
+// ** popover Width
+$popover-sm:    288px !default;
+$popover-md:    480px !default;
+$popover-lg:    800px !default;
+
+// header > nav-account > popover Width
+$popover-width-nav-account: ($font-size-small * 7) + ($padding-x * 2);
+// header > nav-cart > popover Width
+$popover-width-nav-cart: 320px;
+
+
+// --------------------------------------------
+// * value:: Slider
+// --------------------------------------------
+$slider-control:           8px !default;
+$slider-control-active:    10px !default;
+$slider-control-radius:    5px !default;
+$slider-control-bg:        $gray-light !default;
+$slider-control-active-bg: $blue !default;
+
+
+// --------------------------------------------
+// * value:: z-index
+// --------------------------------------------
+// -- Z-index master list
+//
+// ~~~~ defautl
+$zindex-base:              1 !default;
+$zindex-hover:             10 !default;
+$zindex-error:             299 !default;
+// ~~~ header
+$zindex-header-left:       510 !default;
+$zindex-header-right:      520 !default;
+$zindex-header-center:     500 !default;
+// ~~~ Nav
+$zindex-navbar:            1100 !default;
+$zindex-navbar-sub:        1000 !default;
+$zindex-navbar-fixed:      2000 !default;
+// ~~~ AD
+$zindex-ad-login:          100 !default;
+$zindex-ad-form:           199 !default;
+$zindex-ad-fixed:          9999 !default;
+// ~~~~ Tag
+$zindex-tag:               200 !default;
+// ~~~~ Slider
+$zindex-slider-view:       99 !default;
+$zindex-slider-control:    199 !default;
+$zindex-slider-arrow:      299 !default;
+// ~~~~ popover
+$zindex-popover:           1060 !default;
+$zindex-popover-arrow:     1070 !default;
+// ~~~ (´･ω･`)
+// $zindex-dropdown:          1000 !default;
+// $zindex-tooltip:           1070 !default;
+// $zindex-modal-background:  1040 !default;
+// $zindex-modal:             1050 !default;
+// $zindex-modal-close:       1060 !default;
+
+
+
+
+

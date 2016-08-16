@@ -1,0 +1,488 @@
+//
+// Nav & Menu-list
+//
+
+// -------------------------------------
+//
+// * Type
+//
+// -------------------------------------
+
+// Nav :: is 'horizontal'
+
+.nav {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+
+  .nav-item {
+    overflow: hidden;
+  }
+}
+
+.nav-link {
+  display: inline-block;
+
+  @include hover-focus {
+    text-decoration: none;
+  }
+
+  // Disabled state lightens text and removes hover/tab effects
+  &.disabled {
+    color: $nav-disabled-link-color;
+
+    @include plain-hover-focus {
+      color: $nav-disabled-link-hover-color;
+      cursor: $cursor-disabled;
+      background-color: transparent;
+    }
+  }
+}
+
+
+// Nav inline :: is 'vertical'
+
+.nav-inline {
+  overflow: hidden;
+
+  li, .nav-item {
+    float: left;
+    display: inline-block;
+  }
+
+  li + li, a + a,
+  .nav-item + .nav-item,
+  .nav-link + .nav-link {
+    margin-left: 1rem;
+  }
+}
+
+
+// -------------------------------------
+//
+// Nav list Group :: is 'Categroy-tree'
+//
+// .nav-list-group
+//   .nav-list
+//     .nav-item
+//   .nav-list
+//     .nav-item
+//       .nav-list
+//         .nav-item.acitve
+//   .nav-list
+//     .... (略)
+//
+// *** nav-item add '.active'  => 第三層被關注的連結
+
+.nav-list {
+  margin-bottom: 0; // reset 'ul, ol'
+
+  // 連結
+  .nav-item {
+    // 標題
+    .nav-list-title {
+      position: relative;
+      margin-top: $padding-y - 2;
+      margin-bottom: $padding-y / 2;
+      font-size: $font-size-base;
+
+      .btn-switch {
+        top: 1px;
+        right: 0;
+      }
+
+      a { color: $black; }
+    }
+    &:first-child {
+      .nav-list-title {
+        margin-top: 0;
+      }
+    }
+    a {
+      color: lighten($dark, 12%);
+
+      .icon-caret-down {
+        @include transform(rotate(-90deg));
+      }
+
+      &[aria-expanded="true"] {
+        > .icon-caret-down {
+          @include transform(rotate(0));
+        }
+      }
+    }
+
+
+    // 子層資料夾
+    .nav-item {
+      padding-left: 16px;
+    }
+
+    // 最後一層連結選取時，addClass '.active'
+    &.active {
+      background-color: $yellowgreen;
+      color: $white;
+      font-weight: bold;
+
+      a {
+        color: $white;
+      }
+    }
+  }
+}
+
+// accordion 開關 (預設為開啟)
+.btn-switch {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: $zindex-hover;
+
+  &[aria-expanded="false"] {
+    .icon-minus-square-outline {
+      &:before { @extend .icon-plus-squared-alt:before; }
+    }
+  }
+}
+
+.category-tree {
+  .nav-item {
+    font-size: $font-size-small;
+    line-height: $line-height-computed;
+    overflow: hidden;
+  }
+}
+
+// nav-list Group
+// .nav-list-group {
+//   &.category-tree {
+//     .nav-item {
+//       a, .nav-link {
+//         font-size: $font-size-small;
+//         line-height: $line-height-computed;
+//         color: lighten($dark, 15%);
+
+//         &.active {
+//           background-color: $yellowgreen;
+//           color: $white;
+//           font-weight: bold;
+//         }
+//       }
+//       // active :: 目前關注的分類頁面
+//       &.active {
+//         > a,
+//         > .nav-link {
+//           background-color: $yellowgreen;
+//           color: $white;
+//           font-weight: bold;
+//         }
+//       }
+//     }
+//   }
+// }
+
+
+// -------------------------------------
+//
+// Pills :: is 'horizontal'
+//
+
+// .nav-pills {
+//   @include clearfix();
+
+//   .nav-item {
+//     float: left;
+
+//     + .nav-item {
+//       margin-left: .2rem;
+//     }
+//   }
+
+//   .nav-link {
+//     display: block;
+//     padding: $nav-link-padding;
+//     @include border-radius($nav-pills-border-radius);
+//   }
+
+//   .nav-link.active,
+//   .nav-item.open .nav-link {
+//     @include plain-hover-focus {
+//       color: $component-active-color;
+//       cursor: default;
+//       background-color: $component-active-bg;
+//     }
+//   }
+// }
+
+//
+// Stacked :: is 'vertical'
+//
+// .nav-stacked {
+//   .nav-item {
+//     display: block;
+//     float: none;
+
+//     + .nav-item {
+//       margin-top: .2rem;
+//       margin-left: 0;
+//     }
+//   }
+// }
+
+
+
+// -------------------------------------
+//
+// * Advanced
+//
+// ** include:
+//    -- 'menu-list-panel'(會員中心側選單)
+//    -- 'list-group'
+//    -- 'tables'
+//    -- 'shrink'
+//
+// -------------------------------------
+
+//
+// 'menu-list-panel' in panels, use for '首頁' & '會員中心'
+//
+// -------------------------------------
+// div.menu-list-panel
+//   ∟ h4.menu-list-title
+//   ∟ ul.menu-list     -----> default
+//      ∟ li.menu-list-item
+//         ∟ a.nav-link <----- 實際上是由這裡撐開點擊範圍(padding)
+
+.menu-list-panel {
+  position: relative;
+  margin-bottom: $padding-x;
+  background-color: $panel-bg;
+  border: 1px solid $panel-border;
+  @include box-shadow(0 1px 1px rgba(0,0,0,.05));
+
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  ol, ul {
+    margin-bottom: 0;
+  }
+
+  // 標頭
+  .menu-list-title {
+    @include media-breakpoint-down(lg) {
+      padding: ($panel-head-padding - 6) $panel-head-padding;
+    }
+    padding: ($panel-head-padding - 4) $panel-head-padding;
+    background-color: $panel-head-bg;
+    font-weight: bold;
+    @include clearfix;
+
+    a {
+      color: $white;
+      &:hover {
+        color: $white;
+        opacity: 1;
+      }
+    }
+  }
+
+ // Advanced :: primary(Blue) & secondary(Green)
+  &.primary {
+    .menu-list-title {
+      background-color: $panel-primary-heading-bg;
+      color: $panel-primary-text;
+    }
+  }
+  &.secondary {
+    border-radius: $panel-border-radius;
+
+    .menu-list-title {
+      background-color: $panel-secondary-heading-bg;
+      color: $panel-secondary-text;
+    }
+  }
+
+  // use for 'category Menu'
+  &.category-menu {
+    border: none;
+  }
+}
+
+.menu-list {
+  .menu-list-item {
+    border-bottom: 1px solid $panel-border;
+    @include transition(all .2s ease-in-out);
+
+    &.active {
+      background-color: lighten($gray-light, 5%);
+
+      > a { color: $dark; }
+    }
+
+    &:last-child { border-bottom: none; }
+
+    > a {
+      width: 100%;
+      padding: ($panel-body-padding - 2) $panel-body-padding;
+    }
+  }
+
+
+}
+
+// ~~~ use for '全商品分類選單'
+// 影響頁面包含：
+// 1) home.html
+// 2) category-index.html
+// 3) '.header-navbar' > '.header-category'
+.category-list {
+  .category-item {
+    a {
+      padding: ($padding-y + 4) $padding-x;
+      font-size: $font-size-base;
+      line-height: $line-height-computed;
+    }
+    
+    // 第一層選單
+    > .cate-name { 
+      position: relative;
+      z-index: $zindex-navbar;
+      width: 100%;
+      font-weight: bold; 
+      border: 1px solid $border-default;
+      border-top: 0;
+
+      @include media-breakpoint-down(lg) {
+        padding: ($padding-y + 2) ($padding-x - 2) ($padding-y + 4);
+
+        .icon {            
+          top: 2px;
+          margin-right: $padding-x - 6;
+          font-size: floor($font-size-base * 1.5); //~22
+        }
+      }
+      @include media-breakpoint-up(xl) {
+        padding: ($padding-y + 4) $padding-x ($padding-y + 6);
+
+        .icon {            
+          top: 3px;
+          margin-right: $padding-x - 4;
+          font-size: ceil($font-size-base * 1.733); //~22
+        }
+      }
+    }
+
+    
+    &:hover {
+      border-right: 0;
+
+      > .cate-name {
+        border-right: 1px solid $white;
+        opacity: 1;
+      }
+
+      a {
+        padding-left: 13px; 
+      }
+
+      .menu-sub {
+        display: block;
+      }
+    }
+
+    // ~~ 第二層選單
+    $category-sub-menu-width: 560px !default;
+    .menu-sub {
+      display: none;
+      // display: block; // 測試用
+      position: absolute;
+      left: 100%;
+      top: 0;
+      z-index: $zindex-navbar-sub;
+      width: $category-sub-menu-width;
+      min-height: 100%;
+      margin-left: -1px;
+      background-color: $white;
+      border: 1px solid $border-default;
+
+      .menu-item {
+        margin: ($padding-y * 2 - 4) ($padding-x * 1.5);
+        padding-bottom: $padding-y * 2 - 4;
+        border-bottom: 1px dotted $border-default;
+
+        &:last-child {
+          padding-bottom: 0;
+          border-bottom: none;
+        }
+
+        a {
+          padding: ($padding-y / 4) 0;
+          // font-size: $font-size-small;
+        }
+      }
+      
+      // 第二層選單名稱
+      .cate-sub-name {
+        float: left;
+        font-weight: bold;
+        margin-right: $padding-x;
+
+        .icon {
+          margin-left: $padding-x / 2;
+        }
+
+        // 第三層選單 
+        & + .nav-inline {
+          a {
+            margin-right: $padding-x;
+            & + a {
+              margin-left: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // ~~~ if addClass 'pills'
+  // use for 'category-index'
+  &.pills {
+    .category-item { 
+      padding: 0; 
+      border: 1px solid $border-default;
+      > .cate-name {
+        padding: ($padding-y + 4) ($padding-x * 1.5);
+      }
+    }
+  }
+}
+
+// menu 選單hover顏色效果
+@for $i from 1 through length($navs-color) {
+  $current-color: nth($navs-color, $i);
+  .category-item-#{$i} {
+    &:hover {
+      > .cate-name {
+        border-left: 4px solid $current-color !important;
+      }
+
+      > a { color: $current-color; }
+    }
+    // 第一層選單 ICON顏色
+    // > .cate-name {
+    //   .icon { color: $current-color; }
+    // }
+    // 第二層選單
+    .menu-sub {
+      a {
+        &:hover, &:active, &:focus { 
+          color: $current-color; 
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
