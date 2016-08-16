@@ -1,5 +1,5 @@
 {
-  "name": "gulp_template",
+  "name": "my-gulp-template2",
   "private": true,
   "dependencies": {
     "chai": "~3.5.0",
